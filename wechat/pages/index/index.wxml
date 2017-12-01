@@ -1,0 +1,36 @@
+<!-- 导入loading模块  -->
+<import src="../../modules/loading/loading.wxml" />
+<template wx:if="{{loading}}" is="loading" />
+
+<view class="page">
+    <view class="list" wx:for="{{hotList}}" wx:key="1">
+        <view class="author">
+            <image src='{{item.authorInfo.avatarUrl}}'></image>
+            <text class="name">{{item.authorInfo.nickname}}</text>
+            <text class="time">{{item.content.date}}</text>
+        </view>
+        <image class="main-img" mode='widthFix' src='{{item.content.cover}}'></image>
+        <view class="content">
+            <text wx:if="{{item.content.title}}" class="title">{{item.content.title}}</text>
+            <text class="discription">{{item.content.description}}</text>
+        </view>
+        <view class="content-info">
+            <view class="item">
+                <image src='../../assets/icons/view.png'></image>
+                <text>{{item.content.views}}</text>
+            </view>
+            <view class="item">
+                <image src='../../assets/icons/like.png'></image>
+                <text>{{item.content.praises}}</text>
+            </view>
+            <view class="item">
+                <image src='../../assets/icons/comment.png'></image>
+                <text>{{item.comments.length}}</text>
+            </view>
+            <view class="item">
+                <image src='../../assets/icons/share.png'></image>
+                <text>{{item.content.shares}}</text>
+            </view>
+        </view>
+    </view>
+</view>

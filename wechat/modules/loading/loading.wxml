@@ -1,0 +1,21 @@
+<template name="loading">
+  <view class="loader">
+    <view class="loader-inner">
+      <view class="loader-line-wrap">
+        <view class="loader-line"></view>
+      </view>
+      <view class="loader-line-wrap">
+        <view class="loader-line"></view>
+      </view>
+      <view class="loader-line-wrap">
+        <view class="loader-line"></view>
+      </view>
+      <view class="loader-line-wrap">
+        <view class="loader-line"></view>
+      </view>
+      <view class="loader-line-wrap">
+        <view class="loader-line"></view>
+      </view>
+    </view>
+  </view>
+</template>

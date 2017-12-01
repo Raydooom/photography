@@ -1,0 +1,34 @@
+@import "modules/loading/loading.wxss";
+/* 模型盒设置 */
+
+view, text, input, textarea, button {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+
+/* 色值预定义 */
+
+.color-main {
+  color: #a09fed;
+}
+
+.color-bg-main {
+  background: #a09fed;
+}
+
+.color-assist1 {
+  color: #addeff;
+}
+
+.color-bg-assist1 {
+  background: #addeff;
+}
+
+.color-assist2 {
+  color: #aaecd0;
+}
+
+.color-bg-assist2 {
+  background: #aaecd0;
+}

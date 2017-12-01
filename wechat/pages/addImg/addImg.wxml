@@ -1,0 +1,8 @@
+<view class="page">
+    <view>
+        <image class="main-img" src='{{img}}'></image>
+        <input value='' placeholder='主题'></input>
+        <textarea placeholder='作品描述'></textarea>
+        <button>发布</button>
+    </view>
+</view>

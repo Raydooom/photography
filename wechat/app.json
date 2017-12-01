@@ -1,0 +1,43 @@
+{
+    "pages": [
+        "pages/addImg/addImg",
+        "pages/index/index",
+        "pages/kinds/kinds",
+        "pages/test/test"
+    ],
+    "usingComponents": {
+        "aaa": "../../modules/loading/loading"
+    },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "我想学摄影",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "borderStyle": "black",
+        "color": "#666",
+        "backgroundColor": "#fff",
+        "selectedColor": "#a09fed",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "热门",
+                "iconPath": "assets/icons/hot.png",
+                "selectedIconPath": "assets/icons/hot-active.png"
+            },
+            {
+                "pagePath": "pages/addImg/addImg",
+                "text": "发布",
+                "iconPath": "assets/icons/kind.png",
+                "selectedIconPath": "assets/icons/kind-active.png"
+            },
+            {
+                "pagePath": "pages/test/test",
+                "text": "测试",
+                "iconPath": "assets/icons/kind.png",
+                "selectedIconPath": "assets/icons/kind-active.png"
+            }
+        ]
+    }
+}

@@ -1,0 +1,96 @@
+.page {
+    background: #efefef;
+}
+
+.list {
+    margin-bottom: 10rpx;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.author {
+    padding: 16rpx 24rpx;
+    overflow: hidden;
+}
+
+.author image {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    float: left;
+}
+
+.author .name {
+    line-height: 60rpx;
+    font-size: 28rpx;
+    margin-left: 20rpx;
+    width: 300rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+}
+
+.author .time {
+    float: right;
+    font-size: 12px;
+    line-height: 60rpx;
+    color: #666;
+}
+
+.main-img {
+    width: 750rpx;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+/*标题、描述*/
+
+.content {
+    padding: 0 24rpx 16rpx;
+    border-bottom: 1px solid #efefef;
+}
+
+.content .title {
+    font-size: 32rpx;
+    color: #222;
+    display: block;
+    line-height: 80rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content .discription {
+    font-size: 28rpx;
+    color: #666;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.content-info {
+    overflow: hidden;
+    padding: 20rpx 0;
+}
+
+.content-info .item {
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+.content-info .item image {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: middle;
+    margin:0 10rpx;
+}
+
+.content-info .item text {
+    display: inline-block;
+    font-size: 28rpx;
+    color: #999;
+}
