@@ -18,7 +18,7 @@ const uploadImg = require('./routes/common/uploadImg')
 /*
 微信小程序接口
  */
-const wechat = require('./routes/wechat/login')
+const login = require('./routes/wechat/login')
 const wechatArticle = require('./routes/wechat/index')
 
 // error handler
@@ -28,7 +28,7 @@ onerror(app)
 app.use(uploadImg.routes(), uploadImg.allowedMethods())
 
 // wechat路由
-app.use(wechat.routes(), wechat.allowedMethods())
+app.use(login.routes(), login.allowedMethods())
 app.use(wechatArticle.routes(), wechatArticle.allowedMethods())
 
 // middlewares

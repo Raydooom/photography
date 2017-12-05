@@ -1,5 +1,7 @@
 // pages/addImg/addImg.js
 import { HOST } from '../../config/index.js'
+const app = getApp()
+console.log(app)
 Page({
 
     /**
@@ -135,6 +137,7 @@ Page({
             data: {
                 title: info.title,
                 description: info.text,
+                userId: app.userId,
                 imgArr: imgUrlArr.toString(),
                 location: info.showLoc ? info.locationName : ''
             },

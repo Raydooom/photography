@@ -30,8 +30,9 @@ router.post('/hot', async(ctx, next) => {
     for (let index in list) {
         let authorInfo;
         // 查询用户信息
-        await sql.query("SELECT * FROM user WHERE id = " + list[index].author_id + " ORDER BY date")
+        await sql.query("SELECT * FROM user WHERE user_id = '" + list[index].author_id + "'")
             .then(result => {
+                console.log(result)
                 authorInfo = {
                     userId: result[0].id,
                     nickname: result[0].nickname,
@@ -70,7 +71,7 @@ router.get('/release', async(ctx, next) => {
     let data = ctx.query
     let date = moment().format("YYYY-MM-DD HH:mm:ss")
     console.log(date)
-    sql.query("INSERT INTO message_list ( title, description, img, date, location) VALUES ('" + data.title + "','" + data.description + "','" + data.imgArr + "','" + date + "','" + data.location + "') ")
+    sql.query("INSERT INTO message_list ( title, description, author_id, img, date, location) VALUES ('" + data.title + "','" + data.description + "','" + data.userId + "','" + data.imgArr + "','" + date + "','" + data.location + "') ")
     ctx.body = {
         state: 1,
 
