@@ -38,9 +38,40 @@
     color: #666;
 }
 
-.main-img {
-    width: 750rpx;
+.img-contianer {
+    overflow: hidden;
+    padding: 0 24rpx;
+}
+
+.img-contianer image {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.one-img {
+    width: 750rpx;
+    margin-left: -24rpx;
+}
+
+.two-img {
+    margin: 2.5rpx;
+    width: 231rpx;
+    height: 231rpx;
+    float: left;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.location {
+    padding:10rpx 0;
+    font-size: 12px;
+    color: #999;
+}
+
+.location image {
+    display: inline-block;
+    width: 26rpx;
+    height: 26rpx;
+    vertical-align: middle;
+    margin-right: 10rpx;
 }
 
 /*标题、描述*/
@@ -54,10 +85,11 @@
     font-size: 32rpx;
     color: #222;
     display: block;
-    line-height: 80rpx;
+    line-height: 60rpx;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-top: 10rpx;
 }
 
 .content .discription {
@@ -68,6 +100,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    margin: 10rpx 0;
 }
 
 .content-info {
@@ -86,7 +119,7 @@
     width: 40rpx;
     height: 40rpx;
     vertical-align: middle;
-    margin:0 10rpx;
+    margin: 0 10rpx;
 }
 
 .content-info .item text {

@@ -10,6 +10,11 @@ const logger = require('koa-logger')
 const index = require('./routes/index')
 const users = require('./routes/users')
 
+/**
+ * 公用模块
+ */
+const uploadImg = require('./routes/common/uploadImg')
+
 /*
 微信小程序接口
  */
@@ -19,7 +24,10 @@ const wechatArticle = require('./routes/wechat/index')
 // error handler
 onerror(app)
 
-// routes
+// commom路由
+app.use(uploadImg.routes(), uploadImg.allowedMethods())
+
+// wechat路由
 app.use(wechat.routes(), wechat.allowedMethods())
 app.use(wechatArticle.routes(), wechatArticle.allowedMethods())
 

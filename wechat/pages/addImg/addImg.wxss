@@ -1,1 +1,97 @@
-/* pages/addImg/addImg.wxss */
+.page {
+    padding: 0 24rpx;
+}
+
+.title {
+    font-size: 32rpx;
+    line-height: 80rpx;
+    width: 100%;
+    height: 80rpx;
+    border-bottom: 1px solid #efefef;
+}
+
+.text {
+    font-size: 28rpx;
+    margin-top: 30rpx;
+    width: 100%;
+    height: 200rpx;
+    padding: 0;
+    color: #555;
+}
+
+.img-title {
+    font-size: 28rpx;
+    border-bottom: 1px solid #efefef;
+    display: block;
+    line-height: 80rpx;
+}
+
+.location {
+    color: #666;
+    font-size: 28rpx;
+    padding: 10rpx;
+    overflow: hidden;
+    line-height: 64rpx;
+}
+
+.loc-name {
+    float: left;
+    max-width:500rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.location image {
+    display: inline-block;
+    width: 28rpx;
+    height: 28rpx;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+.location switch {
+    float: right;
+    vertical-align: middle;
+}
+
+.img-list {
+    overflow: hidden;
+    padding: 20rpx 0;
+}
+
+.img-list .main-img {
+    width: 118rpx;
+    height: 118rpx;
+    border-radius: 8rpx;
+    float: left;
+    margin-right: 18rpx;
+    margin-bottom: 18rpx;
+    border: 2rpx solid #efefef;
+}
+
+.add-btn {
+    float: left;
+    width: 118rpx;
+    height: 118rpx;
+    border-radius: 8rpx;
+    border: 2rpx dashed #a09fed;
+    padding: 30rpx;
+}
+
+.add-btn image {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.release {
+    display: block;
+    color: #fff;
+    font-size: 32rpx;
+    margin-top: 20rpx;
+}
+
+.release::after {
+    border: none;
+}

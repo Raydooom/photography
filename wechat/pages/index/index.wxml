@@ -9,10 +9,18 @@
             <text class="name">{{item.authorInfo.nickname}}</text>
             <text class="time">{{item.content.date}}</text>
         </view>
-        <image class="main-img" mode='widthFix' src='{{item.content.cover}}'></image>
+        <view class="img-contianer">
+            <block wx:if="{{item.img.length == 1}}" >
+                <image class="one-img" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='widthFix' src='{{imgUrl}}'></image>
+            </block>
+            <block wx:else>
+                <image class="two-img" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='aspectFill' src='{{imgUrl}}'></image>
+            </block>
+        </view>
         <view class="content">
             <text wx:if="{{item.content.title}}" class="title">{{item.content.title}}</text>
             <text class="discription">{{item.content.description}}</text>
+            <view wx:if="{{item.content.location}}" class="location"><image src='../../assets/icons/location.png'></image>{{item.content.location}}</view>
         </view>
         <view class="content-info">
             <view class="item">

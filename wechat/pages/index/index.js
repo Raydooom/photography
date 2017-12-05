@@ -23,7 +23,7 @@ Page({
     getData: function () {
         let that = this;
         wx.request({
-            url: HOST + '/hot',
+            url: HOST + '/wechat/hot',
             method: 'POST',
             success: res => {
                 if (res.data.state == 1) {
@@ -31,7 +31,8 @@ Page({
                         hotList: res.data.data,
                         loading: false
                     })
-                    
+                    console.log(res.data.data)
+                    console.log(res.data.data[1].content.img.split(','))
                     // 停止下拉刷新
                     wx.stopPullDownRefresh()
                 } else {

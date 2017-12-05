@@ -1,3 +1,3 @@
-const HOST = "https://api.raydom.wang/wechat"
+const HOST = "https://api.raydom.wang"
 
 module.exports = { HOST }
