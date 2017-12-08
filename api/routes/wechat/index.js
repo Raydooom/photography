@@ -32,7 +32,7 @@ router.post('/hot', async(ctx, next) => {
         // 查询用户信息
         await sql.query("SELECT * FROM user WHERE user_id = '" + list[index].author_id + "'")
             .then(result => {
-                console.log(result)
+                // console.log(result)
                 authorInfo = {
                     userId: result[0].id,
                     nickname: result[0].nickname,

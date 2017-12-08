@@ -13,7 +13,6 @@ router.prefix('/wechat')
 
 router.get('/login', async(ctx, next) => {
     var js_code = ctx.query.code;
-    console.log
     var userInfo = JSON.parse(ctx.query.userInfo);
     var openid, userId;
     await superagent

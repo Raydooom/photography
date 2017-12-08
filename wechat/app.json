@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/addImg/addImg",
         "pages/index/index",
+        "pages/addImg/addImg",
         "pages/kinds/kinds",
         "pages/test/test"
     ],

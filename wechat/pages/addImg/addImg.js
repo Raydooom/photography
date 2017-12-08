@@ -1,9 +1,8 @@
 // pages/addImg/addImg.js
 import { HOST } from '../../config/index.js'
 const app = getApp()
-console.log(app)
-Page({
 
+Page({
     /**
      * 页面的初始数据
      */
@@ -11,6 +10,7 @@ Page({
         title: '',
         text: '',
         imgArr: [],
+        imgUrl: [],
         showLoc: false,
         locationName: '是否位置信息'
     },
@@ -18,7 +18,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        if (app.userId) {
+            app.getUserId();
+        }
     },
     /**
      * 输入文字
@@ -67,7 +69,7 @@ Page({
         if (that.data.showLoc) {
             wx.chooseLocation({
                 success: res => {
-                    console.log(res)
+                    // console.log(res)
                     that.setData({
                         locationName: res.name
                     })
@@ -113,46 +115,64 @@ Page({
         let imgUrlArr = []
         let that = this
         let imgArr = that.data.imgArr
-        for (let index in imgArr) {
+        console.log("选择图片", imgArr)
+        for (let i = 0; i < imgArr.length; i++) {
             wx.uploadFile({
                 url: HOST + '/uploadImg',
-                filePath: imgArr[index],
+                filePath: imgArr[i],
                 name: 'img',
                 success: res => {
+                    // console.log("单张图片url", HOST + res.data)
                     imgUrlArr.push(HOST + res.data)
-                    if (index == imgArr.length - 1) {
-                        that.submitInfo(imgUrlArr)
-                    }
+                    that.setData({
+                        imgUrl: imgUrlArr
+                    })
+                    that.submitInfo();
                 }
             })
+
         }
+
     },
     /**
      * 信息提交
      */
     submitInfo: function (imgUrlArr) {
-        let info = this.data
-        wx.request({
-            url: HOST + '/wechat/release',
-            data: {
-                title: info.title,
-                description: info.text,
-                userId: app.userId,
-                imgArr: imgUrlArr.toString(),
-                location: info.showLoc ? info.locationName : ''
-            },
-            success: res => {
-                console.log(res)
-                if (res.data.state == 1) {
-                    wx.hideLoading()
-                    wx.showModal({
-                        title: '提示',
-                        showCancel: false,
-                        content: '恭喜您，发布成功！',
-                        confirmColor: '#a09fed'
-                    })
-                }
+        let that = this;
+        if (app.userId) {
+            if (that.data.imgUrl.length == that.data.imgArr.length) {
+                let info = this.data
+                wx.request({
+                    url: HOST + '/wechat/release',
+                    data: {
+                        title: info.title,
+                        description: info.text,
+                        userId: app.userId,
+                        imgArr: that.data.imgUrl.toString(),
+                        location: info.showLoc ? info.locationName : ''
+                    },
+                    success: res => {
+                        // console.log(res)
+                        if (res.data.state == 1) {
+                            wx.hideLoading()
+                            wx.showModal({
+                                title: '提示',
+                                showCancel: false,
+                                content: '恭喜您，发布成功！',
+                                confirmColor: '#a09fed'
+                            })
+                        }
+                    }
+                })
             }
-        })
+
+        } else {
+            wx.showModal({
+                title: '错误信息',
+                showCancel: false,
+                content: '获取用户信息失败！',
+                confirmColor: '#a09fed'
+            })
+        }
     }
 })

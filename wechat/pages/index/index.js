@@ -31,8 +31,6 @@ Page({
                         hotList: res.data.data,
                         loading: false
                     })
-                    console.log(res.data.data)
-                    console.log(res.data.data[1].content.img.split(','))
                     // 停止下拉刷新
                     wx.stopPullDownRefresh()
                 } else {
@@ -52,7 +50,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        console.log(1)
     },
 
     /**
@@ -61,7 +59,15 @@ Page({
     onShareAppMessage: function () {
 
     },
-    login: () => {
-
+    /**
+     * 预览图片
+     */
+    viewImg: function (e) {
+        console.log(e)
+        let data = e.target.dataset
+        wx.previewImage({
+            current: data.current, // 当前显示图片的http链接
+            urls: data.imgarr// 需要预览的图片http链接列表
+        })
     }
 })

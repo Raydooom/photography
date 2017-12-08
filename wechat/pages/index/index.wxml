@@ -11,10 +11,10 @@
         </view>
         <view class="img-contianer">
             <block wx:if="{{item.img.length == 1}}" >
-                <image class="one-img" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='widthFix' src='{{imgUrl}}'></image>
+                <image class="one-img" bindtap="viewImg" data-current="{{imgUrl}}" data-imgArr="{{item.img}}" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='widthFix' src='{{imgUrl}}'></image>
             </block>
             <block wx:else>
-                <image class="two-img" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='aspectFill' src='{{imgUrl}}'></image>
+                <image class="two-img" bindtap="viewImg" data-current="{{imgUrl}}" data-imgArr="{{item.img}}" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='aspectFill' src='{{imgUrl}}'></image>
             </block>
         </view>
         <view class="content">
@@ -41,4 +41,5 @@
             </view>
         </view>
     </view>
+    <view class="end-text">正在加载<image src='../../assets/icons/loading.gif'></image></view>
 </view>
