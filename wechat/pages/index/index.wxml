@@ -11,10 +11,10 @@
         </view>
         <view class="img-contianer">
             <block wx:if="{{item.img.length == 1}}" >
-                <image class="one-img" bindtap="viewImg" data-current="{{imgUrl}}" data-imgArr="{{item.img}}" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='widthFix' src='{{imgUrl}}'></image>
+                <image class="one-img" bindtap="viewImg" data-id='{{item.content.id}}' data-views="{{item.content.views}}" data-current="{{imgUrl}}" data-imgArr="{{item.img}}" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='widthFix' src='{{imgUrl}}'></image>
             </block>
             <block wx:else>
-                <image class="two-img" bindtap="viewImg" data-current="{{imgUrl}}" data-imgArr="{{item.img}}" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='aspectFill' src='{{imgUrl}}'></image>
+                <image class="two-img" bindtap="viewImg" data-id='{{item.content.id}}'  data-views="{{item.content.views}}" data-current="{{imgUrl}}" data-imgArr="{{item.img}}" wx:for="{{item.img}}" wx:key="img" wx:for-item="imgUrl" mode='aspectFill' src='{{imgUrl}}'></image>
             </block>
         </view>
         <view class="content">
@@ -28,8 +28,8 @@
                 <text>{{item.content.views}}</text>
             </view>
             <view class="item">
-                <image src='../../assets/icons/like.png'></image>
-                <text>{{item.content.praises}}</text>
+                <image bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}' src='../../assets/icons/like.png'></image>
+                <text bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}'>{{item.content.praises}}</text>
             </view>
             <view class="item">
                 <image src='../../assets/icons/comment.png'></image>

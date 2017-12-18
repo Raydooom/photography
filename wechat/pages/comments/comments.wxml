@@ -1,0 +1,30 @@
+<view class="comment-list">
+  <view class="msg-item" wx:for="{{commentsData.comments}}" wx:key="{{item.id}}">
+    <image class="avatar" src="{{item.msgList.user_avatar}}"></image>
+    <view class="msg-con">
+      <text class="name">{{item.msgList.user_name}}<!--<text>{{msgList.length-index}}</text>--></text>
+      <text class="msg">{{item.msgList.user_msg}}</text>
+      <view class="btn">
+        <text class="time">{{item.msgList.date}}</text>
+        <view class="reply-btn" bindtap="reply" data-msgId="{{item.msgList.id}}" data-user="{{item.msgList.user_name}}">
+          <image src="../../icon/comment.png"></image>
+        </view>
+        <!-- <view class="prise"><image src="../../icon/like.png"></image> 11</view> --></view>
+      <view class="reply-list" wx:if="{{!item.msgReply.length == 0}}">
+        <view class="reply-item" wx:for="{{item.msgReply}}" wx:key="{{item.id}}">
+          <!--<image src="{{item.user_avatar}}"/>-->
+          <view class="reply-text">
+            <text class="relpy-name">{{item.user_name}}：</text>
+            <text class="text">{{item.user_msg}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <text class="end">没有更多评论</text>
+  <view class="form">
+    <image class="avatar" wx:if="{{hasUserInfo}}" src="{{userInfo.avatarUrl}}" />
+    <image class="avatar" wx:else src="../../icon/avatar.png" />
+    <input type="text" focus="{{focus}}" bindblur="inputBlur" placeholder="{{placeHolder}}" value="{{msg}}" confirm-type="send" bindconfirm="sendComment" />
+  </view>
+</view>

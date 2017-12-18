@@ -20,7 +20,7 @@ router.post('/hot', async(ctx, next) => {
     var data = [],
         list;
     // 查询列表页
-    await sql.query("SELECT * FROM message_list ORDER BY date desc")
+    await sql.query("SELECT * FROM message_list ORDER BY views desc")
         .then(res => {
             list = res
         })
@@ -58,6 +58,39 @@ router.post('/hot', async(ctx, next) => {
         state: 1,
         data: data,
     };
+})
+
+/**
+ * 内容浏览量统计
+ * @param  {[type]} '/' [description]
+ * @param  {[json]} async(ctx, next          [description]
+ * @return {[type]}            [description]
+ */
+router.get('/views', async(ctx, next) => {
+    console.log(ctx.query)
+    let data = ctx.query
+    await sql.query("UPDATE message_list SET views = '" + data.views + "' WHERE id = " + data.id)
+        .then(result => {
+            console.log("浏览量统计成功！")
+        })
+    ctx.body = {
+        state: 1,
+    }
+})
+
+/**
+ * 点赞接口
+ */
+router.get('/praises', async(ctx, next) => {
+    console.log(ctx.query)
+    let data = ctx.query
+    await sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = " + data.id)
+        .then(result => {
+            console.log("点赞成功！")
+        })
+    ctx.body = {
+        state: 1,
+    }
 })
 
 /**

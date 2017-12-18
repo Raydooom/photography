@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/comments/comments",
         "pages/addImg/addImg",
         "pages/kinds/kinds",
         "pages/test/test"

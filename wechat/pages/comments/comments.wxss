@@ -1,0 +1,142 @@
+/*评论列表*/
+.comment-list {
+  padding-bottom: 102rpx;
+  border-top:1px solid #efefef;
+}
+
+.comment-list .msg-item {
+  border-bottom:1px solid #efefef;
+  background: #fff;
+  margin-top: 1px;
+  overflow: hidden;
+  padding: 20rpx;
+  padding-top: 30rpx;
+}
+
+.comment-list .msg-item .avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  float: left;
+}
+
+.comment-list .msg-item .msg-con {
+  width: 600rpx;
+  float: left;
+  margin-left: 20rpx;
+}
+
+.msg-con .name {
+  font-size: 32rpx;
+  color: #666;
+  display: block;
+}
+
+.msg-con .time {
+  font-size: 12px;
+  color: #999;
+}
+
+.msg-con .msg {
+  display: block;
+  font-size: 28rpx;
+  color: #222;
+  line-height: 40rpx;
+  padding: 16rpx 0;
+}
+
+.btn {
+  padding: 20rpx 0;
+  padding-right: 30rpx;
+  overflow: hidden;
+}
+
+.btn view {
+  float: right;
+  margin-left: 40rpx;
+  font-size: 30rpx;
+  color: #666;
+}
+
+.btn view image {
+  vertical-align: middle;
+  width: 42rpx;
+  height: 42rpx;
+}
+
+.reply-btn {
+  font-size: 28rpx;
+  color: #4963ae;
+}
+
+/*回复列表*/
+
+.reply-list {
+  background: #efefef;
+  border-radius: 8rpx;
+  padding: 20rpx;
+}
+
+.reply-item {
+  font-size: 28rpx;
+  color: #555;
+}
+
+.reply-item image {
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.reply-item {
+  padding: 4rpx 0;
+  word-break: break-all;
+}
+
+.reply-item .relpy-name {
+  color: #4963ae;
+  font-size: 28rpx;
+}
+
+.end{
+  font-size: 24rpx;
+  color: #ccc;
+  display: block;
+  padding:20rpx;
+  text-align: center;
+}
+
+.form {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.form .avatar {
+  display: inline-block;
+  width: 68rpx;
+  height: 68rpx;
+  vertical-align: middle;
+  border-radius: 50%;
+  margin-left: 30rpx;
+}
+
+.form input {
+  vertical-align: middle;
+  width: 550rpx;
+  display: inline-block;
+  border: 1px solid #eee;
+  font-size: 28rpx;
+  margin: 20rpx;
+  line-height: 68rpx;
+  height: 68rpx;
+  border-radius: 6rpx;
+  padding: 0 20rpx;
+}

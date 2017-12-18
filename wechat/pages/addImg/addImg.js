@@ -18,9 +18,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        if (app.userId) {
-            app.getUserId();
-        }
+        wx.getStorage({
+            key: 'userId',
+            success: (res) => {
+                console.log(res)
+            },
+            fail: (res) => {
+                console.log(res)
+                app.getUserId();
+            }
+        })
     },
     /**
      * 输入文字

@@ -1,11 +1,11 @@
 Page({
-    onReady() {
-        this.videoCtx = wx.createVideoContext('myVideo')
-    },
-    play() {
-        this.videoCtx.play()
-    },
-    pause() {
-        this.videoCtx.pause()
+    onLoad: function () {
+        wx.setStorage({
+            key: "key",
+            data: "value",
+            success: () => {
+                console.log("1")
+            }
+        })
     }
 })
