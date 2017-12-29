@@ -1,0 +1,47 @@
+<view class="author">
+    <image src='{{userInfo.avatarUrl}}'></image>
+    <text class="name">{{userInfo.nickname}}</text>
+    <text class="time">{{detailInfo.date}}</text>
+</view>
+<view class="img-contianer">
+    <block wx:if="{{imgArr.length == 1}}">
+        <image class="one-img" bindtap="viewImg" data-current="{{imgUrl}}" data-imgArr="{{imgArr}}" wx:for="{{imgArr}}" wx:key="img" wx:for-item="imgUrl" mode='widthFix' src='{{imgUrl}}'></image>
+    </block>
+    <block wx:else>
+        <image class="two-img" bindtap="viewImg" data-current="{{imgUrl}}" data-imgArr="{{imgArr}}" wx:for="{{imgArr}}" wx:key="img" wx:for-item="imgUrl" mode='aspectFill' src='{{imgUrl}}'></image>
+    </block>
+</view>
+<view class="content">
+    <text wx:if="{{detailInfo.title}}" class="title">{{detailInfo.title}}</text>
+    <text class="discription">{{detailInfo.description}}</text>
+    <view wx:if="{{detailInfo.location}}" class="location">
+        <image src='../../assets/icons/location.png'></image>{{detailInfo.location}}</view>
+</view>
+<view class="comment-warp">
+    <view>
+        <text>评论列表（）</text>
+    </view>
+    <view class="msg-item" wx:for="{{commentsData.comments}}" wx:key="{{item.id}}">
+        <image class="avatar" src="{{item.msgList.user_avatar}}"></image>
+        <view class="msg-con">
+            <text class="name">{{item.msgList.user_name}}<!--<text>{{msgList.length-index}}</text>--></text>
+            <text class="msg">{{item.msgList.user_msg}}</text>
+            <view class="btn">
+                <text class="time">{{item.msgList.date}}</text>
+                <view class="reply-btn" bindtap="reply" data-msgId="{{item.msgList.id}}" data-user="{{item.msgList.user_name}}">
+                    <image src="../../icon/comment.png"></image>
+                </view>
+                <!-- <view class="prise"><image src="../../icon/like.png"></image> 11</view> --></view>
+            <view class="reply-list" wx:if="{{!item.msgReply.length == 0}}">
+                <view class="reply-item" wx:for="{{item.msgReply}}" wx:key="{{item.id}}">
+                    <!--<image src="{{item.user_avatar}}"/>-->
+                    <view class="reply-text">
+                        <text class="relpy-name">{{item.user_name}}：</text>
+                        <text class="text">{{item.user_msg}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <text class="end">没有更多评论</text>
+</view>

@@ -31,10 +31,10 @@
                 <image bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}' src='../../assets/icons/like.png'></image>
                 <text bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}'>{{item.content.praises}}</text>
             </view>
-            <view class="item">
+            <navigator url='../detail/detail?id={{item.content.id}}' class="item">
                 <image src='../../assets/icons/comment.png'></image>
                 <text>{{item.comments.length}}</text>
-            </view>
+            </navigator>
             <view class="item">
                 <image src='../../assets/icons/share.png'></image>
                 <text>{{item.content.shares}}</text>

@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/detail/detail",
         "pages/index/index",
         "pages/comments/comments",
         "pages/addImg/addImg",
