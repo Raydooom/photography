@@ -72,6 +72,8 @@ router.get('/views', async(ctx, next) => {
     await sql.query("UPDATE message_list SET views = '" + data.views + "' WHERE id = " + data.id)
         .then(result => {
             console.log("浏览量统计成功！")
+        }).catch(error => {
+            console.log(error);
         })
     ctx.body = {
         state: 1,
@@ -79,7 +81,7 @@ router.get('/views', async(ctx, next) => {
 })
 
 /**
- * 点赞接口
+ * 发布内容点赞接口
  */
 router.get('/praises', async(ctx, next) => {
     console.log(ctx.query)
@@ -87,6 +89,8 @@ router.get('/praises', async(ctx, next) => {
     await sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = " + data.id)
         .then(result => {
             console.log("点赞成功！")
+        }).catch(error => {
+            console.log(error);
         })
     ctx.body = {
         state: 1,
@@ -104,10 +108,141 @@ router.get('/release', async(ctx, next) => {
     let data = ctx.query
     let date = moment().format("YYYY-MM-DD HH:mm:ss")
     console.log(date)
-    sql.query("INSERT INTO message_list ( title, description, author_id, img, date, location) VALUES ('" + data.title + "','" + data.description + "','" + data.userId + "','" + data.imgArr + "','" + date + "','" + data.location + "') ")
+    await sql.query("INSERT INTO message_list ( title, description, author_id, img, date, location) VALUES ('" + data.title + "','" + data.description + "','" + data.userId + "','" + data.imgArr + "','" + date + "','" + data.location + "') ")
+        .then(result => {
+            console.log("发布成功！");
+        }).catch(error => {
+            console.log(error);
+        })
     ctx.body = {
         state: 1,
 
+    }
+})
+
+/**
+ * [列表详情接口]
+ * @param  {[int]}    [列表id]
+ * @return {[json]}   [详情数据]
+ */
+router.get('/detail', async(ctx, next) => {
+    console.log(ctx.query)
+    let data = {};
+    await sql.query("SELECT * FROM message_list WHERE id = " + ctx.query.id)
+        .then(result => {
+            data = {
+                detail: result[0],
+                img: result[0].img.split(',')
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    await sql.query("SELECT * FROM user WHERE user_id ='" + data.detail.author_id + "'")
+        .then(result => {
+            ctx.body = {
+                state: 1,
+                detail: data.detail,
+                img: data.img,
+                userInfo: {
+                    userId: result[0].id,
+                    nickname: result[0].nickname,
+                    avatarUrl: result[0].avatar_url
+                }
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+})
+
+
+/**
+ * [详情评论接口]
+ * @param  {[int]}  [列表id]
+ * @return {[json]}  [评论、评论用户、评论回复、回复用户信息]
+ */
+router.get('/comment', async(ctx, next) => {
+    console.log(ctx.query)
+    let data = [],
+        list;
+    await sql.query("SELECT * FROM comments WHERE message_id = " + ctx.query.id +" ORDER BY id desc")
+        .then(result => {
+            list = result;
+        }).catch(error => {
+            console.log(error);
+        })
+    for (let index in list) {
+        // 查询用户信息
+        let userInfo;
+        await sql.query("SELECT * FROM user WHERE user_id = '" + list[index].user_id + "'")
+            .then(result => {
+                userInfo = {
+                    userId: result[0].id,
+                    nickname: result[0].nickname,
+                    avatarUrl: result[0].avatar_url
+                };
+            }).catch(error => {
+                console.log(error);
+            })
+
+        // 查询回复列表
+        let reply = [],
+            replyList;
+        await sql.query("SELECT * FROM reply_comments WHERE comment_id = " + list[index].id)
+            .then(result=>{
+                console.log("回复",list[index].id)
+                replyList = result
+            }).catch(error => {
+                console.log(error);
+            })
+        for (let i in replyList) {
+            // 查询回复每条的用户信息
+            let userInfo;
+            await sql.query("SELECT * FROM user WHERE user_id = '" + replyList[i].user_id + "'")
+                .then(result => {
+                    reply[i]={
+                        replyMsg:replyList[i],
+                        replyUser:{
+                            userId: result[0].id,
+                            nickname: result[0].nickname,
+                            avatarUrl: result[0].avatar_url
+                        }
+                    }
+                }).catch(error => {
+                    console.log(error);
+                })
+        }
+
+        let item = {
+            comment:list[index],
+            userInfo:userInfo,
+            reply:reply
+        }
+
+        data.push(item);
+    };
+    ctx.body = {
+        state: 1,
+        data: data,
+    };
+})
+
+/**
+ * [详情评论接口]
+ * @param  {[int]}  [评论id]
+ * @param  {[int]}  [当前点赞数]
+ * @return {[json]}  [成功信息]
+ */
+router.get('/commentPraise', async(ctx, next) => {
+    console.log(ctx.query)
+    let data = ctx.query
+    await sql.query("UPDATE comments SET praise = '" + data.praise + "' WHERE id = '" + data.commentId + "'")
+        .then(result => {
+            console.log("点赞成功！")
+        }).catch(error => {
+            console.log(error);
+        })
+    ctx.body = {
+        state: 1,
     }
 })
 

@@ -31,7 +31,7 @@
                 <image bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}' src='../../assets/icons/like.png'></image>
                 <text bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}'>{{item.content.praises}}</text>
             </view>
-            <navigator url="../comments/comments?id={{item.content.id}}" hover-class="none" class="item">
+            <navigator url='../detail/detail?id={{item.content.id}}' class="item">
                 <image src='../../assets/icons/comment.png'></image>
                 <text>{{item.comments.length}}</text>
             </navigator>

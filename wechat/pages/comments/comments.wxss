@@ -3,7 +3,6 @@
   padding-bottom: 102rpx;
   border-top:1px solid #efefef;
 }
-
 .comment-list .msg-item {
   border-bottom:1px solid #efefef;
   background: #fff;
@@ -32,6 +31,7 @@
   color: #666;
   display: block;
 }
+
 
 .msg-con .time {
   font-size: 12px;

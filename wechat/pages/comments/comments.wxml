@@ -21,7 +21,8 @@
       </view>
     </view>
   </view>
-  <text class="end">没有更多评论</text>
+  <text class="end" wx:if="{{!commentsData.comments.length == 0}}">我是有底线的</text>
+  <text class="end" wx:else>还没有评论哦！</text>
   <view class="form">
     <image class="avatar" wx:if="{{hasUserInfo}}" src="{{userInfo.avatarUrl}}" />
     <image class="avatar" wx:else src="../../icon/avatar.png" />

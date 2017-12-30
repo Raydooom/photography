@@ -22,7 +22,7 @@ Page({
         this.setData({
             id: options.id
         })
-        this.getComments();
+        // this.getComments();
         var that = this;
 
         if (app.globalData.userInfo) {

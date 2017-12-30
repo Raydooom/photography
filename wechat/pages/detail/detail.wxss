@@ -1,0 +1,376 @@
+/* pages/detail/detail.wxss */
+
+.author {
+    padding: 16rpx 24rpx;
+    overflow: hidden;
+}
+
+.author image {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    float: left;
+}
+
+.author .name {
+    line-height: 60rpx;
+    font-size: 28rpx;
+    margin-left: 20rpx;
+    width: 300rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+}
+
+.author .time {
+    float: right;
+    font-size: 12px;
+    line-height: 60rpx;
+    color: #666;
+}
+
+.img-contianer {
+    overflow: hidden;
+    padding: 0 24rpx;
+}
+
+.img-contianer image {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.one-img {
+    width: 750rpx;
+    margin-left: -24rpx;
+}
+
+.two-img {
+    margin: 2.5rpx;
+    width: 231rpx;
+    height: 231rpx;
+    float: left;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    padding: 0 24rpx 16rpx;
+}
+
+.content .title {
+    font-size: 32rpx;
+    color: #222;
+    display: block;
+    line-height: 60rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 10rpx;
+}
+
+.content .discription {
+    font-size: 28rpx;
+    color: #666;
+    margin: 10rpx 0;
+}
+
+.location {
+    padding: 10rpx 0;
+    font-size: 12px;
+    color: #999;
+}
+
+.location image {
+    display: inline-block;
+    width: 26rpx;
+    height: 26rpx;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+/*评论列表*/
+
+.comment-list {
+    padding-bottom: 102rpx;
+    border-top: 1px solid #efefef;
+}
+
+.comment-list .comment-title {
+    background: #fdfdfd;
+    line-height: 88rpx;
+    font-size: 30rpx;
+    padding: 0 24rpx;
+}
+
+.comment-list .msg-item {
+    border-bottom: 1px solid #efefef;
+    background: #fff;
+    margin-top: 1px;
+    overflow: hidden;
+    padding: 20rpx;
+    padding-top: 30rpx;
+}
+
+.comment-list .msg-item .avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    border: 1px solid #eee;
+    float: left;
+}
+
+.comment-list .msg-item .msg-con {
+    width: 600rpx;
+    float: left;
+    margin-left: 20rpx;
+}
+
+.msg-con .name {
+    font-size: 32rpx;
+    color: #333;
+    display: block;
+    position: relative;
+}
+
+.msg-con .name text.date {
+    padding-top: 10rpx;
+    display: block;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.msg-con .name .prise {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 24rpx;
+}
+
+.msg-con .name .prise text {
+    line-height: 40rpx;
+    height: 40rpx;
+    font-size: 32rpx;
+    color: #666;
+    display: inline-block;
+    padding-left: 2rpx;
+    margin-left: 10rpx;
+}
+
+.msg-con .name .prise image {
+    display: inine-block;
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: top;
+}
+
+.msg-con .msg {
+    display: block;
+    font-size: 32rpx;
+    color: #222;
+    line-height: 40rpx;
+    padding: 30rpx 0;
+}
+
+/*回复列表*/
+
+.reply-list {
+    background: #fdfdfd;
+    border-radius: 8rpx;
+    padding: 20rpx;
+}
+
+.reply-item {
+    font-size: 28rpx;
+    color: #555;
+    margin-bottom: 20rpx;
+    border-bottom: 1px solid #eee;
+}
+
+.reply-item image {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+.reply-item .relpy-name {
+    color: #4963ae;
+    font-size: 28rpx;
+}
+
+.reply-text {
+    padding: 20rpx;
+    line-height: 40rpx;
+}
+
+.end {
+    font-size: 24rpx;
+    color: #ccc;
+    display: block;
+    padding: 20rpx;
+    text-align: center;
+}
+
+/*底栏*/
+
+.footer-bar {
+    background: #fff;
+    border-top: 1px solid #eee;
+    position: fixed;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 102rpx;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.footer-bar view {
+    float: left;
+}
+
+.footer-bar .comment-btn {
+    border: 1px solid #ccc;
+    height: 64rpx;
+    line-height: 64rpx;
+    width: 300rpx;
+    border-radius: 40rpx;
+    font-size: 28rpx;
+    color: #999;
+    padding-left: 30rpx;
+    margin: 19rpx 20rpx;
+}
+
+.footer-bar .footer-btn {
+    width: 25%;
+    font-size: 28rpx;
+    color: #666;
+    line-height: 104rpx;
+    text-align: center;
+}
+
+.footer-bar .footer-btn:focus {
+    background: #efefef;
+}
+
+.footer-bar .footer-btn image {
+    display: block;
+    width: 54rpx;
+    height: 54rpx;
+    margin: 10rpx auto 0;
+}
+
+.footer-bar .footer-btn text {
+    display: block;
+    margin: 0 auto;
+    line-height: 36rpx;
+    color: #999;
+}
+
+.footer-bar .footer-btn text.praised {
+    color: #e51e30;
+}
+
+.comment-form {
+    position: fixed;
+    bottom: -226rpx;
+    left: 0;
+    background: #fff;
+    z-index: 3;
+    padding: 30rpx 40rpx;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.comment-form .user-info {
+    width: 670rpx;
+}
+
+.comment-form .user-info image {
+    display: inline-block;
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.comment-form .user-info text {
+    font-size: 32rpx;
+    color: #333;
+    padding-left: 20rpx;
+}
+
+.comment-form input {
+    border: 1px solid #ccc;
+    display: block;
+    border-radius: 4px;
+    margin: 20rpx 0 0;
+    width: 634rpx;
+    padding: 0 16rpx;
+    line-height: 80rpx;
+    height: 80rpx;
+    font-size: 32rpx;
+    color: #666;
+}
+
+.share-btn {
+    border: 0;
+    box-shadow: none;
+    background: none;
+    display: inline-block;
+}
+
+.share-icon {
+    position: relative;
+}
+
+.share-icon .share-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+/*  输入内容  */
+
+.form-warp {
+    position: fixed;
+    bottom: -102rpx;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #ccc;
+    z-index: 3;
+    height: 102rpx;
+}
+.form-warp.active {
+    bottom: 0;
+}
+.form-warp .avatar {
+    display: inline-block;
+    width: 68rpx;
+    height: 68rpx;
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-left: 30rpx;
+}
+
+.form-warp input {
+    vertical-align: middle;
+    width: 550rpx;
+    display: inline-block;
+    border: 1px solid #eee;
+    font-size: 28rpx;
+    margin: 20rpx;
+    line-height: 68rpx;
+    height: 68rpx;
+    border-radius: 6rpx;
+    padding: 0 20rpx;
+}
