@@ -1,4 +1,5 @@
 {
+    "navigationBarTitleText": "最新发布",
     "enablePullDownRefresh": true,
     "backgroundColor": "#fff",
     "backgroundTextStyle": "black"

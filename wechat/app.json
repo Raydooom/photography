@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/detail/detail",
         "pages/index/index",
+        "pages/newest/newest",
+        "pages/detail/detail",
         "pages/comments/comments",
         "pages/addImg/addImg",
         "pages/kinds/kinds",
@@ -27,6 +28,12 @@
                 "text": "热门",
                 "iconPath": "assets/icons/hot.png",
                 "selectedIconPath": "assets/icons/hot-active.png"
+            },
+            {
+                "pagePath": "pages/newest/newest",
+                "text": "最新",
+                "iconPath": "assets/icons/newest.png",
+                "selectedIconPath": "assets/icons/newest-active.png"
             },
             {
                 "pagePath": "pages/addImg/addImg",

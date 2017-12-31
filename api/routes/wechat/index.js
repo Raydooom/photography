@@ -42,10 +42,10 @@ router.post('/hot', async(ctx, next) => {
                 console.log(error);
             })
             // 查询评论信息
-        await sql.query("SELECT * FROM comments WHERE id = " + list[index].comment_id)
-            .then(result => {
+        await sql.query("SELECT * FROM comments WHERE message_id = " + list[index].id)
+            .then(comments => {
                 data[index] = {
-                    comments: result,
+                    comments: comments,
                     authorInfo: authorInfo,
                     content: list[index],
                     img: list[index].img.split(',')
@@ -59,6 +59,59 @@ router.post('/hot', async(ctx, next) => {
         data: data,
     };
 })
+
+
+/**
+ * 最新发布列表数据接口
+ * @param  {[type]} '/newset'     [description]
+ * @param  {[type]} async(ctx, next          [description]
+ * @return {[json]}            [description]
+ */
+router.post('/newest', async(ctx, next) => {
+    var data = [],
+        list;
+    // 查询列表页
+    await sql.query("SELECT * FROM message_list ORDER BY date desc")
+        .then(res => {
+            list = res
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    for (let index in list) {
+        let authorInfo;
+        // 查询用户信息
+        await sql.query("SELECT * FROM user WHERE user_id = '" + list[index].author_id + "'")
+            .then(result => {
+                // console.log(result)
+                authorInfo = {
+                    userId: result[0].id,
+                    nickname: result[0].nickname,
+                    avatarUrl: result[0].avatar_url
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+            // 查询评论信息
+        await sql.query("SELECT * FROM comments WHERE message_id = " + list[index].id)
+            .then(comments => {
+                data[index] = {
+                    comments: comments,
+                    authorInfo: authorInfo,
+                    content: list[index],
+                    img: list[index].img.split(',')
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+    ctx.body = {
+        state: 1,
+        data: data,
+    };
+})
+
+
 
 /**
  * 内容浏览量统计
@@ -154,13 +207,53 @@ router.get('/detail', async(ctx, next) => {
         })
 })
 
+/**
+ * [详情评论列表接口]
+ * @param  {[int]}    [列表id]
+ * @param  {[string]} [user_id]
+ * @return {[json]}   [结果]
+ */
+router.get('/addComment', async(ctx, next) => {
+    console.log(ctx.query)
+    let date = moment().format("YYYY-MM-DD HH:mm:ss");
+    await sql.query("INSERT INTO comments (message_id, user_id, comment, date) VALUES ('"+ctx.query.id+"', '"+ctx.query.userId+"', '"+ctx.query.text+"', '"+date+"')")
+        .then(result => {
+                ctx.body={
+                    state:1,
+                    info:"评论成功"
+                }
+        }).catch(error => {
+            console.log(error);
+        })
+})
 
 /**
- * [详情评论接口]
+ * [详情分享接口]
+ * @param  {[int]}    [详情]
+ * @param  {[int]}    [分享数]
+ * @return {[json]}   [结果]
+ */
+router.get('/detailShare', async(ctx, next) => {
+    console.log(ctx.query)
+    let data = ctx.query;
+    await sql.query("UPDATE message_list SET shares = '" + data.shares + "' WHERE id = " + data.detailId)
+        .then(result => {
+            console.log("分享统计成功！")
+        }).catch(error => {
+            console.log(error);
+        })
+    ctx.body = {
+        state: 1,
+    }
+})
+
+
+/**
+ * [获取详情评论接口]
  * @param  {[int]}  [列表id]
  * @return {[json]}  [评论、评论用户、评论回复、回复用户信息]
  */
-router.get('/comment', async(ctx, next) => {
+router.get('/getComment', async(ctx, next) => {
     console.log(ctx.query)
     let data = [],
         list;
@@ -227,7 +320,7 @@ router.get('/comment', async(ctx, next) => {
 })
 
 /**
- * [详情评论接口]
+ * [评论点赞接口]
  * @param  {[int]}  [评论id]
  * @param  {[int]}  [当前点赞数]
  * @return {[json]}  [成功信息]
@@ -244,6 +337,27 @@ router.get('/commentPraise', async(ctx, next) => {
     ctx.body = {
         state: 1,
     }
+})
+
+/**
+ * [回复评论接口]
+ * @param  {[int]}  [评论id]
+ * @param  {[string]}  [user_id]
+ * @return {[json]}  [成功信息]
+ */
+router.get('/commentReply', async(ctx, next) => {
+    console.log(ctx.query)
+    let data = ctx.query
+    let date = moment().format("YYYY-MM-DD HH:mm:ss");
+    await sql.query("INSERT INTO reply_comments (comment_id, user_id, text, date) VALUES ('"+ctx.query.commentId+"', '"+ctx.query.userId+"', '"+ctx.query.text+"', '"+date+"')")
+        .then(result => {
+                ctx.body={
+                    state:1,
+                    info:"回复成功"
+                }
+        }).catch(error => {
+            console.log(error);
+        })
 })
 
 

@@ -10,6 +10,7 @@ Page({
         detailId: '',  // 详情id
         userInfo: '',   // 发布者信息
         detailPraise: 0,
+        detailShare: 0,
         detailInfo: '',
         imgArr: [],
         commentList: [],
@@ -18,18 +19,21 @@ Page({
         active: '',
         focus: false,
         placeHolder: '请输入评论内容',
-        msg: ''
+        msg: '',
+        isReply: false,
+        replyCommentId: ''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let id = 7;
+        // let id = 7;
+        console.log(options)
         this.setData({
-            detailId: id
+            detailId: options.id
         })
-        this.getData(id);
+        this.getData(this.data.detailId);
         // 获取用户信息
         let that = this;
         wx.getStorage({
@@ -43,7 +47,7 @@ Page({
     },
 
     onPullDownRefresh: function () {
-
+        this.getData(this.data.detailId);
     },
 
     /**
@@ -57,14 +61,32 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        let that = this;
+        return {
+            success: function (res) {
+                wx.request({
+                    url: HOST + '/wechat/detailShare',
+                    data: {
+                        shares: that.data.detailShare + 1,
+                        detailId: that.data.detailId
+                    },
+                    success: res => {
+                        that.getData(that.data.detailId);
+                    }
+                });
 
+            },
+            fail: function (res) {
+                // 转发失败
+            }
+        }
     },
 
     /**
      * 获取条目消息
      */
     getData: function (id) {
-        console.log(id)
+        // console.log(id)
         let that = this;
         wx.request({
             url: HOST + '/wechat/detail',
@@ -79,6 +101,7 @@ Page({
                         detailInfo: res.data.detail,
                         imgArr: res.data.img,
                         detailPraise: res.data.detail.praises,
+                        detailShare: res.data.detail.shares,
                         loading: false
                     })
 
@@ -114,7 +137,7 @@ Page({
     getComments: function (id) {
         let that = this;
         wx.request({
-            url: HOST + '/wechat/comment',
+            url: HOST + '/wechat/getComment',
             data: {
                 id: id
             },
@@ -124,7 +147,9 @@ Page({
                     that.setData({
                         commentList: res.data.data
                     })
-                    // 获取评论
+
+                    // 停止下拉刷新
+                    wx.stopPullDownRefresh();
                 } else {
                     console.log("数据查询错误！");
                 }
@@ -177,27 +202,104 @@ Page({
                 praise: data.praise + 1
             },
             success: (res) => {
+                that.setData({
+                    msg: ''
+                })
                 that.getComments(that.data.detailId);
             }
         })
     },
 
     /**
-     * 评论
+     * 弹出评论框
      */
     comment: function () {
         this.setData({
             active: 'active',
             focus: true,
+            msg: '',
+            placeHolder: '请输入评论内容',
+            isReply: false
         })
+    },
+    /**
+     * 弹出回复框
+     */
+    reply: function (e) {
+        let commentId = e.currentTarget.dataset.commentId;
+        let user = e.currentTarget.dataset.user;
+        if (this.data.focus){
+            this.setData({
+                active: 'active',
+                focus: false,
+            })
+        }else{
+            this.setData({
+                replyCommentId: commentId,
+                active: 'active',
+                focus: true,
+                placeHolder: '回复 ' + user + ' :',
+                isReply: true,
+                msg: ''
+            })
+        }
+        
     },
     /**
      * 失去焦点
      */
     inputBlur: function () {
         this.setData({
-            active: '',
             focus: false,
+            active: '',
         })
-    }
+    },
+    /**
+     * 提交评论
+     */
+    sendComment: function (e) {
+        let text = e.detail.value;
+        let that = this;
+        // 评论内容
+        if (!that.data.isReply) {
+            wx.request({
+                url: HOST + '/wechat/addComment',
+                data: {
+                    id: that.data.detailId,
+                    userId: that.data.userId,
+                    text: text
+                },
+                success: (res => {
+                    that.getComments(that.data.detailId);
+                    that.setData({
+                        msg: '',
+                        active: '',
+                    })
+                    console.log(res);
+                })
+            })
+        } else {
+            // 回复评论
+            wx.request({
+                url: HOST + '/wechat/commentReply',
+                data: {
+                    commentId: that.data.replyCommentId,
+                    userId: that.data.userId,
+                    text: text
+                },
+                success: (res => {
+                    that.getComments(that.data.detailId);
+                    that.setData({
+                        msg: '',
+                        active: '',
+                        placeHolder: '请输入评论内容',
+                        isReply: false
+                    })
+                    console.log(res);
+                })
+            })
+        }
+
+    },
+
 })

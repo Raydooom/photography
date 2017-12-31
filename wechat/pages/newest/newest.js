@@ -30,7 +30,7 @@ Page({
     getData: function () {
         let that = this;
         wx.request({
-            url: HOST + '/wechat/hot',
+            url: HOST + '/wechat/newest',
             method: 'POST',
             success: res => {
                 if (res.data.state == 1) {
