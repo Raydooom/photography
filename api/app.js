@@ -21,6 +21,12 @@ const uploadImg = require('./routes/common/uploadImg')
 const login = require('./routes/wechat/login')
 const wechatArticle = require('./routes/wechat/index')
 
+
+// middlewares
+app.use(bodyparser({
+  enableTypes:['json', 'form', 'text']
+}))
+
 // error handler
 onerror(app)
 app.use(async (ctx, next) => {
@@ -32,6 +38,8 @@ app.use(async (ctx, next) => {
     ctx.set("Access-Control-Allow-Credentials", true);
     ctx.set("Access-Control-Max-Age", 300);
     ctx.set("Access-Control-Expose-Headers", "myData");
+
+    // ctx.body = ctx.request.body;
     await next();
 })
 // commom路由
@@ -41,10 +49,6 @@ app.use(uploadImg.routes(), uploadImg.allowedMethods())
 app.use(login.routes(), login.allowedMethods())
 app.use(wechatArticle.routes(), wechatArticle.allowedMethods())
 
-// middlewares
-app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
-}))
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))

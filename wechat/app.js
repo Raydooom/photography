@@ -15,6 +15,7 @@ App({
             fail: (res) => {
                 console.log(res)
                 that.getUserId();
+                that.getCode();
             }
         })
     },
@@ -23,14 +24,14 @@ App({
      * 当小程序启动，或从后台进入前台显示，会触发 onShow
      */
     onShow: function (options) {
-        
+
     },
 
     /**
      * 当小程序从前台进入后台，会触发 onHide
      */
     onHide: function () {
-
+        
     },
 
     /**
@@ -44,37 +45,47 @@ App({
         // 获取用户信息
         wx.getUserInfo({
             success: res => {
-                userInfo = res.userInfo
+                that.globalData.userInfo = res.userInfo
                 // 用户登录获取用户
-                wx.login({
-                    success: loginRes => {
-                        console.log(userInfo)
-                        if (loginRes.code) {
-                            // 获取code成功后传到后台
-                            wx.request({
-                                url: HOST + '/wechat/login',
-                                data: {
-                                    code: loginRes.code,
-                                    userInfo: res.userInfo
-                                },
-                                success: res => {
-                                    // 后台返回用户信息存入本地缓存
-                                    wx.setStorage({
-                                        key: "userId",
-                                        data: res.data.userId,
-                                        success: () => {
-                                            
-                                        }
-                                    })
-                                }
-                            })
-                        } else {
-                            console.log('获取用户登录态失败！' + res.errMsg)
-                        }
-                    }
-       
-                });
             }
         })
+    },
+    getCode: function () {
+        let that = this;
+        console.log(111)
+        wx.login({
+            success: loginRes => {
+                let userInfo = that.globalData.userInfo;
+                console.log(userInfo)
+                if (loginRes.code) {
+                    // 获取code成功后传到后台
+                    wx.request({
+                        url: HOST + '/wechat/login',
+                        method: 'POST',
+                        data: {
+                            code: loginRes.code,
+                            userInfo: userInfo
+                        },
+                        success: res => {
+                            // 后台返回用户信息存入本地缓存
+                            wx.setStorage({
+                                key: "userId",
+                                data: res.data.userId,
+                                success: () => {
+
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    console.log('获取用户登录态失败！' + res.errMsg)
+                }
+            }
+
+        });
+    },
+    globalData: {
+        userInfo: null
     }
+
 })

@@ -9,7 +9,11 @@ Page({
     data: {
         hotList: [],
         loading: true,
-        userId: ''
+        userId: '',
+        page: 0,
+        pageSize: 8,
+        end: false,
+        backTopShow: false
     },
 
     /**
@@ -17,7 +21,6 @@ Page({
      */
     onLoad: function () {
         let that = this;
-        this.getData();
         wx.getStorage({
             key: 'userId',
             success: function (res) {
@@ -27,10 +30,17 @@ Page({
             },
         })
     },
+    onShow: function () {
+        this.getData();
+    },
     getData: function () {
         let that = this;
         wx.request({
             url: HOST + '/wechat/newest',
+            data: {
+                page: that.data.page,  // 起始页
+                pageSize: that.data.pageSize  // 一页数据条数
+            },
             method: 'POST',
             success: res => {
                 if (res.data.state == 1) {
@@ -39,6 +49,12 @@ Page({
                         loading: false
                     });
                     console.log(res.data.data)
+                    console.log(res.data)
+                    if (res.data.length == res.data.data.length) {
+                        that.setData({
+                            end: true
+                        })
+                    }
                     // 停止下拉刷新
                     wx.stopPullDownRefresh();
                 } else {
@@ -58,9 +74,34 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        console.log(1);
+        this.setData({
+            page: this.data.page + 1
+        })
+        if (!this.data.end) {
+            this.getData();
+        }
+
     },
 
+    onPageScroll: function (e) {
+        if (e.scrollTop > 1500) {
+            this.setData({
+                backTopShow: true
+            })
+        } else {
+            this.setData({
+                backTopShow: false
+            })
+        }
+    },
+    /**
+     * 返回顶部
+     */
+    backTop: function () {
+        wx.pageScrollTo({
+            scrollTop: 0
+        })
+    },
     /**
      * 用户点击右上角分享
      */

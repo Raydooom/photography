@@ -6,6 +6,8 @@
         "pages/comments/comments",
         "pages/addImg/addImg",
         "pages/kinds/kinds",
+        "pages/center/center",
+        "pages/special/special",
         "pages/test/test"
     ],
     "usingComponents": {
@@ -38,12 +40,18 @@
             {
                 "pagePath": "pages/addImg/addImg",
                 "text": "发布",
+                "iconPath": "assets/icons/release.png",
+                "selectedIconPath": "assets/icons/release.png"
+            },
+            {
+                "pagePath": "pages/special/special",
+                "text": "专题",
                 "iconPath": "assets/icons/kind.png",
                 "selectedIconPath": "assets/icons/kind-active.png"
             },
             {
-                "pagePath": "pages/test/test",
-                "text": "测试",
+                "pagePath": "pages/center/center",
+                "text": "我的",
                 "iconPath": "assets/icons/kind.png",
                 "selectedIconPath": "assets/icons/kind-active.png"
             }

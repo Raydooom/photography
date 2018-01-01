@@ -44,7 +44,11 @@
             </view>
         </view>
     </view>
-    <view class="end-text">正在加载
+    <view class="end-text" wx:if="{{!end && !loading}}">正在加载
         <image src='../../assets/icons/loading.gif'></image>
     </view>
+    <view class="end-text" wx:if="{{end}}">
+        我可是有底线的
+    </view>
 </view>
+<image class="backtop-icon" bindtap='backTop' wx:if="{{backTopShow}}" src='../../assets/icons/back_top.png'></image>

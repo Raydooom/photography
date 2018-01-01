@@ -11,9 +11,9 @@ const moment = require('moment')
 router.prefix('/wechat')
 
 
-router.get('/login', async(ctx, next) => {
-    var js_code = ctx.query.code;
-    var userInfo = JSON.parse(ctx.query.userInfo);
+router.post('/login', async(ctx, next) => {
+    var js_code = ctx.request.body.code;
+    var userInfo = ctx.request.body.userInfo;
     var openid, userId;
     await superagent
         .get('https://api.weixin.qq.com/sns/jscode2session')

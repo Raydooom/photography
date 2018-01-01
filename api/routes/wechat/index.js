@@ -17,10 +17,20 @@ router.prefix('/wechat')
  * @return {[json]}            [description]
  */
 router.post('/hot', async(ctx, next) => {
+    var page = parseInt(ctx.request.body.page) || 0;
+    var pageSize = parseInt(ctx.request.body.pageSize) || 2;
     var data = [],
+        length = 0,
         list;
+    await sql.query("SELECT * FROM message_list")
+        .then(res=>{
+            length = res.length
+        })
+        .catch(err => {
+            console.log(err)
+        })
     // 查询列表页
-    await sql.query("SELECT * FROM message_list ORDER BY views desc")
+    await sql.query("SELECT * FROM message_list ORDER BY views desc limit 0," + ( page + 1 ) * pageSize)
         .then(res => {
             list = res
         })
@@ -57,6 +67,7 @@ router.post('/hot', async(ctx, next) => {
     ctx.body = {
         state: 1,
         data: data,
+        length: length
     };
 })
 
@@ -68,10 +79,20 @@ router.post('/hot', async(ctx, next) => {
  * @return {[json]}            [description]
  */
 router.post('/newest', async(ctx, next) => {
+    var page = parseInt(ctx.request.body.page) || 0;
+    var pageSize = parseInt(ctx.request.body.pageSize) || 2;
     var data = [],
+        length = 0,
         list;
+    await sql.query("SELECT * FROM message_list")
+        .then(res=>{
+            length = res.length
+        })
+        .catch(err => {
+            console.log(err)
+        })
     // 查询列表页
-    await sql.query("SELECT * FROM message_list ORDER BY date desc")
+    await sql.query("SELECT * FROM message_list ORDER BY date desc limit 0," + ( page + 1 ) * pageSize)
         .then(res => {
             list = res
         })
@@ -108,6 +129,7 @@ router.post('/newest', async(ctx, next) => {
     ctx.body = {
         state: 1,
         data: data,
+        length: length
     };
 })
 

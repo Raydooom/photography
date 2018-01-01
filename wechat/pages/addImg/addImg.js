@@ -12,20 +12,31 @@ Page({
         imgArr: [],
         imgUrl: [],
         showLoc: false,
-        locationName: '是否位置信息'
+        locationName: '是否位置信息',
+        userId:''
     },
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onShow: function (options) {
+        let that = this;
         wx.getStorage({
             key: 'userId',
             success: (res) => {
                 console.log(res)
+                if(res.data){
+                    that.setData({
+                        userId: res.data
+                    })
+                }else{
+                    app.getUserId();
+                    app.getCode();
+                }
             },
             fail: (res) => {
                 console.log(res)
                 app.getUserId();
+                app.getCode();
             }
         })
     },
@@ -146,7 +157,7 @@ Page({
      */
     submitInfo: function (imgUrlArr) {
         let that = this;
-        if (app.userId) {
+        if (that.data.userId) {
             if (that.data.imgUrl.length == that.data.imgArr.length) {
                 let info = this.data
                 wx.request({
@@ -154,7 +165,7 @@ Page({
                     data: {
                         title: info.title,
                         description: info.text,
-                        userId: app.userId,
+                        userId: that.data.userId,
                         imgArr: that.data.imgUrl.toString(),
                         location: info.showLoc ? info.locationName : ''
                     },
@@ -166,7 +177,21 @@ Page({
                                 title: '提示',
                                 showCancel: false,
                                 content: '恭喜您，发布成功！',
-                                confirmColor: '#a09fed'
+                                confirmColor: '#a09fed',
+                                success: function (res) {
+                                    that.setData({
+                                        title: '',
+                                        text: '',
+                                        imgArr: [],
+                                        imgUrl: [],
+                                        showLoc: false,
+                                        locationName: '是否位置信息',
+                                        userId: ''
+                                    })
+                                    wx.switchTab({
+                                        url: '../newest/newest'
+                                    })
+                                }
                             })
                         }
                     }
@@ -174,6 +199,7 @@ Page({
             }
 
         } else {
+            wx.hideLoading();
             wx.showModal({
                 title: '错误信息',
                 showCancel: false,
