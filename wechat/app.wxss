@@ -1,34 +1,66 @@
 @import "modules/loading/loading.wxss";
+
 /* 模型盒设置 */
 
 view, text, input, textarea, button {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
-
 
 /* 色值预定义 */
 
 .color-main {
-  color: #a09fed;
+    color: #a09fed;
 }
 
 .color-bg-main {
-  background: #a09fed;
+    background: #a09fed;
 }
 
 .color-assist1 {
-  color: #addeff;
+    color: #addeff;
 }
 
 .color-bg-assist1 {
-  background: #addeff;
+    background: #addeff;
 }
 
 .color-assist2 {
-  color: #aaecd0;
+    color: #aaecd0;
 }
 
 .color-bg-assist2 {
-  background: #aaecd0;
+    background: #aaecd0;
+}
+
+/* 底部加载文字 */
+
+.end-text {
+    border-top: 1px solid #efefef;
+    background: #fdfdfd;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4rpx;
+    margin-top: -8rpx;
+    line-height: 20px;
+}
+
+.end-text image {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-left: 12rpx;
+}
+
+/*返回顶部按钮*/
+
+.backtop-icon {
+    display: block;
+    position: fixed;
+    bottom: 20rpx;
+    right: 24rpx;
+    width: 80rpx;
+    height: 80rpx;
 }

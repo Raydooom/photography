@@ -18,7 +18,7 @@ router.prefix('/wechat')
  */
 router.post('/hot', async(ctx, next) => {
     var page = parseInt(ctx.request.body.page) || 0;
-    var pageSize = parseInt(ctx.request.body.pageSize) || 2;
+    var pageSize = parseInt(ctx.request.body.pageSize) || 4;
     var data = [],
         length = 0,
         list;

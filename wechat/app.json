@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/special/special",
         "pages/index/index",
         "pages/newest/newest",
         "pages/detail/detail",
@@ -7,7 +8,6 @@
         "pages/addImg/addImg",
         "pages/kinds/kinds",
         "pages/center/center",
-        "pages/special/special",
         "pages/test/test"
     ],
     "usingComponents": {
