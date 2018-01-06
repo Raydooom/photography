@@ -1,2 +1,5 @@
 <!--pages/center/center.wxml-->
-<text>pages/center/center.wxml</text>
+<view class='top-part'>
+    <view class="bg"></view>
+    <view class="center-info"></view>
+</view>

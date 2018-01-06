@@ -1,0 +1,49 @@
+<!-- 导入loading模块  -->
+<import src="../../modules/loading/loading.wxml" />
+<template wx:if="{{loading}}" is="loading" />
+
+<view class="page">
+    <view class="album-detail">
+        <view class="album">
+            <text class="title">{{detail.title}}</text>
+            <view class="date">
+                {{detail.date}}
+                <text class="author">{{detail.user_id}}</text>
+            </view>
+            <text class="description">{{detail.description}}</text>
+        </view>
+        <view class="content">
+            {{detail.text}}
+        </view>
+        <!-- <view class="keywords" wx:if="{{pageData.album.keywords != ''}}">关键词：{{pageData.album.keywords}}</view> -->
+        <text class="end">———— EDN ————</text>
+    </view>
+</view>
+<!--  底部栏  -->
+<view class="footer-bar">
+    <view class="footer-btn">
+        <image src="../../assets/icons/view.png"></image>
+        <text>{{view}}</text>
+    </view>
+    <view class="footer-btn" bindtap="praise" data-praises="{{detailInfo.praises}}">
+        <block wx:if="{{!hasPraise}}">
+            <image src="../../assets/icons/like.png"></image>
+            <text>{{praise}}</text>
+        </block>
+        <block wx:else>
+            <image src="../../assets/icons/like-on.png"></image>
+            <text class="praised">{{detailPraise}}</text>
+        </block>
+    </view>
+    <view class="footer-btn" bindtap='comment'>
+        <navigator url="../specialDetailComment/specialDetailComment?id={{detailId}}&title={{detail.title}}">
+            <image src="../../assets/icons/comment.png"></image>
+            <text>{{detail.comment}}</text>
+        </navigator>
+    </view>
+    <view class="footer-btn share-icon">
+        <image src="../../assets/icons/share-icon.png"></image>
+        <text>{{share}}</text>
+        <button class="share-btn" open-type="share"></button>
+    </view>
+</view>

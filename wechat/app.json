@@ -1,13 +1,15 @@
 {
     "pages": [
+        "pages/center/center",
         "pages/special/special",
+        "pages/specialDetailComment/specialDetailComment",
         "pages/index/index",
+        "pages/specialDetail/specialDetail",
         "pages/newest/newest",
         "pages/detail/detail",
         "pages/comments/comments",
         "pages/addImg/addImg",
         "pages/kinds/kinds",
-        "pages/center/center",
         "pages/test/test"
     ],
     "usingComponents": {
@@ -46,14 +48,14 @@
             {
                 "pagePath": "pages/special/special",
                 "text": "专题",
-                "iconPath": "assets/icons/kind.png",
-                "selectedIconPath": "assets/icons/kind-active.png"
+                "iconPath": "assets/icons/special.png",
+                "selectedIconPath": "assets/icons/special-active.png"
             },
             {
                 "pagePath": "pages/center/center",
                 "text": "我的",
-                "iconPath": "assets/icons/kind.png",
-                "selectedIconPath": "assets/icons/kind-active.png"
+                "iconPath": "assets/icons/center.png",
+                "selectedIconPath": "assets/icons/center-active.png"
             }
         ]
     }

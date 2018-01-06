@@ -4,7 +4,7 @@
 <template wx:if="{{loading}}" is="loading" />
 <view>
     <view class="item" wx:for="{{specialList}}" wx:key="special">
-        <navigator url='../specialDetail/specialDetail?id={{item.id}}'>
+        <navigator url='../specialDetail/specialDetail?id={{item.id}}&title={{item.title}}'>
             <image class="cover" src='{{item.cover}}' mode='aspectFill'></image>
             <view class="text-info">
                 <text class="title">{{item.title}}</text>
