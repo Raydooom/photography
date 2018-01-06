@@ -1,5 +1,11 @@
 <!--pages/center/center.wxml-->
 <view class='top-part'>
     <view class="bg"></view>
-    <view class="center-info"></view>
+    <view class="center-info">
+        <image src="{{userInfo.avatar}}"></image>
+        <view class="user-info">
+            <text class="name">{{userInfo.nickname}}</text>
+            <!-- <text class="date">{{userInfo.date}}</text> -->
+        </view>
+    </view>
 </view>

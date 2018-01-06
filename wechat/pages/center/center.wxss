@@ -1,1 +1,57 @@
 /* pages/center/center.wxss */
+
+page {
+    background: #f2f2f2;
+}
+
+.top-part {
+    position: relative;
+    height: 200rpx;
+}
+
+.top-part .bg {
+    background: #5756c0;
+    height: 160rpx;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}
+
+.center-info {
+    top: 20rpx;
+    width: 670rpx;
+    position: absolute;
+    z-index: 2;
+    background: #fff;
+    margin: 0 40rpx;
+    padding: 40rpx;
+    box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+
+.center-info image {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    border: 4rpx solid #fff;
+    box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.15);
+    float: left;
+}
+
+.user-info {
+    float: left;
+    padding-left: 30rpx;
+}
+
+.user-info .name {
+    font-size: 32rpx;
+    color: #333;
+    line-height: 80rpx;
+    height: 80rpx;
+    display: block;
+}
+
+.user-info .date {
+    display: block;
+    font-size: 24rpx;
+    color: #999;
+}

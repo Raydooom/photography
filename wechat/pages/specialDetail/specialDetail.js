@@ -8,6 +8,7 @@ Page({
      */
     data: {
         detailId: '',  // 详情id
+        loading: true,
         detail: {},  // 页面数据
         view: 0,  // 浏览数
         praise: 0, // 点赞数
@@ -78,7 +79,8 @@ Page({
                         loading: false,
                         view: res.data.detail.view + 1,
                         praise: res.data.detail.praise,
-                        share: res.data.detail.share
+                        share: res.data.detail.share,
+                        loading: false,
                     })
                     // 统计浏览量
                     that.addViews(that.data.detailId, that.data.view);

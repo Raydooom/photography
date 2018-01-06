@@ -11,6 +11,9 @@ const moment = require('moment')
 router.prefix('/wechat')
 
 
+/**
+ * 登录换取openid等信息
+*/
 router.post('/login', async(ctx, next) => {
     var js_code = ctx.request.body.code;
     var userInfo = ctx.request.body.userInfo;
@@ -65,5 +68,23 @@ router.post('/login', async(ctx, next) => {
             console.log(error)
         })
 })
+
+
+router.get('/userInfo', async(ctx, next) => {
+    console.log(ctx.query)
+    await sql.query("SELECT * FROM user WHERE user_id ='" + ctx.query.userId +"'")
+        .then(res=>{
+            ctx.body = {
+                state:1,
+                nickname:res[0].nickname,
+                avatar:res[0].avatar_url,
+                gender:res[0].gender,
+                country:res[0].country,
+                date:res[0].date
+            }
+        })
+})
+
+
 
 module.exports = router;

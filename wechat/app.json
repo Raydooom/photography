@@ -1,9 +1,9 @@
 {
     "pages": [
+        "pages/index/index",
         "pages/center/center",
         "pages/special/special",
         "pages/specialDetailComment/specialDetailComment",
-        "pages/index/index",
         "pages/specialDetail/specialDetail",
         "pages/newest/newest",
         "pages/detail/detail",

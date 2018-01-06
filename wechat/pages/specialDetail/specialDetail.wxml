@@ -2,7 +2,7 @@
 <import src="../../modules/loading/loading.wxml" />
 <template wx:if="{{loading}}" is="loading" />
 
-<view class="page">
+<view class="page" wx:if="{{!loading}}">
     <view class="album-detail">
         <view class="album">
             <text class="title">{{detail.title}}</text>
@@ -20,7 +20,7 @@
     </view>
 </view>
 <!--  底部栏  -->
-<view class="footer-bar">
+<view class="footer-bar" wx:if="{{!loading}}">
     <view class="footer-btn">
         <image src="../../assets/icons/view.png"></image>
         <text>{{view}}</text>

@@ -11,6 +11,7 @@ Page({
         specialId: '',
         userId: '',
         active: '',
+        loading: true,
         focus: false,
         placeHolder: '请输入评论内容',
         msg: '',
@@ -77,7 +78,8 @@ Page({
                 console.log(res);
                 if (res.data.state == 1) {
                     that.setData({
-                        commentList: res.data.data
+                        commentList: res.data.data,
+                        loading: false,
                     })
 
                     // 停止下拉刷新
