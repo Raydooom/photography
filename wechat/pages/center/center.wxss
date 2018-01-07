@@ -6,52 +6,146 @@ page {
 
 .top-part {
     position: relative;
-    height: 200rpx;
+    padding-top: 20rpx;
 }
 
 .top-part .bg {
     background: #5756c0;
     height: 160rpx;
     position: absolute;
+    top: -20rpx;
     z-index: 1;
     width: 100%;
 }
 
 .center-info {
-    top: 20rpx;
-    width: 670rpx;
-    position: absolute;
+    margin-top: 20rpx;
+    width: 702rpx;
+    position: relative;
     z-index: 2;
     background: #fff;
-    margin: 0 40rpx;
+    margin: 0 24rpx;
     padding: 40rpx;
-    box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.1);
 }
 
-.center-info image {
+.user-info {
+    overflow: hidden;
+    padding-bottom: 30rpx;
+}
+
+.user-info image {
     width: 120rpx;
     height: 120rpx;
     border-radius: 50%;
     border: 4rpx solid #fff;
-    box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8rpx 10rpx rgba(0, 0, 0, 0.2);
     float: left;
 }
 
-.user-info {
-    float: left;
+.user-name {
     padding-left: 30rpx;
+    float: left;
 }
 
-.user-info .name {
+.user-name .name {
     font-size: 32rpx;
     color: #333;
-    line-height: 80rpx;
-    height: 80rpx;
+    line-height: 100rpx;
+    height: 100rpx;
     display: block;
 }
 
-.user-info .date {
+.user-name .date {
     display: block;
     font-size: 24rpx;
     color: #999;
+}
+
+.article-info {
+    border-top: 1px solid #efefef;
+    padding-top: 20rpx;
+    overflow: hidden;
+}
+
+.article-info .item {
+    width: 50%;
+    float: left;
+}
+
+.article-info .item text {
+    display: block;
+    text-align: center;
+}
+
+.article-info .item text.num {
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #333;
+    line-height: 60rpx;
+}
+
+.article-info .item text.text {
+    font-size: 28rpx;
+    color: #333;
+}
+
+.tools-warp {
+    width: 702rpx;
+    background: #fff;
+    margin: 30rpx 24rpx;
+    box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.tools-warp .title {
+    font-size: 30rpx;
+    color: #666;
+    border-bottom: 1px solid #efefef;
+    display: block;
+    line-height: 80rpx;
+    padding: 0 40rpx;
+}
+
+.tools {
+    overflow: hidden;
+    padding: 40rpx;
+}
+
+.tools .tools-item {
+    width: 46%;
+    float: left;
+    margin: 0 2%;
+    text-align: center;
+}
+
+.menu {
+    overflow: hidden;
+    width: 702rpx;
+    background: #fff;
+    margin: 0 24rpx;
+    box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+    height: 100rpx;
+    line-height: 100rpx;
+}
+
+.menu .text {
+    display: block;
+    float: left;
+}
+
+.menu .text image {
+    padding: 30rpx;
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+}
+
+.menu .text text {
+    float: left;
+    font-size: 28rpx;
+    color: #666;
+}
+
+.menu .switch {
+    float: right;
 }

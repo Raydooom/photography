@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/index/index",
         "pages/center/center",
+        "pages/index/index",
         "pages/special/special",
         "pages/specialDetailComment/specialDetailComment",
         "pages/specialDetail/specialDetail",

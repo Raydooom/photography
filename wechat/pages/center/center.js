@@ -8,7 +8,8 @@ Page({
      */
     data: {
         userId: '',
-        userInfo:''
+        userInfo: '',
+        articleInfo: ''
     },
 
     /**
@@ -46,7 +47,20 @@ Page({
             },
             success: res => {
                 that.setData({
-                    userInfo:res.data
+                    userInfo: res.data
+                })
+            }
+        });
+        wx.request({
+            url: HOST + '/wechat/articleInfo',
+            method: 'POST',
+            data: {
+                userId: that.data.userId
+            },
+            success: res => {
+                console.log(res)
+                that.setData({
+                    articleInfo: res.data
                 })
             }
         })

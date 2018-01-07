@@ -13,7 +13,7 @@ router.prefix('/wechat')
 
 /**
  * 登录换取openid等信息
-*/
+ */
 router.post('/login', async(ctx, next) => {
     var js_code = ctx.request.body.code;
     var userInfo = ctx.request.body.userInfo;
@@ -69,21 +69,69 @@ router.post('/login', async(ctx, next) => {
         })
 })
 
-
+/**
+ * [用户基本信息查询]
+ * @param  {[string]}  [user_id]
+ */
 router.get('/userInfo', async(ctx, next) => {
-    console.log(ctx.query)
-    await sql.query("SELECT * FROM user WHERE user_id ='" + ctx.query.userId +"'")
-        .then(res=>{
+    console.log("查询用户信息获取", ctx.query)
+    await sql.query("SELECT * FROM user WHERE user_id ='" + ctx.query.userId + "'")
+        .then(res => {
             ctx.body = {
-                state:1,
-                nickname:res[0].nickname,
-                avatar:res[0].avatar_url,
-                gender:res[0].gender,
-                country:res[0].country,
-                date:res[0].date
+                state: 1,
+                nickname: res[0].nickname,
+                avatar: res[0].avatar_url,
+                gender: res[0].gender,
+                country: res[0].country,
+                date: res[0].date
             }
+        }).catch(error => {
+            console.log(error)
         })
 })
+
+
+/**
+ * [用户文章信息]
+ * @param  {[string]}  [user_id]
+ */
+router.post('/articleInfo', async(ctx, next) => {
+    console.log("查询用户文章信息获取", ctx.request.body.userId)
+    let release;
+    // 查询发布的文章
+    await sql.query("SELECT * FROM message_list WHERE author_id ='" + ctx.request.body.userId + "'")
+        .then(res => {
+            release = res
+        }).catch(error => {
+            console.log(error)
+        })
+
+    // 查询评论过的文章
+    let commentList;
+    await sql.query("SELECT * FROM comments WHERE user_id ='" + ctx.request.body.userId + "'")
+        .then(res => {
+            commentList = res
+        }).catch(error => {
+            console.log(error)
+        })
+
+    // 临时数组
+    let articleArr = [];
+    for (let i in commentList) {
+        if (articleArr.indexOf(commentList[i].message_id) == '-1') {
+            articleArr.push(commentList[i].message_id);
+        }
+
+    }
+console.log(articleArr.length)
+    ctx.body = {
+        state: 1,
+        release: release.length,
+        comment: articleArr.length
+    }
+})
+
+
 
 
 
