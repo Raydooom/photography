@@ -19,8 +19,9 @@ const uploadImg = require('./routes/common/uploadImg')
 微信小程序接口
  */
 const login = require('./routes/wechat/login')
-const wechatArticle = require('./routes/wechat/index')
-
+const wechatIndex = require('./routes/wechat/index')
+const wechatSpecial= require('./routes/wechat/special')
+const wechatMessage= require('./routes/wechat/msgTemplate')
 
 // middlewares
 app.use(bodyparser({
@@ -47,7 +48,9 @@ app.use(uploadImg.routes(), uploadImg.allowedMethods())
 
 // wechat路由
 app.use(login.routes(), login.allowedMethods())
-app.use(wechatArticle.routes(), wechatArticle.allowedMethods())
+app.use(wechatIndex.routes(), wechatIndex.allowedMethods())
+app.use(wechatSpecial.routes(), wechatSpecial.allowedMethods())
+app.use(wechatMessage.routes(), wechatMessage.allowedMethods())
 
 app.use(json())
 app.use(logger())

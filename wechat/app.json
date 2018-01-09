@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/center/center",
         "pages/index/index",
+        "pages/test/test",
+        "pages/center/center",
         "pages/special/special",
         "pages/specialDetailComment/specialDetailComment",
         "pages/specialDetail/specialDetail",
@@ -9,8 +10,7 @@
         "pages/detail/detail",
         "pages/comments/comments",
         "pages/addImg/addImg",
-        "pages/kinds/kinds",
-        "pages/test/test"
+        "pages/kinds/kinds"
     ],
     "usingComponents": {
         "aaa": "../../modules/loading/loading"
