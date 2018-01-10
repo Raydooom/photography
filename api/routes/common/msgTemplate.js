@@ -14,31 +14,16 @@ const secret = "f53591699cf22b3ff462c610af28953b";
  */
 const MsgTemplate = {
     // 评论消息模板
-    sendCommentMsg: function(msgId, formId, authorId, title, text) {
-        let openId, pushState;
-        // console.log(msgId, formId, authorId, title, text)
-        sql.query("SELECT * FROM user WHERE user_id ='" + authorId + "'")
+    publishMsg: function(lastId, integral, formId, openId, nickname, msgTitle) {
+        // 请求ACCESS_TOKEN
+        superagent
+            .get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + secret)
             .then(res => {
-                openId = res[0].openid; // openid
-                pushState = res[0].push; // 获取推送状态
-                if (pushState) {
-                    selectTmpl(openId)
-                }
-            }).catch(error => {
-                console.log(error)
+                let ACCESS_TOKEN = res.body.access_token;
+                sendMsg(ACCESS_TOKEN, openId)
             })
 
-        // 请求ACCESS_TOKEN
-        function selectTmpl(openId) {
-            superagent
-                .get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + secret)
-                .then(res => {
-                    let ACCESS_TOKEN = res.body.access_token;
-                    sendMsg(ACCESS_TOKEN, openId)
-                })
-
-            let date = moment().format("YYYY-MM-DD HH:mm:ss");
-        }
+        let date = moment().format("YYYY-MM-DD HH:mm:ss");
 
         function sendMsg(ACCESS_TOKEN, openId) {
             let date = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -46,24 +31,24 @@ const MsgTemplate = {
                 .post("https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=" + ACCESS_TOKEN)
                 .send({
                     "touser": openId,
-                    "template_id": "fM5HLPJUqp6pJLnMCFomxi7xNUDObKa8hn-tdQA2xig",
-                    "page": "pages/detail/detail?id=" + msgId,
+                    "template_id": "MQzayzKk7LpfrecqxXWX3mmE8zZZCEdGWqRQFgWPfg4",
+                    "page": "pages/detail/detail?id=" + lastId,
                     "form_id": formId,
                     "data": {
                         "keyword1": {
-                            "value": "有人评论了您的作品",
+                            "value": msgTitle,
                             "color": "#173177"
                         },
                         "keyword2": {
-                            "value": date,
+                            "value": nickname,
                             "color": "#173177"
                         },
                         "keyword3": {
-                            "value": text,
+                            "value": date,
                             "color": "#173177"
                         },
                         "keyword4": {
-                            "value": title,
+                            "value": "积分+5，目前积分" + integral,
                             "color": "#173177"
                         }
                     }

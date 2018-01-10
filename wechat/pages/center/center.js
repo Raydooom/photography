@@ -38,6 +38,7 @@ Page({
             }
         })
     },
+    // 获取用户信息
     getUserInfo() {
         let that = this;
         wx.request({
@@ -62,6 +63,21 @@ Page({
                 that.setData({
                     articleInfo: res.data
                 })
+            }
+        })
+    },
+    // 推送设置
+    pushSet(e) {
+        console.log(e);
+        let that = this;
+        wx.request({
+            url: HOST + '/wechat/pushSet',
+            data: {
+                user_id: that.data.userId,
+                pushState: e.detail.value
+            },
+            success: res => {
+                console.log(res)
             }
         })
     }

@@ -16,5 +16,7 @@
         </view>
         <switch bindchange="showLocation" />
     </view>
-    <button class="release color-bg-main" bindtap='release'>立即发布</button>
+    <form bindsubmit="formSubmit" report-submit="true">
+        <button formType="submit" class="release color-bg-main">立即发布</button>
+    </form>
 </view>

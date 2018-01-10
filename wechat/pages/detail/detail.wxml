@@ -72,11 +72,8 @@
         </block>
     </view>
     <view class="footer-btn sub-form" bindtap='comment'>
-        <form bindsubmit="formSubmit" report-submit="true">
-            <image src="../../assets/icons/comment.png"></image>
-            <text>{{commentList.length}}</text>
-            <button class="sub-btn" formType="submit"></button>
-        </form>
+        <image src="../../assets/icons/comment.png"></image>
+        <text>{{commentList.length}}</text>
     </view>
     <view class="footer-btn share-icon">
         <image src="../../assets/icons/share-icon.png"></image>

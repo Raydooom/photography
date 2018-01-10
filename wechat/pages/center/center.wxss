@@ -34,7 +34,7 @@ page {
     padding-bottom: 30rpx;
 }
 
-.user-info image {
+.user-info image.avatar {
     width: 120rpx;
     height: 120rpx;
     border-radius: 50%;
@@ -51,9 +51,49 @@ page {
 .user-name .name {
     font-size: 32rpx;
     color: #333;
-    line-height: 100rpx;
-    height: 100rpx;
     display: block;
+    padding: 20rpx 0 10rpx;
+}
+
+.user-name .level {
+    display: block;
+    font-size: 26rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #999;
+}
+
+.user-name .level .level-icon {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+.points {
+    position: absolute;
+    background: #a09fed;
+    top: 30rpx;
+    right: 0;
+    line-height: 56rpx;
+    height: 56rpx;
+    border-radius: 28rpx 0 0 28rpx;
+    color: #fff;
+    font-size: 24rpx;
+    padding: 0 20rpx;
+}
+
+.points .coin {
+    display: inline-block;
+    height: 40rpx;
+    width: 40rpx;
+    vertical-align: middle;
+}
+
+.points text {
+    font-size: 30rpx;
+    font-weight: bold;
 }
 
 .user-name .date {
@@ -116,6 +156,10 @@ page {
     float: left;
     margin: 0 2%;
     text-align: center;
+}
+
+.menu-list{
+    padding-top:20rpx;
 }
 
 .menu {

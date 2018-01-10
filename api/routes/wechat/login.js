@@ -22,12 +22,13 @@ router.post('/login', async(ctx, next) => {
         .get('https://api.weixin.qq.com/sns/jscode2session')
         .query({
             appid: 'wx2984c3354dfc51d6',
-            secret: '586d3d6ccac49d3229ec03040d958c4b',
+            secret: 'f53591699cf22b3ff462c610af28953b',
             js_code: js_code,
             grant_type: 'authorization_code'
         })
         .then(function(res) {
             let jsonRes = JSON.parse(res.res.text);
+            console.log(jsonRes);
             let md5 = crypto.createHash('md5')
             md5.update(jsonRes.openid); // 对session_key进行md5加密
             openid = jsonRes.openid;
@@ -83,6 +84,9 @@ router.get('/userInfo', async(ctx, next) => {
                 avatar: res[0].avatar_url,
                 gender: res[0].gender,
                 country: res[0].country,
+                integral: res[0].integral,
+                level: res[0].level,
+                push: res[0].push,
                 date: res[0].date
             }
         }).catch(error => {
@@ -123,7 +127,7 @@ router.post('/articleInfo', async(ctx, next) => {
         }
 
     }
-console.log(articleArr.length)
+    console.log(articleArr.length)
     ctx.body = {
         state: 1,
         release: release.length,
@@ -132,7 +136,25 @@ console.log(articleArr.length)
 })
 
 
-
+/**
+ * [推送设置]
+ * @param  {[type]} async(ctx, next          [description]
+ * @return {[type]}            [description]
+ */
+router.get('/pushSet', async(ctx, next) => {
+    console.log(ctx.query)
+    let pushState = ctx.query.pushState == 'true' ? "1" : "0";
+    console.log(pushState)
+    await sql.query("UPDATE user SET push = '" + pushState + "' WHERE user_id ='" + ctx.query.user_id + "'")
+        .then(res => {
+            ctx.body = {
+                state: 1,
+                info: '设置成功！'
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+})
 
 
 module.exports = router;

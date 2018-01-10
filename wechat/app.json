@@ -1,15 +1,15 @@
 {
     "pages": [
+        "pages/center/center",
+        "pages/addImg/addImg",
         "pages/index/index",
         "pages/test/test",
-        "pages/center/center",
         "pages/special/special",
         "pages/specialDetailComment/specialDetailComment",
         "pages/specialDetail/specialDetail",
         "pages/newest/newest",
         "pages/detail/detail",
         "pages/comments/comments",
-        "pages/addImg/addImg",
         "pages/kinds/kinds"
     ],
     "usingComponents": {
@@ -17,9 +17,9 @@
     },
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "我想学摄影",
-        "navigationBarTextStyle": "black"
+        "navigationBarBackgroundColor": "#5756c0",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "我想学摄影"
     },
     "tabBar": {
         "borderStyle": "black",

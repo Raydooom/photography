@@ -162,6 +162,7 @@ router.get('/views', async(ctx, next) => {
  */
 router.get('/praises', async(ctx, next) => {
     console.log(ctx.query)
+    console.log(ctx.query.formId)
     let data = ctx.query
     await sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = " + data.id)
         .then(result => {
@@ -184,16 +185,75 @@ router.get('/release', async(ctx, next) => {
     console.log(ctx.query)
     let data = ctx.query
     let date = moment().format("YYYY-MM-DD HH:mm:ss")
-    console.log(date)
-    await sql.query("INSERT INTO message_list ( title, description, author_id, img, date, location) VALUES ('" + data.title + "','" + data.description + "','" + data.userId + "','" + data.imgArr + "','" + date + "','" + data.location + "') ")
+    console.log('发布信息', date)
+    let formId = data.formId;
+    let user_id = data.userId;
+    let msgTitle = data.title || data.description;
+    await sql.query("INSERT INTO message_list ( title, description, author_id, img, date, location) VALUES ('" + data.title + "','" + data.description + "','" + user_id + "','" + data.imgArr + "','" + date + "','" + data.location + "')")
         .then(result => {
             console.log("发布成功！");
         }).catch(error => {
             console.log(error);
         })
-    ctx.body = {
-        state: 1,
 
+    // 查询id
+    let lastId;
+    await sql.query("select @@IDENTITY as id")
+        .then(res => {
+            lastId = res[0].id;
+        }).catch(error => {
+            console.log(error);
+        })
+        // 用户信息查询
+    let integral, pushState, openId, nickname;
+    await sql.query("SELECT * FROM user WHERE user_id ='" + user_id + "'")
+        .then(res => {
+            // console.log(res)
+            integral = res[0].integral + 5; // 获取积分
+            openId = res[0].openid; // openid
+            pushState = res[0].push; // 获取推送状态
+            nickname = res[0].nickname; // 发布人
+
+        }).catch(error => {
+            console.log(error);
+        })
+
+    // 等级称号设置
+    let level;
+    switch (true) {
+        case integral < 50:
+            level = '摄影菜鸟';
+            break;
+        case integral >= 50 && integral < 200:
+            level = '摄影新手';
+            break;
+        case integral >= 200 && integral < 400:
+            level = '摄影爱好者';
+            break;
+        case integral >= 400 && integral < 1000:
+            level = '摄影发烧友';
+            break;
+        case integral >= 1000 && integral < 2000:
+            level = '专业摄影师';
+            break;
+        default:
+            level = '摄影大咖';
+    }
+
+    // 更新积分
+    await sql.query("UPDATE user SET integral = '" + integral + "', level = '" + level + "' WHERE user_id ='" + user_id + "'")
+        .then(res => {
+            console.log('发布成功，积分更新成功！')
+            if (pushState) {
+                //  调用消息模板
+                MsgTemplate.publishMsg(lastId, integral, formId, openId, nickname, msgTitle);
+            }
+
+        }).catch(error => {
+            console.log(error);
+        })
+    ctx.body = {
+        state: 1
     }
 })
 
@@ -241,14 +301,14 @@ router.get('/addComment', async(ctx, next) => {
     console.log(ctx.query)
     let msgId = ctx.query.id; // 详情id
     let authorId = ctx.query.authorId; // 发布者的authorId
-    let formId = ctx.query.formId; // formId
+    // let formId = ctx.query.formId; // formId
     let title = ctx.query.detailTitle; // 详情标题
     let text = ctx.query.text; // 评论文字
 
     let date = moment().format("YYYY-MM-DD HH:mm:ss");
     await sql.query("INSERT INTO comments (message_id, user_id, comment, date) VALUES ('" + msgId + "', '" + ctx.query.userId + "', '" + text + "', '" + date + "')")
         .then(result => {
-            MsgTemplate.sendCommentMsg(msgId, formId, authorId, title, text); // 调用消息模板
+            // MsgTemplate.sendCommentMsg(msgId, formId, authorId, title, text); // 调用消息模板
             ctx.body = {
                 state: 1,
                 info: "评论成功"

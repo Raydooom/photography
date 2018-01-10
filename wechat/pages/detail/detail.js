@@ -22,7 +22,7 @@ Page({
         msg: '',
         isReply: false,
         replyCommentId: '',
-        commentFormId: '',
+        // commentFormId: '',
     },
 
     /**
@@ -270,7 +270,7 @@ Page({
                     userId: that.data.userId,
                     text: text,
                     formId: that.data.commentFormId, // formId
-                    authorId: that.data.detailInfo.author_id,  // 作者的author_id
+                    // authorId: that.data.detailInfo.author_id,  // 作者的author_id
                     detailTitle: that.data.detailInfo.title
                 },
                 success: (res => {
@@ -305,10 +305,4 @@ Page({
         }
 
     },
-    // 生成formId
-    formSubmit: function (e) {
-        this.setData({
-            commentFormId: e.detail.formId
-        })
-    }
 })
