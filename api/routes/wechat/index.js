@@ -7,6 +7,8 @@ const sql = require('../config/db.config.js')
 const crypto = require('crypto')
     // 时间格式化中间件
 const moment = require('moment')
+    // 消息模板
+const MsgTemplate = require('../common/msgTemplate.js')
 
 router.prefix('/wechat')
 
@@ -23,14 +25,14 @@ router.post('/hot', async(ctx, next) => {
         length = 0,
         list;
     await sql.query("SELECT * FROM message_list")
-        .then(res=>{
+        .then(res => {
             length = res.length
         })
         .catch(err => {
             console.log(err)
         })
-    // 查询列表页
-    await sql.query("SELECT * FROM message_list ORDER BY views desc limit 0," + ( page + 1 ) * pageSize)
+        // 查询列表页
+    await sql.query("SELECT * FROM message_list ORDER BY views desc limit 0," + (page + 1) * pageSize)
         .then(res => {
             list = res
         })
@@ -85,14 +87,14 @@ router.post('/newest', async(ctx, next) => {
         length = 0,
         list;
     await sql.query("SELECT * FROM message_list")
-        .then(res=>{
+        .then(res => {
             length = res.length
         })
         .catch(err => {
             console.log(err)
         })
-    // 查询列表页
-    await sql.query("SELECT * FROM message_list ORDER BY date desc limit 0," + ( page + 1 ) * pageSize)
+        // 查询列表页
+    await sql.query("SELECT * FROM message_list ORDER BY date desc limit 0," + (page + 1) * pageSize)
         .then(res => {
             list = res
         })
@@ -160,6 +162,7 @@ router.get('/views', async(ctx, next) => {
  */
 router.get('/praises', async(ctx, next) => {
     console.log(ctx.query)
+    console.log(ctx.query.formId)
     let data = ctx.query
     await sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = " + data.id)
         .then(result => {
@@ -182,16 +185,75 @@ router.get('/release', async(ctx, next) => {
     console.log(ctx.query)
     let data = ctx.query
     let date = moment().format("YYYY-MM-DD HH:mm:ss")
-    console.log(date)
-    await sql.query("INSERT INTO message_list ( title, description, author_id, img, date, location) VALUES ('" + data.title + "','" + data.description + "','" + data.userId + "','" + data.imgArr + "','" + date + "','" + data.location + "') ")
+    console.log('发布信息', date)
+    let formId = data.formId;
+    let user_id = data.userId;
+    let msgTitle = data.title || data.description;
+    await sql.query("INSERT INTO message_list ( title, description, author_id, img, date, location) VALUES ('" + data.title + "','" + data.description + "','" + user_id + "','" + data.imgArr + "','" + date + "','" + data.location + "')")
         .then(result => {
             console.log("发布成功！");
         }).catch(error => {
             console.log(error);
         })
-    ctx.body = {
-        state: 1,
 
+    // 查询id
+    let lastId;
+    await sql.query("select @@IDENTITY as id")
+        .then(res => {
+            lastId = res[0].id;
+        }).catch(error => {
+            console.log(error);
+        })
+        // 用户信息查询
+    let integral, pushState, openId, nickname;
+    await sql.query("SELECT * FROM user WHERE user_id ='" + user_id + "'")
+        .then(res => {
+            // console.log(res)
+            integral = res[0].integral + 5; // 获取积分
+            openId = res[0].openid; // openid
+            pushState = res[0].push; // 获取推送状态
+            nickname = res[0].nickname; // 发布人
+
+        }).catch(error => {
+            console.log(error);
+        })
+
+    // 等级称号设置
+    let level;
+    switch (true) {
+        case integral < 50:
+            level = '摄影菜鸟';
+            break;
+        case integral >= 50 && integral < 200:
+            level = '摄影新手';
+            break;
+        case integral >= 200 && integral < 400:
+            level = '摄影爱好者';
+            break;
+        case integral >= 400 && integral < 1000:
+            level = '摄影发烧友';
+            break;
+        case integral >= 1000 && integral < 2000:
+            level = '专业摄影师';
+            break;
+        default:
+            level = '摄影大咖';
+    }
+
+    // 更新积分
+    await sql.query("UPDATE user SET integral = '" + integral + "', level = '" + level + "' WHERE user_id ='" + user_id + "'")
+        .then(res => {
+            console.log('发布成功，积分更新成功！')
+            if (pushState) {
+                //  调用消息模板
+                MsgTemplate.publishMsg(lastId, integral, formId, openId, nickname, msgTitle);
+            }
+
+        }).catch(error => {
+            console.log(error);
+        })
+    ctx.body = {
+        state: 1
     }
 })
 
@@ -237,13 +299,20 @@ router.get('/detail', async(ctx, next) => {
  */
 router.get('/addComment', async(ctx, next) => {
     console.log(ctx.query)
+    let msgId = ctx.query.id; // 详情id
+    let authorId = ctx.query.authorId; // 发布者的authorId
+    // let formId = ctx.query.formId; // formId
+    let title = ctx.query.detailTitle; // 详情标题
+    let text = ctx.query.text; // 评论文字
+
     let date = moment().format("YYYY-MM-DD HH:mm:ss");
-    await sql.query("INSERT INTO comments (message_id, user_id, comment, date) VALUES ('"+ctx.query.id+"', '"+ctx.query.userId+"', '"+ctx.query.text+"', '"+date+"')")
+    await sql.query("INSERT INTO comments (message_id, user_id, comment, date) VALUES ('" + msgId + "', '" + ctx.query.userId + "', '" + text + "', '" + date + "')")
         .then(result => {
-                ctx.body={
-                    state:1,
-                    info:"评论成功"
-                }
+            // MsgTemplate.sendCommentMsg(msgId, formId, authorId, title, text); // 调用消息模板
+            ctx.body = {
+                state: 1,
+                info: "评论成功"
+            }
         }).catch(error => {
             console.log(error);
         })
@@ -279,7 +348,7 @@ router.get('/getComment', async(ctx, next) => {
     console.log(ctx.query)
     let data = [],
         list;
-    await sql.query("SELECT * FROM comments WHERE message_id = " + ctx.query.id +" ORDER BY id desc")
+    await sql.query("SELECT * FROM comments WHERE message_id = " + ctx.query.id + " ORDER BY id desc")
         .then(result => {
             list = result;
         }).catch(error => {
@@ -303,8 +372,8 @@ router.get('/getComment', async(ctx, next) => {
         let reply = [],
             replyList;
         await sql.query("SELECT * FROM reply_comments WHERE comment_id = " + list[index].id)
-            .then(result=>{
-                console.log("回复",list[index].id)
+            .then(result => {
+                // console.log("回复",list[index].id)
                 replyList = result
             }).catch(error => {
                 console.log(error);
@@ -314,9 +383,9 @@ router.get('/getComment', async(ctx, next) => {
             let userInfo;
             await sql.query("SELECT * FROM user WHERE user_id = '" + replyList[i].user_id + "'")
                 .then(result => {
-                    reply[i]={
-                        replyMsg:replyList[i],
-                        replyUser:{
+                    reply[i] = {
+                        replyMsg: replyList[i],
+                        replyUser: {
                             userId: result[0].id,
                             nickname: result[0].nickname,
                             avatarUrl: result[0].avatar_url
@@ -328,9 +397,9 @@ router.get('/getComment', async(ctx, next) => {
         }
 
         let item = {
-            comment:list[index],
-            userInfo:userInfo,
-            reply:reply
+            comment: list[index],
+            userInfo: userInfo,
+            reply: reply
         }
 
         data.push(item);
@@ -371,12 +440,12 @@ router.get('/commentReply', async(ctx, next) => {
     console.log(ctx.query)
     let data = ctx.query
     let date = moment().format("YYYY-MM-DD HH:mm:ss");
-    await sql.query("INSERT INTO reply_comments (comment_id, user_id, text, date) VALUES ('"+ctx.query.commentId+"', '"+ctx.query.userId+"', '"+ctx.query.text+"', '"+date+"')")
+    await sql.query("INSERT INTO reply_comments (comment_id, user_id, text, date) VALUES ('" + ctx.query.commentId + "', '" + ctx.query.userId + "', '" + ctx.query.text + "', '" + date + "')")
         .then(result => {
-                ctx.body={
-                    state:1,
-                    info:"回复成功"
-                }
+            ctx.body = {
+                state: 1,
+                info: "回复成功"
+            }
         }).catch(error => {
             console.log(error);
         })

@@ -1,1 +1,4 @@
-<view></view>
+<form bindsubmit="formSubmit" report-submit="true" >
+
+    <button formType="submit">tijc</button>
+</form>

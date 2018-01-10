@@ -21,7 +21,8 @@ Page({
         placeHolder: '请输入评论内容',
         msg: '',
         isReply: false,
-        replyCommentId: ''
+        replyCommentId: '',
+        // commentFormId: '',
     },
 
     /**
@@ -228,12 +229,12 @@ Page({
     reply: function (e) {
         let commentId = e.currentTarget.dataset.commentId;
         let user = e.currentTarget.dataset.user;
-        if (this.data.focus){
+        if (this.data.focus) {
             this.setData({
                 active: 'active',
                 focus: false,
             })
-        }else{
+        } else {
             this.setData({
                 replyCommentId: commentId,
                 active: 'active',
@@ -243,7 +244,7 @@ Page({
                 msg: ''
             })
         }
-        
+
     },
     /**
      * 失去焦点
@@ -267,7 +268,10 @@ Page({
                 data: {
                     id: that.data.detailId,
                     userId: that.data.userId,
-                    text: text
+                    text: text,
+                    formId: that.data.commentFormId, // formId
+                    // authorId: that.data.detailInfo.author_id,  // 作者的author_id
+                    detailTitle: that.data.detailInfo.title
                 },
                 success: (res => {
                     that.getComments(that.data.detailId);
@@ -301,5 +305,4 @@ Page({
         }
 
     },
-
 })

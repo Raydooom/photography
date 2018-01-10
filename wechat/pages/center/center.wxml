@@ -2,10 +2,45 @@
 <view class='top-part'>
     <view class="bg"></view>
     <view class="center-info">
-        <image src="{{userInfo.avatar}}"></image>
         <view class="user-info">
-            <text class="name">{{userInfo.nickname}}</text>
-            <!-- <text class="date">{{userInfo.date}}</text> -->
+            <image class="avatar" src="{{userInfo.avatar}}"></image>
+            <view class="user-name">
+                <text class="name">{{userInfo.nickname}}</text>
+                <!-- <text class="date">{{userInfo.date}}</text> -->
+                <view class="level">
+                    <image class="level-icon" src='../../assets/icons/level.png'></image>{{userInfo.level}}</view>
+            </view>
+            <view class="points">
+                <!--<image class="coin" src='../../assets/icons/coin.png'></image>-->积分
+                <text>{{userInfo.integral}}</text>
+            </view>
+        </view>
+        <view class="article-info">
+            <view class="item">
+                <text class="num">{{articleInfo.release}}</text>
+                <text class="text">我的发布</text>
+            </view>
+            <view class="item">
+                <text class="num">{{articleInfo.comment}}</text>
+                <text class="text">我的评论</text>
+            </view>
         </view>
     </view>
+    <!-- <view class="tools-warp">
+        <text class="title">小工具</text>
+        <view class="tools">
+            <view class="tools-item">明信片</view>
+            <view class="tools-item">星座运势</view>
+        </view>
+    </view> -->
+    <view class="menu-list">
+        <view class="menu">
+            <view class="text">
+                <image src="../../assets/icons/send.png"></image>
+                <text>推送通知</text>
+            </view>
+            <switch class="switch" color="#5756c0" checked="{{userInfo.push == '1'}}" bindchange="pushSet" />
+        </view>
+    </view>
+
 </view>

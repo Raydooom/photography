@@ -71,7 +71,7 @@
             <text class="praised">{{detailPraise}}</text>
         </block>
     </view>
-    <view class="footer-btn" bindtap='comment'>
+    <view class="footer-btn sub-form" bindtap='comment'>
         <image src="../../assets/icons/comment.png"></image>
         <text>{{commentList.length}}</text>
     </view>

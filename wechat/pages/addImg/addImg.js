@@ -13,7 +13,8 @@ Page({
         imgUrl: [],
         showLoc: false,
         locationName: '是否位置信息',
-        userId:''
+        userId: '',
+        formId: ''
     },
     /**
      * 生命周期函数--监听页面加载
@@ -24,11 +25,11 @@ Page({
             key: 'userId',
             success: (res) => {
                 console.log(res)
-                if(res.data){
+                if (res.data) {
                     that.setData({
                         userId: res.data
                     })
-                }else{
+                } else {
                     app.getUserId();
                     app.getCode();
                 }
@@ -102,6 +103,14 @@ Page({
     /**
      * 发布
      */
+
+    // 生成formId
+    formSubmit: function (e) {
+        this.setData({
+            formId: e.detail.formId
+        })
+        this.release();
+    },
     release: function () {
         let info = this.data
         if (!info.text.trim()) {
@@ -167,7 +176,8 @@ Page({
                         description: info.text,
                         userId: that.data.userId,
                         imgArr: that.data.imgUrl.toString(),
-                        location: info.showLoc ? info.locationName : ''
+                        location: info.showLoc ? info.locationName : '',
+                        formId: that.data.formId
                     },
                     success: res => {
                         // console.log(res)
@@ -207,5 +217,6 @@ Page({
                 confirmColor: '#a09fed'
             })
         }
-    }
+    },
+
 })
