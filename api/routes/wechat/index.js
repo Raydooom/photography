@@ -162,7 +162,6 @@ router.get('/views', async(ctx, next) => {
  */
 router.get('/praises', async(ctx, next) => {
     console.log(ctx.query)
-    console.log(ctx.query.formId)
     let data = ctx.query
     await sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = " + data.id)
         .then(result => {
@@ -198,7 +197,7 @@ router.get('/release', async(ctx, next) => {
 
     // 查询id
     let lastId;
-    await sql.query("select @@IDENTITY as id")
+    await sql.query("SELECT * FROM message_list ORDER BY id desc")
         .then(res => {
             lastId = res[0].id;
         }).catch(error => {
