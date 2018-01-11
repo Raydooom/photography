@@ -1,5 +1,5 @@
 <view class="page">
-    <input class="title" value='{{title}}' placeholder='主题' bindinput='titleInput'></input>
+    <!-- <input class="title" value='{{title}}' placeholder='主题' bindinput='titleInput'></input> -->
     <textarea class="text" value='{{text}}' placeholder='作品描述' bindinput='textInput'></textarea>
     <view class="img-title color-main">添加图片
 

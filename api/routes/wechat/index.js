@@ -53,14 +53,29 @@ router.post('/hot', async(ctx, next) => {
             }).catch(error => {
                 console.log(error);
             })
-            // 查询评论信息
+
+        // 查询是否点赞
+        let isPraise = false;
+        await sql.query("SELECT * FROM message_praise WHERE user_id = '" + list[index].author_id + "' AND message_id = '" + list[index].id + "'")
+            .then(res => {
+                console.log(res.length)
+                if (res.length) {
+                    isPraise = true;
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+
+
+        // 查询评论信息
         await sql.query("SELECT * FROM comments WHERE message_id = " + list[index].id)
             .then(comments => {
                 data[index] = {
                     comments: comments,
                     authorInfo: authorInfo,
                     content: list[index],
-                    img: list[index].img.split(',')
+                    img: list[index].img.split(','),
+                    isPraise: isPraise
                 }
             }).catch(error => {
                 console.log(error);
@@ -162,14 +177,38 @@ router.get('/views', async(ctx, next) => {
  */
 router.get('/praises', async(ctx, next) => {
     console.log(ctx.query)
-    console.log(ctx.query.formId)
-    let data = ctx.query
-    await sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = " + data.id)
+    let data = ctx.query;
+
+    await sql.query("SELECT * FROM message_praise WHERE user_id = '" + data.userId + "' AND message_id = '" + data.id + "'")
+        .then(res => {
+            console.log(res.length)
+            if (res.length == 0) {
+                sql.query("INSERT INTO message_praise (user_id, message_id) value ('" + data.userId + "','" + data.id + "')")
+                    .then(res => {
+                        console.log('新增',res);
+                    }).catch(error => {
+                        console.log(error);
+                    })
+            } else {
+                sql.query("delete from message_praise WHERE user_id = '" + data.userId + "' AND message_id = '" + data.id + "'")
+                    .then(res => {
+                        console.log('删除',res);
+                    }).catch(error => {
+                        console.log(error);
+                    })
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+
+
+
+    /*await sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = " + data.id)
         .then(result => {
             console.log("点赞成功！")
         }).catch(error => {
             console.log(error);
-        })
+        })*/
     ctx.body = {
         state: 1,
     }
@@ -198,7 +237,7 @@ router.get('/release', async(ctx, next) => {
 
     // 查询id
     let lastId;
-    await sql.query("select @@IDENTITY as id")
+    await sql.query("SELECT * FROM message_list ORDER BY id desc")
         .then(res => {
             lastId = res[0].id;
         }).catch(error => {

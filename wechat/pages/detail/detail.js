@@ -64,6 +64,8 @@ Page({
     onShareAppMessage: function () {
         let that = this;
         return {
+            title: '你的好友分享给你了一个摄影作品',
+            imageUrl: that.data.imgArr[0],
             success: function (res) {
                 wx.request({
                     url: HOST + '/wechat/detailShare',

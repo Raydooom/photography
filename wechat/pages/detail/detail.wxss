@@ -68,15 +68,25 @@
 }
 
 .content .discription {
+    display: block;
     font-size: 28rpx;
-    color: #666;
-    margin: 10rpx 0;
+    color: #333;
+    margin: 20rpx 0;
+}
+
+.bottom-info {
+    overflow: hidden;
 }
 
 .location {
     padding: 10rpx 0;
     font-size: 12px;
     color: #999;
+    float: left;
+    max-width: 500rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .location image {
@@ -85,6 +95,13 @@
     height: 26rpx;
     vertical-align: middle;
     margin-right: 10rpx;
+}
+
+.views {
+    float: right;
+    font-size: 24rpx;
+    color: #999;
+    padding:10rpx 0;
 }
 
 /*评论列表*/
@@ -248,7 +265,7 @@
 }
 
 .footer-bar .footer-btn {
-    width: 25%;
+    width: 33.33%;
     font-size: 28rpx;
     color: #666;
     line-height: 104rpx;

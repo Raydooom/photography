@@ -19,28 +19,33 @@
         </view>
         <navigator url='../detail/detail?id={{item.content.id}}'>
             <view class="content">
-                <text wx:if="{{item.content.title}}" class="title">{{item.content.title}}</text>
+                <!-- <text wx:if="{{item.content.title}}" class="title">{{item.content.title}}</text> -->
                 <text class="discription">{{item.content.description}}</text>
-                <view wx:if="{{item.content.location}}" class="location">
-                    <image src='../../assets/icons/location.png'></image>{{item.content.location}}</view>
+                <view class="bottom-info">
+                    <view class="location" wx:if="{{item.content.location}}">
+                        <image src='../../assets/icons/location.png'></image>{{item.content.location}}</view>
+                    <view class="views">查看 {{item.content.views}} 次</view>
+                </view>
             </view>
         </navigator>
         <view class="content-info">
-            <view class="item">
+            <!-- <view class="item">
                 <image src='../../assets/icons/view.png'></image>
                 <text>{{item.content.views}}</text>
-            </view>
-            <view class="item">
-                <image bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}' src='../../assets/icons/like.png'></image>
-                <text bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}'>{{item.content.praises}}</text>
+            </view> -->
+
+            <view class="item share" bindtap='share'>
+                <image src='../../assets/icons/share.png'></image>
+                <text>{{item.content.shares}}</text>
+                <button class="share-btn" open-type="share" data-img="{{item.img[0]}}" data-id="{{item.content.id}}" data-share="{{item.content.shares}}"></button>
             </view>
             <navigator url='../detail/detail?id={{item.content.id}}' class="item">
                 <image src='../../assets/icons/comment.png'></image>
                 <text>{{item.comments.length}}</text>
             </navigator>
             <view class="item">
-                <image src='../../assets/icons/share.png'></image>
-                <text>{{item.content.shares}}</text>
+                <image bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}' src='../../assets/icons/like.png'></image>
+                <text bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}'>{{item.content.praises}}</text>
             </view>
         </view>
     </view>
