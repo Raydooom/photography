@@ -84,7 +84,7 @@
 }
 
 .views {
-    padding:10rpx 0;
+    padding: 10rpx 0;
     float: right;
     font-size: 24rpx;
     color: #999;
@@ -142,6 +142,10 @@
     width: 100%;
     height: 100%;
     opacity: 0;
+}
+
+.praise text.active {
+    color: #f40 !important;
 }
 
 .content-info .item image {

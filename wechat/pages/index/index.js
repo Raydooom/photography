@@ -40,11 +40,12 @@ Page({
             data: {
                 page: that.data.page,  // 起始页
                 pageSize: that.data.pageSize,  // 一页数据条数
-                user_id: that.data.userId  // userId  用于获取是否点赞
+                userId: that.data.userId  // userId  用于获取是否点赞
             },
             method: 'POST',
             success: res => {
                 if (res.data.state == 1) {
+                    console.log(res.data.data)
                     that.setData({
                         hotList: res.data.data,
                         loading: false
@@ -161,13 +162,14 @@ Page({
      */
     praise: function (e) {
         let data = e.currentTarget.dataset;
-        // console.log(e)
+        console.log(data)
+        let praises = data.state ? data.praises - 1 : data.praises + 1;
         let that = this;
         wx.request({
             url: HOST + '/wechat/praises',
             data: {
                 id: data.id,
-                praises: data.praises + 1,
+                praises: praises,
                 userId: that.data.userId
             },
             success: (res) => {

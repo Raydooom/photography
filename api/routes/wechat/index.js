@@ -19,9 +19,11 @@ router.prefix('/wechat')
  * @return {[json]}            [description]
  */
 router.post('/hot', async(ctx, next) => {
-    var page = parseInt(ctx.request.body.page) || 0;
-    var pageSize = parseInt(ctx.request.body.pageSize) || 4;
-    var data = [],
+    let page = parseInt(ctx.request.body.page) || 0;
+    let pageSize = parseInt(ctx.request.body.pageSize) || 4;
+    let userId = ctx.request.body.userId;
+
+    let data = [],
         length = 0,
         list;
     await sql.query("SELECT * FROM message_list")
@@ -56,9 +58,9 @@ router.post('/hot', async(ctx, next) => {
 
         // 查询是否点赞
         let isPraise = false;
-        await sql.query("SELECT * FROM message_praise WHERE user_id = '" + list[index].author_id + "' AND message_id = '" + list[index].id + "'")
+        await sql.query("SELECT * FROM message_praise WHERE user_id = '" + userId + "' AND message_id = '" + list[index].id + "'")
             .then(res => {
-                console.log(res.length)
+                // console.log(res.length)
                 if (res.length) {
                     isPraise = true;
                 }
@@ -185,14 +187,14 @@ router.get('/praises', async(ctx, next) => {
             if (res.length == 0) {
                 sql.query("INSERT INTO message_praise (user_id, message_id) value ('" + data.userId + "','" + data.id + "')")
                     .then(res => {
-                        console.log('新增',res);
+                        console.log('点赞成功！', res);
                     }).catch(error => {
                         console.log(error);
                     })
             } else {
                 sql.query("delete from message_praise WHERE user_id = '" + data.userId + "' AND message_id = '" + data.id + "'")
                     .then(res => {
-                        console.log('删除',res);
+                        console.log('取消点赞！', res);
                     }).catch(error => {
                         console.log(error);
                     })
@@ -201,14 +203,13 @@ router.get('/praises', async(ctx, next) => {
             console.log(error);
         })
 
+    // 更新文章列表点赞数
+    sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = '" + data.id + "'")
+        .then(res => {
+            console.log("点赞数据统计成功！")
+        })
 
 
-    /*await sql.query("UPDATE message_list SET praises = '" + data.praises + "' WHERE id = " + data.id)
-        .then(result => {
-            console.log("点赞成功！")
-        }).catch(error => {
-            console.log(error);
-        })*/
     ctx.body = {
         state: 1,
     }
