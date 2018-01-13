@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/center/center",
+        "pages/credits/credits",
         "pages/addImg/addImg",
         "pages/index/index",
         "pages/test/test",

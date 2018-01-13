@@ -96,6 +96,15 @@ page {
     font-weight: bold;
 }
 
+.points .next {
+    margin-left: 4rpx;
+    margin-top:-6rpx;
+    display: inline-block;
+    width:28rpx;
+    height: 28rpx;
+    vertical-align: middle;
+}
+
 .user-name .date {
     display: block;
     font-size: 24rpx;
@@ -158,8 +167,8 @@ page {
     text-align: center;
 }
 
-.menu-list{
-    padding-top:20rpx;
+.menu-list {
+    padding-top: 20rpx;
 }
 
 .menu {

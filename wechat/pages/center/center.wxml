@@ -10,10 +10,11 @@
                 <view class="level">
                     <image class="level-icon" src='../../assets/icons/level.png'></image>{{userInfo.level}}</view>
             </view>
-            <view class="points">
+            <navigator class="points" url='../credits/credits?credits={{userInfo.integral}}&level={{userInfo.level}}'>
                 <!--<image class="coin" src='../../assets/icons/coin.png'></image>-->积分
                 <text>{{userInfo.integral}}</text>
-            </view>
+                <image class="next" src="../../assets/icons/next.png"></image>
+            </navigator>
         </view>
         <view class="article-info">
             <view class="item">
