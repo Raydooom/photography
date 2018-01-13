@@ -1,6 +1,10 @@
 {
     "pages": [
         "pages/center/center",
+        "centerTools/postcardIndex/postcardIndex",
+        "centerTools/editText/editText",
+        "centerTools/saveCard/saveCard",
+        "centerTools/viewCard/viewCard",
         "pages/credits/credits",
         "pages/addImg/addImg",
         "pages/index/index",
