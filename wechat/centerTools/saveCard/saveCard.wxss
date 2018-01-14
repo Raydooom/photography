@@ -1,0 +1,61 @@
+page {
+  height: 100%;
+  border-top: 1px solid #efefef;
+}
+
+page .main-img image {
+  margin: 40rpx 75rpx;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 600rpx;
+  height: 720rpx;
+}
+
+.btn-container {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  width: 260rpx;
+  border-radius: 36rpx;
+  background: #ddd;
+  color: #fff;
+  font-size: 32rpx;
+  margin: 0 20rpx;
+}
+
+.btn.save {
+  background: #0e94fa;
+}
+
+.btn.again {
+  background: #03b5e1;
+  vertical-align: middle;
+  border:none;
+}
+.bottom{
+  margin-top:40rpx;
+}
+.bottom .info{
+  font-size: 24rpx;
+  display: block;
+  text-align: center;
+  color: #666;
+}
+
+.bottom .kind-btn{
+  display: block;
+  width: 320rpx;
+  margin:30rpx auto;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #999;
+  line-height: 80rpx;
+  height: 80rpx;
+  font-size: 32rpx;
+  border-radius: 40rpx;
+  color: #333;
+}

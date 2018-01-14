@@ -2,7 +2,7 @@
 
 /* 模型盒设置 */
 
-view, text, input, textarea, button {
+view, text, input, textarea, button, navigator {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }

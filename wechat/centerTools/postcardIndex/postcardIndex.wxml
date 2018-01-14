@@ -1,0 +1,25 @@
+<!--centerTools/postcardIndex/postcardIndex.wxml-->
+<view class="container">
+    <view class="card-show">
+        <image mode="aspectFill" src="{{defaultImg}}"></image>
+        <text class="title">黄金时代</text>
+        <text class="text">那一年我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。</text>
+        <text class="from-name">—— 王小波</text>
+    </view>
+    <!--  按钮栏  -->
+    <view class="tool-bar">
+        <view class="btn" bindtap='localSelect'>
+            <image mode='aspectFit' src='../../assets/icons/tool_icon01.png' />选择图片</view>
+        <view class="sure-btn" bindtap='sureSelect'>
+            <image mode='aspectFit' src='../../assets/icons/icon_sure.png' />
+        </view>
+    </view>
+    <!-- <view class="choose-container {{selectShow ? 'active':''}}">
+    <view class="local-btn" bindtap='localSelect'>本地图片</view>
+    <view class="img-list" wx:for="{{defaultList}}" wx:key="item.id">
+      <view class="img">
+        <image bindtap='selectImg' mode='aspectFill' src="{{item.img}}" data-url='{{item.img}}'></image>
+      </view>
+    </view>
+  </view> -->
+</view>

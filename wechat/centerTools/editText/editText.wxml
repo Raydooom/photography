@@ -1,0 +1,35 @@
+<view class="container">
+    <canvas canvas-id="canvas" style='opacity:1;position:fixed;top:-100%;z-index:888;'></canvas>
+    <view class="card-show">
+        <image mode="aspectFill" src="{{mainImg}}"></image>
+        <text class="title">{{title}}</text>
+        <text class="text">{{text}}</text>
+        <text class="from-name">—— {{fromName}}</text>
+    </view>
+    <!--  按钮栏  -->
+    <view class="tool-bar">
+        <view class="btn" bindtap='toSelect'>
+            <image mode='aspectFit' src='../../assets/icons/tool_icon02.png' />文字编辑</view>
+        <view class="sure-btn" bindtap='nextStep'>
+            <image mode='aspectFit' src='../../assets/icons/icon_sure.png' />
+        </view>
+    </view>
+    <!--  文字编辑  -->
+    <view class="text-form {{done ? '' : 'active'}}">
+        <text>明信片主题</text>
+        <input placeholder='请输入标题' value='{{title}}' bindblur='titleBlur' maxlength='16' />
+        <text>明信片文字</text>
+        <textarea placeholder='请输入留言内容' value='{{text}}' bindblur='textBlur' maxlength='60' fixed="true"></textarea>
+        <text>发送人</text>
+        <input placeholder='请输入发送人' value='{{fromName}}' bindblur='nameBlur' maxlength='10' />
+        <!-- <view class="loaction">
+      <text>是否显示位置信息</text>
+      <switch checked bindchange="switch1Change" />
+    </view>
+    <view class="loaction">
+      <text>是否显示天气信息</text>
+      <switch checked bindchange="switch1Change" />
+    </view> -->
+        <button class="end-btn" type="primary" bindtap='endEdit'>完成</button>
+    </view>
+</view>

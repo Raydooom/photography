@@ -76,12 +76,12 @@ page {
     background: #a09fed;
     top: 30rpx;
     right: 0;
-    line-height: 56rpx;
-    height: 56rpx;
-    border-radius: 28rpx 0 0 28rpx;
+    line-height: 60rpx;
+    height: 60rpx;
+    border-radius: 30rpx 0 0 30rpx;
     color: #fff;
     font-size: 24rpx;
-    padding: 0 20rpx;
+    padding: 0 16rpx 0 30rpx;
 }
 
 .points .coin {
@@ -94,6 +94,15 @@ page {
 .points text {
     font-size: 30rpx;
     font-weight: bold;
+}
+
+.points .next {
+    margin-left: 4rpx;
+    margin-top:-6rpx;
+    display: inline-block;
+    width:28rpx;
+    height: 28rpx;
+    vertical-align: middle;
 }
 
 .user-name .date {
@@ -133,7 +142,7 @@ page {
 .tools-warp {
     width: 702rpx;
     background: #fff;
-    margin: 30rpx 24rpx;
+    margin: 30rpx 24rpx 0;
     box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 }
 
@@ -148,18 +157,46 @@ page {
 
 .tools {
     overflow: hidden;
-    padding: 40rpx;
+    padding: 20rpx 0;
 }
 
 .tools .tools-item {
     width: 46%;
     float: left;
     margin: 0 2%;
-    text-align: center;
+    padding:20rpx 40rpx;
+    position: relative;
+    font-size: 32rpx;
+    color: #333;
 }
 
-.menu-list{
-    padding-top:20rpx;
+.post-card{
+    border-right:1px solid #efefef;
+}
+.tools-item .text{
+    font-size: 24rpx;
+    color: #999;
+    padding-top:10rpx;
+    display: block;
+}
+.post-card .icon{
+    position: absolute;
+    top:0rpx;
+    right:10rpx;
+    width:100rpx;
+    height: 100rpx;
+    transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+}
+.news .icon{
+    position: absolute;
+    top:0rpx;
+    right:10rpx;
+    width:100rpx;
+    height: 100rpx;
+}
+.menu-list {
+    padding-top: 20rpx;
 }
 
 .menu {

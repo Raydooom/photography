@@ -2,6 +2,11 @@
     "pages": [
         "pages/index/index",
         "pages/center/center",
+        "centerTools/postcardIndex/postcardIndex",
+        "centerTools/editText/editText",
+        "centerTools/saveCard/saveCard",
+        "centerTools/viewCard/viewCard",
+        "pages/credits/credits",
         "pages/addImg/addImg",
         "pages/test/test",
         "pages/special/special",

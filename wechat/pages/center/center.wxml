@@ -10,10 +10,11 @@
                 <view class="level">
                     <image class="level-icon" src='../../assets/icons/level.png'></image>{{userInfo.level}}</view>
             </view>
-            <view class="points">
+            <navigator class="points" url='../credits/credits?credits={{userInfo.integral}}&level={{userInfo.level}}'>
                 <!--<image class="coin" src='../../assets/icons/coin.png'></image>-->积分
                 <text>{{userInfo.integral}}</text>
-            </view>
+                <image class="next" src="../../assets/icons/next.png"></image>
+            </navigator>
         </view>
         <view class="article-info">
             <view class="item">
@@ -26,13 +27,20 @@
             </view>
         </view>
     </view>
-    <!-- <view class="tools-warp">
+    <view class="tools-warp">
         <text class="title">小工具</text>
         <view class="tools">
-            <view class="tools-item">明信片</view>
-            <view class="tools-item">星座运势</view>
+            <navigator class="tools-item post-card" url="../../centerTools/index/index">明信片制作
+                <text class="text">友谊像一抹彩虹</text>
+                <image class="icon" src="../../assets/icons/postcard-icon.png"></image>
+            </navigator>
+            <navigator class="tools-item news">新闻头条
+                <text class="text">最新时事新闻 </text>
+                <image class="icon" src="../../assets/icons/news-icon.png"></image>
+            </navigator>
         </view>
-    </view> -->
+    </view>
+
     <view class="menu-list">
         <view class="menu">
             <view class="text">
