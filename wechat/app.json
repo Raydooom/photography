@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/special/special",
         "pages/center/center",
         "centerTools/postcardIndex/postcardIndex",
         "centerTools/editText/editText",
@@ -9,7 +10,6 @@
         "pages/credits/credits",
         "pages/addImg/addImg",
         "pages/test/test",
-        "pages/special/special",
         "pages/specialDetailComment/specialDetailComment",
         "pages/specialDetail/specialDetail",
         "pages/newest/newest",

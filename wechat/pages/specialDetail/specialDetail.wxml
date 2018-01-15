@@ -1,3 +1,4 @@
+<import src="../../wxParse/wxParse.wxml" />
 <!-- 导入loading模块  -->
 <import src="../../modules/loading/loading.wxml" />
 <template wx:if="{{loading}}" is="loading" />
@@ -13,7 +14,8 @@
             <text class="description">{{detail.description}}</text>
         </view>
         <view class="content">
-            {{detail.text}}
+            <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+            <!--  {{detail.text}}-->
         </view>
         <!-- <view class="keywords" wx:if="{{pageData.album.keywords != ''}}">关键词：{{pageData.album.keywords}}</view> -->
         <text class="end">———— EDN ————</text>

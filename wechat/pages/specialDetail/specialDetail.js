@@ -1,5 +1,8 @@
 // pages/detail/detail.js
 import { HOST } from '../../config/index';
+import WxParse from '../../wxParse/wxParse.js';
+
+console.log(WxParse)
 
 Page({
 
@@ -10,6 +13,7 @@ Page({
         detailId: '',  // 详情id
         loading: true,
         detail: {},  // 页面数据
+        detailText: '',// 文章内容
         view: 0,  // 浏览数
         praise: 0, // 点赞数
         share: 0  // 分享数
@@ -25,9 +29,6 @@ Page({
         this.setData({
             detailId: options.id
         })
-        this.getData();
-        // 获取用户信息
-        let that = this;
     },
     onShow: function () {
         this.getData();
@@ -72,10 +73,11 @@ Page({
                 id: that.data.detailId
             },
             success: res => {
-                console.log(res);
+                // console.log(res);
                 if (res.data.state == 1) {
                     that.setData({
                         detail: res.data.detail,
+                        detailText: res.data.detail.text,
                         loading: false,
                         view: res.data.detail.view + 1,
                         praise: res.data.detail.praise,
@@ -84,6 +86,8 @@ Page({
                     })
                     // 统计浏览量
                     that.addViews(that.data.detailId, that.data.view);
+
+                    WxParse.wxParse('article', 'html', that.data.detailText, that, 5);
                 } else {
                     console.log("数据查询错误！");
                 }
@@ -102,7 +106,7 @@ Page({
                 view: view
             },
             success: (res) => {
-                console.log(res)
+                // console.log(res)
             }
         })
     },

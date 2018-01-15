@@ -50,7 +50,8 @@ router.post('/hot', async(ctx, next) => {
                 authorInfo = {
                     userId: result[0].id,
                     nickname: result[0].nickname,
-                    avatarUrl: result[0].avatar_url
+                    avatarUrl: result[0].avatar_url,
+                    level: result[0].level
                 }
             }).catch(error => {
                 console.log(error);
@@ -130,7 +131,8 @@ router.post('/newest', async(ctx, next) => {
                 authorInfo = {
                     userId: result[0].id,
                     nickname: result[0].nickname,
-                    avatarUrl: result[0].avatar_url
+                    avatarUrl: result[0].avatar_url,
+                    level: result[0].level
                 }
             }).catch(error => {
                 console.log(error);
@@ -356,7 +358,8 @@ router.post('/detail', async(ctx, next) => {
                 userInfo: {
                     userId: result[0].id,
                     nickname: result[0].nickname,
-                    avatarUrl: result[0].avatar_url
+                    avatarUrl: result[0].avatar_url,
+                    level: result[0].level
                 }
             }
         }).catch(error => {
@@ -435,7 +438,8 @@ router.get('/getComment', async(ctx, next) => {
                 userInfo = {
                     userId: result[0].id,
                     nickname: result[0].nickname,
-                    avatarUrl: result[0].avatar_url
+                    avatarUrl: result[0].avatar_url,
+                    level: result[0].level
                 };
             }).catch(error => {
                 console.log(error);

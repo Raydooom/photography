@@ -17,7 +17,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getData()
+        // this.getData()
     },
 
     /**
@@ -84,8 +84,8 @@ Page({
                         specialList: res.data.data,
                         loading: false
                     });
-                    console.log(res.data.data)
-                    console.log(res.data)
+                    // console.log(res.data.data)
+                    // console.log(res.data)
                     if (res.data.length == res.data.data.length) {
                         that.setData({
                             end: true

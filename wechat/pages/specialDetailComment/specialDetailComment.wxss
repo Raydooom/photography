@@ -6,7 +6,7 @@
 }
 
 .comment-list .comment-title {
-    background: #fdfdfd;
+    background: #f2f2f2;
     line-height: 88rpx;
     font-size: 30rpx;
     padding: 0 24rpx;
@@ -42,8 +42,31 @@
     position: relative;
 }
 
+.comment-user-name {
+    margin-top: -2rpx;
+    display: inline-block;
+    max-width: 300rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.name .level-icon {
+    display: inline-block;
+    width: 28rpx;
+    height: 28rpx;
+    vertical-align: middle;
+    margin-right: 4rpx;
+}
+
+.name .level-name {
+    font-size: 24rpx;
+    color: #999;
+    vertical-align: middle;
+}
+
 .msg-con .name text.date {
-    padding-top: 10rpx;
     display: block;
     font-size: 24rpx;
     color: #999;

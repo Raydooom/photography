@@ -27,7 +27,7 @@
             </view>
         </view>
     </view>
-    <view class="tools-warp">
+    <!-- <view class="tools-warp">
         <text class="title">小工具</text>
         <view class="tools">
             <navigator class="tools-item post-card" url="../../centerTools/index/index">明信片制作
@@ -39,7 +39,7 @@
                 <image class="icon" src="../../assets/icons/news-icon.png"></image>
             </navigator>
         </view>
-    </view>
+    </view> -->
 
     <view class="menu-list">
         <view class="menu">

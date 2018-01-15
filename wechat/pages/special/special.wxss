@@ -5,6 +5,7 @@ page {
 }
 
 .item {
+    border-top: 1px solid #efefef;
     background: #fff;
     padding: 24rpx;
     overflow: hidden;

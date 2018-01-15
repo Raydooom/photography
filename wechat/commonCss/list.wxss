@@ -11,31 +11,46 @@
 .author {
     padding: 16rpx 24rpx;
     overflow: hidden;
+    border-bottom: 1px solid #efefef;
 }
 
-.author image {
-    width: 60rpx;
-    height: 60rpx;
+.author > image {
+    width: 80rpx;
+    height: 80rpx;
     border-radius: 50%;
     float: left;
 }
 
 .author .name {
-    line-height: 60rpx;
+    line-height: 46rpx;
     font-size: 28rpx;
     margin-left: 20rpx;
-    width: 300rpx;
+    width: 600rpx;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     float: left;
 }
 
+.name .level-icon {
+    display: inline-block;
+    width: 28rpx;
+    height: 28rpx;
+    vertical-align: middle;
+    margin-right: 4rpx;
+}
+
+.name .level-name {
+    font-size: 24rpx;
+    color: #999;
+}
+
 .author .time {
-    float: right;
+    display: block;
     font-size: 12px;
-    line-height: 60rpx;
     color: #666;
+    height: 28rpx;
+    line-height: 28rpx;
 }
 
 .img-contianer {

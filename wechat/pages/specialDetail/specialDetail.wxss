@@ -1,3 +1,5 @@
+@import "/wxParse/wxParse.wxss";
+
 .album-detail {
     padding: 0 24rpx 105rpx;
 }
@@ -36,7 +38,9 @@
     padding: 20rpx;
     border-radius: 8rpx;
 }
-
+.content{
+    font-size:32rpx;
+}
 .photos .photo-item .photo-title {
     margin: 10rpx 0;
     display: block;
