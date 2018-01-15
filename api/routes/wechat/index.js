@@ -22,7 +22,7 @@ router.post('/hot', async(ctx, next) => {
     let page = parseInt(ctx.request.body.page) || 0;
     let pageSize = parseInt(ctx.request.body.pageSize) || 4;
     let userId = ctx.request.body.userId;
-
+    console.log(ctx.request.body)
     let data = [],
         length = 0,
         list;
@@ -57,11 +57,12 @@ router.post('/hot', async(ctx, next) => {
             })
 
         // 查询是否点赞
+        // console.log(list[index].id,userId)
         let isPraise = false;
         await sql.query("SELECT * FROM message_praise WHERE user_id = '" + userId + "' AND message_id = '" + list[index].id + "'")
             .then(res => {
-                // console.log(res.length)
-                if (res.length) {
+                console.log(res.length)
+                if (res.length != 0) {
                     isPraise = true;
                 }
             }).catch(error => {
@@ -93,14 +94,16 @@ router.post('/hot', async(ctx, next) => {
 
 /**
  * 最新发布列表数据接口
- * @param  {[type]} '/newset'     [description]
+ * @param  {[type]} '/newest'     [description]
  * @param  {[type]} async(ctx, next          [description]
  * @return {[json]}            [description]
  */
 router.post('/newest', async(ctx, next) => {
-    var page = parseInt(ctx.request.body.page) || 0;
-    var pageSize = parseInt(ctx.request.body.pageSize) || 2;
-    var data = [],
+    let page = parseInt(ctx.request.body.page) || 0;
+    let pageSize = parseInt(ctx.request.body.pageSize) || 4;
+    let userId = ctx.request.body.userId;
+    console.log(ctx.request.body)
+    let data = [],
         length = 0,
         list;
     await sql.query("SELECT * FROM message_list")
@@ -132,14 +135,30 @@ router.post('/newest', async(ctx, next) => {
             }).catch(error => {
                 console.log(error);
             })
-            // 查询评论信息
+
+        // 查询是否点赞
+        console.log(list[index].id, userId)
+        let isPraise = false;
+        await sql.query("SELECT * FROM message_praise WHERE user_id = '" + userId + "' AND message_id = '" + list[index].id + "'")
+            .then(res => {
+                console.log(res.length)
+                if (res.length != 0) {
+                    isPraise = true;
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+
+
+        // 查询评论信息
         await sql.query("SELECT * FROM comments WHERE message_id = " + list[index].id)
             .then(comments => {
                 data[index] = {
                     comments: comments,
                     authorInfo: authorInfo,
                     content: list[index],
-                    img: list[index].img.split(',')
+                    img: list[index].img.split(','),
+                    isPraise: isPraise
                 }
             }).catch(error => {
                 console.log(error);
@@ -208,8 +227,6 @@ router.get('/praises', async(ctx, next) => {
         .then(res => {
             console.log("点赞数据统计成功！")
         })
-
-
     ctx.body = {
         state: 1,
     }
@@ -302,10 +319,11 @@ router.get('/release', async(ctx, next) => {
  * @param  {[int]}    [列表id]
  * @return {[json]}   [详情数据]
  */
-router.get('/detail', async(ctx, next) => {
+router.post('/detail', async(ctx, next) => {
     console.log(ctx.query)
+    let userId = ctx.request.body.userId;
     let data = {};
-    await sql.query("SELECT * FROM message_list WHERE id = " + ctx.query.id)
+    await sql.query("SELECT * FROM message_list WHERE id = " + ctx.request.body.id)
         .then(result => {
             data = {
                 detail: result[0],
@@ -314,10 +332,25 @@ router.get('/detail', async(ctx, next) => {
         }).catch(error => {
             console.log(error);
         })
+
+    // 获取当前用户是否为当前文章点赞
+    let isPraise = false;
+    await sql.query("SELECT * FROM message_praise WHERE user_id = '" + userId + "' AND message_id = '" + ctx.request.body.id + "'")
+        .then(res => {
+            console.log(res.length)
+            if (res.length != 0) {
+                isPraise = true;
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+
+    // 查询发布者信息
     await sql.query("SELECT * FROM user WHERE user_id ='" + data.detail.author_id + "'")
         .then(result => {
             ctx.body = {
                 state: 1,
+                isPraise: isPraise,
                 detail: data.detail,
                 img: data.img,
                 userInfo: {

@@ -43,9 +43,10 @@
                 <image src='../../assets/icons/comment.png'></image>
                 <text>{{item.comments.length}}</text>
             </navigator>
-            <view class="item">
-                <image bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}' src='../../assets/icons/like.png'></image>
-                <text bindtap='praise' data-praises='{{item.content.praises}}' data-id='{{item.content.id}}'>{{item.content.praises}}</text>
+            <view class="item praise" bindtap="praise" data-state="{{item.isPraise}}" data-praises='{{item.content.praises}}' data-id='{{item.content.id}}'>
+                <image wx:if="{{!item.isPraise}}" src='../../assets/icons/like.png'></image>
+                <image wx:if="{{item.isPraise}}" src='../../assets/icons/like-on.png'></image>
+                <text class="{{!item.isPraise ? '' : 'active'}}">{{item.content.praises}}</text>
             </view>
         </view>
     </view>

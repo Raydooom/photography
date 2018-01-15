@@ -290,7 +290,7 @@
     color: #999;
 }
 
-.footer-bar .footer-btn text.praised {
+.footer-bar .praise text.active {
     color: #e51e30;
 }
 

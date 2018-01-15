@@ -20,15 +20,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function () {
-        let that = this;
-        wx.getStorage({
-            key: 'userId',
-            success: function (res) {
-                that.setData({
-                    userId: res.data
-                })
-            },
-        })
+        
     },
     onShow: function () {
         this.getData();
@@ -40,7 +32,7 @@ Page({
             data: {
                 page: that.data.page,  // 起始页
                 pageSize: that.data.pageSize,  // 一页数据条数
-                userId: that.data.userId  // userId  用于获取是否点赞
+                userId: wx.getStorageSync("userId")  // userId  用于获取是否点赞
             },
             method: 'POST',
             success: res => {
@@ -170,7 +162,7 @@ Page({
             data: {
                 id: data.id,
                 praises: praises,
-                userId: that.data.userId
+                userId: wx.getStorageSync("userId")
             },
             success: (res) => {
                 that.getData();

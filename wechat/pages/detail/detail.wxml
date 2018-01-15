@@ -21,7 +21,7 @@
         <view class="bottom-info">
             <view class="location" wx:if="{{detailInfo.location}}">
                 <image src='../../assets/icons/location.png'></image>{{detailInfo.location}}</view>
-            <view class="views">查看 {{detailInfo.views}} 次</view>
+            <view class="views">查看 {{detailInfo.views + 1}} 次</view>
         </view>
     </view>
     <view class="comment-list" wx:if="{{!loading}}">
@@ -64,7 +64,7 @@
         <image src="../../assets/icons/view.png"></image>
         <text>{{detailInfo.collect}}</text>
     </view> -->
-    <view class="footer-btn" bindtap="praise" data-praises="{{detailInfo.praises}}">
+    <!-- <view class="footer-btn" bindtap="praise" data-praises="{{detailInfo.praises}}">
         <block wx:if="{{!hasPraise}}">
             <image src="../../assets/icons/like.png"></image>
             <text>{{detailPraise}}</text>
@@ -73,15 +73,21 @@
             <image src="../../assets/icons/like-on.png"></image>
             <text class="praised">{{detailPraise}}</text>
         </block>
+    </view> -->
+
+    <view class="footer-btn share-icon">
+        <image src="../../assets/icons/share-icon.png"></image>
+        <text>{{detailInfo.shares}}</text>
+        <button class="share-btn" open-type="share"></button>
     </view>
     <view class="footer-btn sub-form" bindtap='comment'>
         <image src="../../assets/icons/comment.png"></image>
         <text>{{commentList.length}}</text>
     </view>
-    <view class="footer-btn share-icon">
-        <image src="../../assets/icons/share-icon.png"></image>
-        <text>{{detailInfo.shares}}</text>
-        <button class="share-btn" open-type="share"></button>
+    <view class="footer-btn praise" bindtap="praise" data-state="{{isPraise}}" data-praises='{{detailInfo.praises}}' data-id='{{detailId}}'>
+        <image wx:if="{{!isPraise}}" src='../../assets/icons/like.png'></image>
+        <image wx:else src='../../assets/icons/like-on.png'></image>
+        <text class="{{!isPraise ? '' : 'active'}}">{{detailPraise}}</text>
     </view>
 </view>
 <!--  评论框  -->
