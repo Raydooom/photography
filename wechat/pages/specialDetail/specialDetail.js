@@ -87,7 +87,7 @@ Page({
                     // 统计浏览量
                     that.addViews(that.data.detailId, that.data.view);
 
-                    WxParse.wxParse('article', 'html', that.data.detailText, that, 5);
+                    WxParse.wxParse('article', 'html', that.data.detailText, that, 16);
                 } else {
                     console.log("数据查询错误！");
                 }

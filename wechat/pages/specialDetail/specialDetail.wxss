@@ -13,7 +13,7 @@
 }
 
 .album .date {
-    padding-top:16rpx;
+    padding-top: 16rpx;
     font-size: 28rpx;
     color: #999;
     display: block;
@@ -38,9 +38,11 @@
     padding: 20rpx;
     border-radius: 8rpx;
 }
-.content{
-    font-size:32rpx;
+
+.content {
+    font-size: 32rpx;
 }
+
 .photos .photo-item .photo-title {
     margin: 10rpx 0;
     display: block;
