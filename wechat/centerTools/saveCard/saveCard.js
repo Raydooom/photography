@@ -97,7 +97,7 @@ Page({
         var that = this
         return {
             title: '你的好友给送了你一张明信片',
-            path: '/pages/viewCard/viewCard?cardId=' + that.data.cardKey + '&userId=' + wx.getStorageSync('userId'),
+            path: '/centerTools/viewCard/viewCard?cardId=' + that.data.cardKey + '&userId=' + wx.getStorageSync('userId'),
             imageUrl: that.data.postcard,
             success: function (res) {
                 wx.showToast({
