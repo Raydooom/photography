@@ -1,12 +1,12 @@
 {
     "pages": [
         "pages/index/index",
+        "centerTools/editText/editText",
+        "centerTools/viewCard/viewCard",
+        "centerTools/postcardIndex/postcardIndex",
         "pages/special/special",
         "pages/center/center",
-        "centerTools/postcardIndex/postcardIndex",
-        "centerTools/editText/editText",
         "centerTools/saveCard/saveCard",
-        "centerTools/viewCard/viewCard",
         "pages/credits/credits",
         "pages/addImg/addImg",
         "pages/test/test",

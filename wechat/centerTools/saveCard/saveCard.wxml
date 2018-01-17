@@ -1,14 +1,14 @@
 <!--pages/saveCard/saveCard.wxml-->
 <view class="card-container">
-  <view class='main-img'>
-    <image src='{{postcard}}'></image>
-  </view>
-  <view class="btn-container">
-    <text class="btn save" bindtap='save'>保存到相册</text>
-    <button class="btn again" open-type="share">发送给好友</button>
-  </view>
-  <view class='bottom'>
-    <text class="info">———— 美图不够多？去相册图集看看吧  ————</text>
-    <text class="kind-btn" bindtap='backKind'>相册图集</text>
-  </view>
+    <view class='main-img'>
+        <image src='{{postcard}}'></image>
+    </view>
+    <view class="btn-container">
+        <text class="btn save" bindtap='save'>保存到相册</text>
+        <button class="btn again" open-type="share">发送给好友</button>
+    </view>
+    <view class='bottom'>
+        <text class="info">———— 美图不够多？去热门作品看看吧  ————</text>
+        <text class="kind-btn" bindtap='backKind'>热门作品</text>
+    </view>
 </view>

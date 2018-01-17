@@ -98,9 +98,9 @@ page {
 
 .points .next {
     margin-left: 4rpx;
-    margin-top:-6rpx;
+    margin-top: -6rpx;
     display: inline-block;
-    width:28rpx;
+    width: 28rpx;
     height: 28rpx;
     vertical-align: middle;
 }
@@ -164,37 +164,41 @@ page {
     width: 46%;
     float: left;
     margin: 0 2%;
-    padding:20rpx 40rpx;
+    padding: 20rpx 40rpx;
     position: relative;
     font-size: 32rpx;
     color: #333;
 }
 
-.post-card{
-    border-right:1px solid #efefef;
+.post-card {
+    border-right: 1px solid #efefef;
 }
-.tools-item .text{
+
+.tools-item .text {
     font-size: 24rpx;
     color: #999;
-    padding-top:10rpx;
+    padding-top: 10rpx;
     display: block;
 }
-.post-card .icon{
+
+.post-card .icon {
     position: absolute;
-    top:0rpx;
-    right:10rpx;
-    width:100rpx;
+    top: 0rpx;
+    right: 10rpx;
+    width: 100rpx;
     height: 100rpx;
     transform: rotate(30deg);
     -webkit-transform: rotate(30deg);
 }
-.news .icon{
+
+.news .icon {
     position: absolute;
-    top:0rpx;
-    right:10rpx;
-    width:100rpx;
+    top: 0rpx;
+    right: 20rpx;
+    width: 100rpx;
     height: 100rpx;
 }
+
 .menu-list {
     padding-top: 20rpx;
 }

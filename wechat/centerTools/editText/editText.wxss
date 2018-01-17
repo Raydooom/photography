@@ -1,217 +1,241 @@
 /**index.wxss**/
 
 page {
-  height: 100%;
-  background: #333;
-  /* overflow: hidden; */
+    height: 100%;
+    background: #333;
+    /* overflow: hidden; */
 }
 
 .container {
-  height: 100%;
-  background: #333;
+    height: 100%;
+    background: #333;
 }
 
 .card-container {
-  width: 100%;
-  background: #333;
-  height: 100%;
-  display: flex;
-  /* align-items: center; */
-  justify-content: center;
+    width: 100%;
+    background: #333;
+    height: 100%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
 }
 
 .card-show {
-  padding: 30rpx;
-  background: #fff;
-  height: 900rpx;
-  position: relative;
+    padding: 30rpx;
+    background: #fff;
+    height: 900rpx;
+    position: relative;
 }
 
 .card-show image {
-  width: 690rpx;
-  height: 460rpx;
+    width: 690rpx;
+    height: 460rpx;
 }
 
 .card-show .title {
-  font-size: 36rpx;
-  color: #111;
-  display: block;
-  margin-top: 20rpx;
+    font-size: 36rpx;
+    color: #111;
+    display: block;
+    margin-top: 20rpx;
 }
 
 .card-show .text {
-  display: block;
-  font-size: 28rpx;
-  line-height: 42rpx;
-  color: #666;
-  margin-top: 30rpx;
-  letter-spacing: 0.05em;
+    display: block;
+    font-size: 28rpx;
+    line-height: 42rpx;
+    color: #666;
+    margin-top: 30rpx;
+    letter-spacing: 0.05em;
 }
 
 .card-show .from-name {
-  color: #666;
-  font-size: 28rpx;
-  display: block;
-  text-align: right;
-  position: absolute;
-  bottom: 80rpx;
-  right: 60rpx;
+    color: #666;
+    font-size: 28rpx;
+    display: block;
+    text-align: left;
+    position: absolute;
+    bottom: 80rpx;
+    left: 30rpx;
 }
 
 canvas {
-  width: 100%;
-  height: 900rpx;
-  background: #fff;
+    width: 100%;
+    height: 900rpx;
+    background: #fff;
 }
 
 .showImg {
-  /* margin-top: -92rpx; */
-  width: 100%;
-  height: 900rpx;
+    /* margin-top: -92rpx; */
+    width: 100%;
+    height: 900rpx;
 }
 
 /*底部工具栏*/
 
 .tool-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 96rpx;
-  background: #fff;
-  border-top: 1px solid #efefef;
-  z-index: 100;
-  overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 96rpx;
+    background: #fff;
+    border-top: 1px solid #efefef;
+    z-index: 100;
+    overflow: hidden;
 }
 
 .tool-bar .btn {
-  width: 654rpx;
-  float: left;
-  line-height: 92rpx;
-  font-size: 28rpx;
-  text-align: center;
-  border-right: 1px solid #efefef;
+    width: 654rpx;
+    float: left;
+    line-height: 92rpx;
+    font-size: 28rpx;
+    text-align: center;
+    border-right: 1px solid #efefef;
 }
 
 .tool-bar .btn image {
-  width: 28rpx;
-  height: 28rpx;
-  margin-right: 10rpx;
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: -2rpx;
+    width: 28rpx;
+    height: 28rpx;
+    margin-right: 10rpx;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -2rpx;
 }
 
 .tool-bar .sure-btn {
-  width: 96rpx;
-  float: left;
-  height: 96rpx;
-  padding: 22rpx;
+    width: 96rpx;
+    float: left;
+    height: 96rpx;
+    padding: 22rpx;
 }
 
 .tool-bar .sure-btn image {
-  width: 52rpx;
-  height: 52rpx;
-  display: block;
+    width: 52rpx;
+    height: 52rpx;
+    display: block;
 }
 
 .choose-container {
-  position: fixed;
-  bottom: -20rpx;
-  z-index: 99;
-  left: 0;
-  overflow: hidden;
-  background: #000;
-  padding: 8rpx 4rpx 4rpx 4rpx;
-  transition: 0.3s all;
+    position: fixed;
+    bottom: -20rpx;
+    z-index: 99;
+    left: 0;
+    overflow: hidden;
+    background: #000;
+    padding: 8rpx 4rpx 4rpx 4rpx;
+    transition: 0.3s all;
 }
 
 .choose-container.active {
-  bottom: 96rpx;
+    bottom: 96rpx;
 }
 
 .choose-container .local-btn {
-  float: left;
-  width: 120rpx;
-  height: 96rpx;
-  line-height: 96rpx;
-  text-align: center;
-  font-size: 24rpx;
-  color: #0077d2;
-  background: #fff;
+    float: left;
+    width: 120rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #0077d2;
+    background: #fff;
 }
 
 .choose-container .img-list {
-  float: left;
-  height: 96rpx;
+    float: left;
+    height: 96rpx;
 }
 
 .choose-container .img-list .img {
-  width: 96rpx;
-  height: 96rpx;
-  border: 1px solid #fff;
-  display: inline-block;
-  white-space: nowrap;
+    width: 96rpx;
+    height: 96rpx;
+    border: 1px solid #fff;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .choose-container .img-list image {
-  width: 96rpx;
-  height: 96rpx;
-  display: block;
+    width: 96rpx;
+    height: 96rpx;
+    display: block;
 }
 
 /*文字编辑表单*/
-.text-form{
-  background: rgba(255,255,255,1);
-  position: fixed;
-  z-index:101;
-  top:100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding:40rpx;
-  transition: 0.3s all ease-out;
+
+.shade{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.6);
 }
 
-.text-form.active{
-  top:0;
+.close-btn{
+    position: absolute;
+    top:30rpx;
+    right:30rpx;
+    width: 40rpx;
+    height: 40rpx;
 }
 
-.text-form text{
-  font-size:32rpx;
-  color: #111;
-  font-weight: bold;
-  display: block;
-  margin:20rpx 0 10rpx;
-}
-.text-form input{
-  height: 80rpx;
-  padding:20rpx 10rpx;
-  border-radius: 8rpx;
-  border:1px solid #111;
-  font-size:28rpx;
-}
-.text-form textarea{
-  border-radius: 8rpx;
-  border:1px solid #111;
-  font-size:28rpx;
-  width: 100%;
-  height: 200rpx;
+.text-form {
+    background: rgba(255, 255, 255, 1);
+    position: fixed;
+    z-index: 101;
+    bottom: -90%;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    padding: 40rpx;
+    transition: 0.3s all ease-out;
 }
 
-.text-form .loaction{
-  padding:40rpx 0 0;
-  overflow: hidden;
+.text-form.active {
+    bottom: 0;
 }
-.text-form .loaction text{
-  float: left;
-  margin-top:10rpx;
+
+.text-form text {
+    font-size: 32rpx;
+    color: #111;
+    font-weight: bold;
+    display: block;
+    margin: 20rpx 0 10rpx;
 }
-.text-form .loaction switch{
-  float: right;
+
+.text-form input {
+    height: 80rpx;
+    padding: 20rpx 10rpx;
+    border-radius: 8rpx;
+    border: 1px solid #111;
+    font-size: 28rpx;
 }
-.text-form .end-btn{
-  margin-top:30rpx;
+
+.text-form textarea {
+    border-radius: 8rpx;
+    border: 1px solid #111;
+    font-size: 28rpx;
+    width: 100%;
+    height: 200rpx;
+}
+
+.text-form .loaction {
+    padding: 40rpx 0 0;
+    overflow: hidden;
+}
+
+.text-form .loaction text {
+    float: left;
+    margin-top: 10rpx;
+}
+
+.text-form .loaction switch {
+    float: right;
+}
+
+.text-form .end-btn {
+    margin-top: 30rpx;
 }
 
 /* .bg {

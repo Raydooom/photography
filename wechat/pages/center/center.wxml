@@ -27,19 +27,19 @@
             </view>
         </view>
     </view>
-    <!-- <view class="tools-warp">
+    <view class="tools-warp">
         <text class="title">小工具</text>
         <view class="tools">
-            <navigator class="tools-item post-card" url="../../centerTools/index/index">明信片制作
+            <navigator class="tools-item post-card" url="../../centerTools/postcardIndex/postcardIndex">明信片制作
                 <text class="text">友谊像一抹彩虹</text>
                 <image class="icon" src="../../assets/icons/postcard-icon.png"></image>
             </navigator>
-            <navigator class="tools-item news">新闻头条
-                <text class="text">最新时事新闻 </text>
-                <image class="icon" src="../../assets/icons/news-icon.png"></image>
+            <navigator class="tools-item news">精美图集
+                <text class="text">摄影灵感 </text>
+                <image class="icon" src="../../assets/icons/album.png"></image>
             </navigator>
         </view>
-    </view> -->
+    </view>
 
     <view class="menu-list">
         <view class="menu">

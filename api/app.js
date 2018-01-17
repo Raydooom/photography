@@ -7,7 +7,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 
-const index = require('./routes/index')
+const test = require('./routes/index')
 const users = require('./routes/users')
 
 /**
@@ -21,7 +21,7 @@ const uploadImg = require('./routes/common/uploadImg')
 const login = require('./routes/wechat/login')
 const wechatIndex = require('./routes/wechat/index')
 const wechatSpecial= require('./routes/wechat/special')
-const wechatMessage= require('./routes/wechat/msgTemplate')
+const wechatTools= require('./routes/wechat/tools')
 
 // middlewares
 app.use(bodyparser({
@@ -39,10 +39,13 @@ app.use(async (ctx, next) => {
     ctx.set("Access-Control-Allow-Credentials", true);
     ctx.set("Access-Control-Max-Age", 300);
     ctx.set("Access-Control-Expose-Headers", "myData");
-
+    ctx.set("server", "aaa");
     // ctx.body = ctx.request.body;
     await next();
 })
+// 测试页面
+app.use(users.routes(), users.allowedMethods())
+
 // commom路由
 app.use(uploadImg.routes(), uploadImg.allowedMethods())
 
@@ -50,7 +53,7 @@ app.use(uploadImg.routes(), uploadImg.allowedMethods())
 app.use(login.routes(), login.allowedMethods())
 app.use(wechatIndex.routes(), wechatIndex.allowedMethods())
 app.use(wechatSpecial.routes(), wechatSpecial.allowedMethods())
-app.use(wechatMessage.routes(), wechatMessage.allowedMethods())
+app.use(wechatTools.routes(), wechatTools.allowedMethods())
 
 app.use(json())
 app.use(logger())

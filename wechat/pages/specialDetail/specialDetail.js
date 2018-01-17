@@ -2,8 +2,6 @@
 import { HOST } from '../../config/index';
 import WxParse from '../../wxParse/wxParse.js';
 
-console.log(WxParse)
-
 Page({
 
     /**
