@@ -143,7 +143,8 @@ router.get('/specialComment', async(ctx, next) => {
                 userInfo = {
                     userId: result[0].id,
                     nickname: result[0].nickname,
-                    avatarUrl: result[0].avatar_url
+                    avatarUrl: result[0].avatar_url,
+                    level:result[0].level
                 };
             }).catch(error => {
                 console.log(error);

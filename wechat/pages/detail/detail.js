@@ -9,6 +9,7 @@ Page({
     data: {
         detailId: '',  // 详情id
         userInfo: '',   // 发布者信息
+        detailView: 0,
         detailPraise: 0,
         detailShare: 0,
         detailInfo: '',
@@ -34,6 +35,7 @@ Page({
         this.setData({
             detailId: options.id
         })
+        // 数据获取
         this.getData(this.data.detailId);
         // 获取用户信息
         let that = this;
@@ -46,7 +48,10 @@ Page({
             },
         })
     },
-
+    onUnload: function () {
+        // 统计浏览量
+        this.addViews(this.data.detailId, this.data.detailView);
+    },
     onPullDownRefresh: function () {
         this.getData(this.data.detailId);
     },
@@ -64,6 +69,8 @@ Page({
     onShareAppMessage: function () {
         let that = this;
         return {
+            title: '你的好友分享给你了一个摄影作品',
+            imageUrl: that.data.imgArr[0],
             success: function (res) {
                 wx.request({
                     url: HOST + '/wechat/detailShare',
@@ -91,8 +98,10 @@ Page({
         let that = this;
         wx.request({
             url: HOST + '/wechat/detail',
+            method: "POST",
             data: {
-                id: id
+                id: id,
+                userId: wx.getStorageSync("userId")
             },
             success: res => {
                 console.log(res);
@@ -101,13 +110,13 @@ Page({
                         userInfo: res.data.userInfo,
                         detailInfo: res.data.detail,
                         imgArr: res.data.img,
+                        detailView: res.data.detail.views,
                         detailPraise: res.data.detail.praises,
                         detailShare: res.data.detail.shares,
+                        isPraise: res.data.isPraise,
                         loading: false
                     })
 
-                    // 统计浏览量
-                    that.addViews(id, res.data.detail.views);
                     // 获取评论
                     that.getComments(id);
                 } else {
@@ -120,6 +129,7 @@ Page({
      * 浏览量统计
      */
     addViews: function (id, views) {
+        console.log(views)
         let that = this;
         wx.request({
             url: HOST + '/wechat/views',
@@ -173,19 +183,18 @@ Page({
     */
     praise: function (e) {
         let data = e.currentTarget.dataset;
+        // console.log(data)
+        let praises = data.state ? data.praises - 1 : data.praises + 1;
         let that = this;
-        that.setData({
-            detailPraise: that.data.detailPraise + 1
-        })
         wx.request({
             url: HOST + '/wechat/praises',
             data: {
-                id: that.data.detailId,
-                praises: data.praises + 1,
-                userId: that.data.userId
+                id: data.id,
+                praises: praises,
+                userId: wx.getStorageSync("userId")
             },
             success: (res) => {
-                console.log("点赞成功");
+                that.getData(this.data.detailId);
             }
         })
     },
@@ -261,6 +270,15 @@ Page({
     sendComment: function (e) {
         let text = e.detail.value;
         let that = this;
+        if(text.trim() == ""){
+            wx.showModal({
+                title: '提示',
+                showCancel: false,
+                content: '内容不能为空！',
+                confirmColor: '#a09fed'
+            })
+            return false;
+        }
         // 评论内容
         if (!that.data.isReply) {
             wx.request({

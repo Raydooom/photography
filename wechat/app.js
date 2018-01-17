@@ -10,7 +10,7 @@ App({
         wx.getStorage({
             key: 'userId',
             success: (res) => {
-                console.log(res)
+                // console.log(res)
             },
             fail: (res) => {
                 console.log(res)

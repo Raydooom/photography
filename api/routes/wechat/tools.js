@@ -5,8 +5,6 @@ const sql = require('../config/db.config.js')
 const superagent = require('superagent')
     // 时间格式化中间件
 const moment = require('moment')
-
-const path = require("path")
     // 图片处理组件
 const gm = require('gm')
 
@@ -49,13 +47,13 @@ router.get("/postcardText", async(ctx, next) => {
 
 /**
  * [明信片生成接口]
+ * [明信片制作接口]
  * @param  {[type]} "/postcardCreate" [description]
  * @param  {[type]} async(ctx,        next          [description]
  * @return {[type]}                   [description]
  */
 router.get("/postcardCreate", async(ctx, next) => {
     let request = ctx.query;
-
     // 图片压缩
     gm(process.cwd() + "/public" + request.card)
         // .resize(600,0)     //设置压缩后的w/h
@@ -65,7 +63,7 @@ router.get("/postcardCreate", async(ctx, next) => {
         .autoOrient()
         .write(process.cwd() + "/public/" + request.card, 
         function(err){
-            console.log("err: " + err);
+            // console.log("err: " + err);
     })
 
     console.log(request);

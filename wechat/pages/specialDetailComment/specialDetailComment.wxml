@@ -9,7 +9,13 @@
         <image class="avatar" src="{{item.userInfo.avatarUrl}}"></image>
         <view class="msg-con">
             <!--  评论用户信息  -->
-            <view class="name">{{item.userInfo.nickname}}
+            <view class="name">
+                <view>
+                    <text class="comment-user-name">{{item.userInfo.nickname}}</text>
+                    <image class="level-icon" src='../../assets/icons/level.png'></image>
+                    <text class="level-name">{{item.userInfo.level}}</text>
+                </view>
+
                 <text class="date">{{item.comment.date}}</text>
                 <view class="prise" bindtap='commentPraise' data-comment-id="{{item.comment.id}}" data-praise="{{item.comment.praise}}">
                     <image src="../../assets/icons/like.png"></image>

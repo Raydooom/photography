@@ -20,15 +20,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function () {
-        let that = this;
-        wx.getStorage({
-            key: 'userId',
-            success: function (res) {
-                that.setData({
-                    userId: res.data
-                })
-            },
-        })
+        
     },
     onShow: function () {
         this.getData();
@@ -39,17 +31,19 @@ Page({
             url: HOST + '/wechat/hot',
             data: {
                 page: that.data.page,  // 起始页
-                pageSize: that.data.pageSize  // 一页数据条数
+                pageSize: that.data.pageSize,  // 一页数据条数
+                userId: wx.getStorageSync("userId")  // userId  用于获取是否点赞
             },
             method: 'POST',
             success: res => {
                 if (res.data.state == 1) {
+                    console.log(res.data.data)
                     that.setData({
                         hotList: res.data.data,
                         loading: false
                     });
-                    console.log(res.data.data)
-                    console.log(res.data)
+                    // console.log(res.data.data)
+                    // console.log(res.data)
                     if (res.data.length == res.data.data.length) {
                         that.setData({
                             end: true
@@ -88,7 +82,7 @@ Page({
             this.setData({
                 backTopShow: true
             })
-        }else{
+        } else {
             this.setData({
                 backTopShow: false
             })
@@ -105,8 +99,32 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function (e) {
+        let img = e.target.dataset.img;
+        let id = e.target.dataset.id;
+        let share = e.target.dataset.share;
+        let that = this;
+        return {
+            title: '你的好友分享给你了一个摄影作品',
+            path: '/pages/detail/detail?id=' + id,
+            imageUrl: img,
+            success: function (res) {
+                wx.request({
+                    url: HOST + '/wechat/detailShare',
+                    data: {
+                        shares: share + 1,
+                        detailId: id
+                    },
+                    success: res => {
+                        that.getData();
+                    }
+                });
 
+            },
+            fail: function (res) {
+                // 转发失败
+            }
+        }
     },
     /**
      * 预览图片
@@ -135,15 +153,16 @@ Page({
      * 点赞
      */
     praise: function (e) {
-        let data = e.target.dataset;
+        let data = e.currentTarget.dataset;
         console.log(data)
+        let praises = data.state ? data.praises - 1 : data.praises + 1;
         let that = this;
         wx.request({
             url: HOST + '/wechat/praises',
             data: {
                 id: data.id,
-                praises: data.praises + 1,
-                userId: that.data.userId
+                praises: praises,
+                userId: wx.getStorageSync("userId")
             },
             success: (res) => {
                 that.getData();

@@ -3,8 +3,10 @@
     <image class='showImg' src="{{card}}"></image>
     <view class="tool-bar">
         <view class="btn" bindtap='saveImg'>
-            <image mode='aspectFit' src='../../assets/images/tool_icon01.png' />保存相册</view>
-        <view class="btn" bindtap='goToCreate' url="../postcard/postcard">
-            <image mode='aspectFit' src='../../assets/images/tool_icon02.png' />我要制作</view>
+            <image mode='aspectFit' src='../../assets/icons/tool_icon01.png' />保存相册
+        </view>
+        <navigator class="btn" open-type="switchTab" url="../../pages/center/center">
+            <image mode='aspectFit' src='../../assets/icons/tool_icon02.png' />我要制作
+        </navigator>
     </view>
 </view>

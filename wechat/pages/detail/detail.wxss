@@ -5,29 +5,44 @@
     overflow: hidden;
 }
 
-.author image {
-    width: 60rpx;
-    height: 60rpx;
+.author > image {
+    width: 80rpx;
+    height: 80rpx;
     border-radius: 50%;
     float: left;
 }
 
 .author .name {
-    line-height: 60rpx;
+    line-height: 46rpx;
     font-size: 28rpx;
     margin-left: 20rpx;
-    width: 300rpx;
+    width: 420rpx;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     float: left;
 }
 
+.name .level-icon {
+    display: inline-block;
+    width: 28rpx;
+    height: 28rpx;
+    vertical-align: middle;
+    margin-right: 4rpx;
+}
+
+.name .level-name {
+    font-size: 24rpx;
+    color: #999;
+    vertical-align: middle;
+}
+
 .author .time {
-    float: right;
+    display: block;
     font-size: 12px;
-    line-height: 60rpx;
     color: #666;
+    height: 28rpx;
+    line-height: 28rpx;
 }
 
 .img-contianer {
@@ -68,15 +83,25 @@
 }
 
 .content .discription {
+    display: block;
     font-size: 28rpx;
-    color: #666;
-    margin: 10rpx 0;
+    color: #333;
+    margin: 20rpx 0;
+}
+
+.bottom-info {
+    overflow: hidden;
 }
 
 .location {
     padding: 10rpx 0;
     font-size: 12px;
     color: #999;
+    float: left;
+    max-width: 500rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .location image {
@@ -85,6 +110,13 @@
     height: 26rpx;
     vertical-align: middle;
     margin-right: 10rpx;
+}
+
+.views {
+    float: right;
+    font-size: 24rpx;
+    color: #999;
+    padding: 10rpx 0;
 }
 
 /*评论列表*/
@@ -125,14 +157,23 @@
 }
 
 .msg-con .name {
-    font-size: 32rpx;
+    font-size: 30rpx;
     color: #333;
     display: block;
     position: relative;
 }
 
+.comment-user-name {
+    margin-top:-2rpx;
+    display: inline-block;
+    max-width: 300rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
 .msg-con .name text.date {
-    padding-top: 10rpx;
     display: block;
     font-size: 24rpx;
     color: #999;
@@ -248,7 +289,7 @@
 }
 
 .footer-bar .footer-btn {
-    width: 25%;
+    width: 33.33%;
     font-size: 28rpx;
     color: #666;
     line-height: 104rpx;
@@ -273,7 +314,7 @@
     color: #999;
 }
 
-.footer-bar .footer-btn text.praised {
+.footer-bar .praise text.active {
     color: #e51e30;
 }
 

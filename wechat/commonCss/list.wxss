@@ -1,0 +1,206 @@
+.page {
+    background: #f2f2f2;
+}
+
+.list {
+    margin-bottom: 10rpx;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.author {
+    padding: 16rpx 24rpx;
+    overflow: hidden;
+    border-bottom: 1px solid #efefef;
+}
+
+.author > image {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    float: left;
+}
+
+.author .name {
+    line-height: 46rpx;
+    font-size: 28rpx;
+    margin-left: 20rpx;
+    width: 600rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+}
+
+.name .level-icon {
+    display: inline-block;
+    width: 28rpx;
+    height: 28rpx;
+    vertical-align: middle;
+    margin-right: 4rpx;
+}
+
+.name .level-name {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.author .time {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    height: 28rpx;
+    line-height: 28rpx;
+}
+
+.img-contianer {
+    overflow: hidden;
+    padding: 0 24rpx;
+}
+
+.img-contianer image {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.one-img {
+    width: 750rpx;
+    margin-left: -24rpx;
+}
+
+.two-img {
+    margin: 2.5rpx;
+    width: 231rpx;
+    height: 231rpx;
+    float: left;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-info {
+    overflow: hidden;
+}
+
+.location {
+    padding: 10rpx 0;
+    font-size: 12px;
+    color: #999;
+    float: left;
+    max-width: 500rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.location image {
+    display: inline-block;
+    width: 26rpx;
+    height: 26rpx;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+.views {
+    padding: 10rpx 0;
+    float: right;
+    font-size: 24rpx;
+    color: #999;
+}
+
+/*标题、描述*/
+
+.content {
+    padding: 0 24rpx 16rpx;
+    border-bottom: 1px solid #efefef;
+}
+
+.content .title {
+    font-size: 32rpx;
+    color: #222;
+    display: block;
+    line-height: 60rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 10rpx;
+}
+
+.content .discription {
+    font-size: 28rpx;
+    color: #333;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin: 20rpx 0;
+}
+
+.content-info {
+    overflow: hidden;
+    padding: 20rpx 0;
+}
+
+.content-info .item {
+    float: left;
+    width: 33.33%;
+    text-align: center;
+}
+
+.share {
+    position: relative;
+}
+
+.share .share-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #f40;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.praise text.active {
+    color: #f40 !important;
+}
+
+.content-info .item image {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: middle;
+    margin: 0 10rpx;
+}
+
+.content-info .item text {
+    display: inline-block;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.end-text {
+    border-top: 1px solid #efefef;
+    background: #fdfdfd;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4rpx;
+    margin-top: -8rpx;
+    line-height: 20px;
+}
+
+.end-text image {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-left: 12rpx;
+}
+
+.backtop-icon {
+    display: block;
+    position: fixed;
+    bottom: 20rpx;
+    right: 24rpx;
+    width: 80rpx;
+    height: 80rpx;
+}

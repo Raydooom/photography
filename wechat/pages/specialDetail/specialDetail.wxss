@@ -1,3 +1,5 @@
+@import "/wxParse/wxParse.wxss";
+
 .album-detail {
     padding: 0 24rpx 105rpx;
 }
@@ -11,7 +13,7 @@
 }
 
 .album .date {
-    padding-top:16rpx;
+    padding-top: 16rpx;
     font-size: 28rpx;
     color: #999;
     display: block;
@@ -35,6 +37,10 @@
     background: #f3f3f3;
     padding: 20rpx;
     border-radius: 8rpx;
+}
+
+.content {
+    font-size: 32rpx;
 }
 
 .photos .photo-item .photo-title {

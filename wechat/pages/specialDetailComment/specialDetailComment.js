@@ -157,6 +157,16 @@ Page({
     sendComment: function (e) {
         let text = e.detail.value;
         let that = this;
+        
+        if (text.trim() == "") {
+            wx.showModal({
+                title: '提示',
+                showCancel: false,
+                content: '内容不能为空！',
+                confirmColor: '#a09fed'
+            })
+            return false;
+        }
         // 评论内容
         if (!that.data.isReply) {
             wx.request({
