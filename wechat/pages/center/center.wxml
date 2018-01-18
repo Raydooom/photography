@@ -34,8 +34,8 @@
                 <text class="text">友谊像一抹彩虹</text>
                 <image class="icon" src="../../assets/icons/postcard-icon.png"></image>
             </navigator>
-            <navigator class="tools-item news">精美图集
-                <text class="text">摄影灵感 </text>
+            <navigator class="tools-item news" url="../../centerTools/weather/weather">天气早知道
+                <text class="text">冷暖自知 </text>
                 <image class="icon" src="../../assets/icons/album.png"></image>
             </navigator>
         </view>

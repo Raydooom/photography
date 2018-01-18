@@ -10,22 +10,6 @@ const gm = require('gm')
 
 router.prefix('/wechat')
 
-// 京东appkey
-const appkey = "214e5eae2b58697d95e44c708b5b7cdb";
-
-router.get('/newsList', async(ctx, next) => {
-    await superagent
-        .get("https://way.jd.com/jisuapi/astro?astroid=1&date=2016-11-08&appkey=214e5eae2b58697d95e44c708b5b7cdb")
-        .then(res => {
-            console.log(res.body);
-            ctx.body = res.body
-        }).catch(err => {
-            console.log(err)
-        })
-})
-
-
-
 /**
  * [明信片语录接口]
  * @param  {[type]} "/postcardCreate" [description]
@@ -98,6 +82,28 @@ router.get("/postcardView", async(ctx, next) => {
             console.log(err)
         })
 })
+
+/**
+ * [天气查询接口]
+ * @param  {[userId:string]}  [userId]
+ */
+router.get('/getWeather', async(ctx, next) => {
+    let location = ctx.query.latitude + ',' + ctx.query.longitude;
+    console.log(location)
+    await superagent
+        .get("http://jisutqybmf.market.alicloudapi.com/weather/query")
+        .query({
+            location: location
+        })
+        .set('Authorization', 'APPCODE e0a68a47b5554b3e8f6944caaf5abec0')
+        .then(res => {
+            // console.log(res.body);
+            ctx.body = res.body
+        }).catch(err => {
+            console.log(err)
+        })
+})
+
 
 
 module.exports = router;

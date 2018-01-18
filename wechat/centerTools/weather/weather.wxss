@@ -1,0 +1,180 @@
+/* centerTools/weather/weather.wxss */
+
+.temp-warp {
+    background: #5756c0;
+    padding: 40rpx;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 80rpx;
+}
+
+.base-info {
+    float: left;
+}
+
+.base-info .temp {
+    font-size: 160rpx;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    height: 160rpx;
+    line-height: 160rpx;
+}
+
+.weather {
+    padding-left: 20rpx;
+    font-size: 30rpx;
+}
+
+.height {
+    display: block;
+    color: #fff;
+    font-size: 24rpx;
+    position: absolute;
+    left: 40rpx;
+    bottom: 70rpx;
+}
+
+.base-info .temp .unit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 24rpx;
+    height: 24rpx;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.weather-icon {
+    float: right;
+    width: 40%;
+}
+
+.weather-top {
+    overflow: hidden;
+}
+
+.weather-icon image {
+    width: 138rpx;
+    height: 122rpx;
+    float: left;
+    margin-right: 20rpx;
+}
+
+.loc-info {
+    float: left;
+}
+
+.location {
+    font-size: 32rpx;
+    color: #fff;
+    display: block;
+    padding: 22rpx 0 14rpx;
+}
+
+.week {
+    font-size: 24rpx;
+    color: #eee;
+    display: block;
+}
+
+.weather-bottom {
+    overflow: hidden;
+    margin-left: -20rpx;
+    padding-top: 20rpx;
+}
+
+.weather-bottom .wind, .weather-bottom .air {
+    font-size: 24rpx;
+    float: right;
+    color: #fff;
+    text-align: center;
+    margin-top: 20rpx;
+    width: 50%;
+}
+
+.wind {
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.wind .name, .air .name {
+    display: block;
+    padding-bottom: 10rpx;
+}
+
+.week-list {
+    background: #fff;
+    box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.2);
+    margin: -40rpx 20rpx 0;
+    position: relative;
+    z-index: 1;
+    border-radius: 20rpx;
+    padding: 0 20rpx;
+}
+
+.week-list .day {
+    overflow: hidden;
+    border-bottom: 1px solid #efefef;
+    padding: 10rpx 40rpx;
+    line-height: 80rpx;
+}
+
+.week-list .day:last-child {
+    border-bottom: none;
+}
+
+.day .week-day {
+    font-size: 28rpx;
+    color: #666;
+    float: left;
+}
+
+.day image {
+    width: 69rpx;
+    height: 61rpx;
+    float: left;
+    margin-left: 40rpx;
+    margin-top: 6rpx;
+}
+
+.day .week-temp {
+    float: right;
+    font-size: 32rpx;
+    color: #5756c0;
+}
+
+.weather-text {
+    font-size: 28rpx;
+    color: #666;
+    float: left;
+    margin-left: 40rpx;
+}
+
+.day .week-temp .low-temp {
+    font-size: 26rpx;
+    color: #a09fed;
+    font-weight: normal;
+}
+
+.bottom-info {
+    padding: 20rpx 40rpx;
+    font-size: 24rpx;
+    text-align: right;
+    color: #666;
+}
+
+.bottom-info .update-btn,.back-btn {
+    font-size: 24rpx;
+    color: #5756c0;
+}
+
+.data-from {
+    position: fixed;
+    bottom: 16rpx;
+    text-align: center;
+    color: #999;
+    font-size: 24rpx;
+    left: 0;
+    width: 100%;
+}

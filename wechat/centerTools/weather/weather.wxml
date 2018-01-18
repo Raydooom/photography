@@ -1,0 +1,49 @@
+<import src="../../modules/loading/loading.wxml" />
+<template wx:if="{{loading}}" is="loading" />
+
+<view wx:if="{{!loading}}">
+    <view class="temp-warp">
+        <view class="base-info">
+            <text class="temp">{{weatherData.temp}}<text class="weather">{{weatherData.weather}}</text>
+            <text class="unit"></text></text>
+            <text class="height" wx:if="{{altitude}}">海拔 {{altitude}} 米</text>
+        </view>
+        <view class="weather-icon">
+            <view class="weather-top">
+                <image src="../../assets/weathercn02/{{weatherData.img}}.png"></image>
+                <view class="loc-info">
+                    <text class="location">{{weatherData.city}}</text>
+                    <text class="week">{{weatherData.week}}</text>
+                </view>
+            </view>
+            <view class="weather-bottom">
+                <view class="air">
+                    <text class="name">空气质量</text>
+                    <view class="air-num">
+                        {{weatherData.aqi.aqi}}
+                    </view>
+                </view>
+                <view class="wind">
+                    <text class="name">{{weatherData.winddirect}}</text>
+                    <view class="wind-num">
+                        {{weatherData.windpower}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="week-list">
+        <view class="day" wx:for="{{weatherData.daily}}" wx:if="{{index != 0}}" wx:key="week-list">
+            <text class="week-day">{{item.week}}</text>
+            <image src="../../assets/weathercn02/{{item.day.img}}.png"></image>
+            <text class="weather-text">{{item.day.weather}}</text>
+            <text class="week-temp">{{item.day.temphigh}}℃ <text class="low-temp">/ {{item.night.templow}}℃</text></text>
+        </view>
+    </view>
+
+    <view class="bottom-info">
+        更新时间 {{lastTime}} <text class="update-btn" bindtap="update">立即更新</text>
+    </view>
+    <view class="data-from" bindtap="backIndex">信息来源：<text class="back-btn">我想学摄影</text></view>
+</view>
