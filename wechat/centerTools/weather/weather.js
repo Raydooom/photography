@@ -60,7 +60,7 @@ Page({
         let random = Math.floor(Math.random() * 5);
         console.log(random)
         return {
-            title: '您的好友，提醒您注意天气:  ' + this.data.shareText[random],
+            title: '您的好友，提醒您注意天气！ ',
             imageUrl: this.data.shareImg,
             success: function (res) {
 
