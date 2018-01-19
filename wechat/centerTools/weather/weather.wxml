@@ -8,9 +8,9 @@
             <text class="unit"></text></text>
             <text class="height" wx:if="{{altitude}}">海拔 {{altitude}} 米</text>
         </view>
-        <view class="weather-icon">
+        <view class="weather-info">
             <view class="weather-top">
-                <image src="../../assets/weathercn02/{{weatherData.img}}.png"></image>
+                <image class="weather-icon" src="../../assets/weathercn02/{{weatherData.img}}.png"></image>
                 <view class="loc-info">
                     <text class="location">{{weatherData.city}}</text>
                     <text class="week">{{weatherData.week}}</text>
@@ -20,13 +20,14 @@
                 <view class="air">
                     <text class="name">空气质量</text>
                     <view class="air-num">
+                        <image class="air-icon" src="../../assets/icons/air.png"></image>
                         {{weatherData.aqi.aqi}}
                     </view>
                 </view>
                 <view class="wind">
                     <text class="name">{{weatherData.winddirect}}</text>
                     <view class="wind-num">
-                        {{weatherData.windpower}}
+                        <image style="animation: rotate {{2/windPower}}s infinite linear;" class="wind-icon" src="../../assets/icons/wind.png"></image>{{weatherData.windpower}}
                     </view>
                 </view>
             </view>

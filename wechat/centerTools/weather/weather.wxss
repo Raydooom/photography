@@ -46,7 +46,7 @@
     border-radius: 50%;
 }
 
-.weather-icon {
+.weather-info {
     float: right;
     width: 40%;
 }
@@ -55,7 +55,7 @@
     overflow: hidden;
 }
 
-.weather-icon image {
+.weather-info .weather-icon {
     width: 138rpx;
     height: 122rpx;
     float: left;
@@ -102,6 +102,60 @@
     display: block;
     padding-bottom: 10rpx;
 }
+
+.weather-info .wind-icon, .weather-info .air-icon {
+    display: inline-block;
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+    position: relative;
+    top: 4rpx;
+}
+
+.weather-info .air-icon {
+    animation: move 1s ease-in-out infinite alternate;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0);
+    }
+
+    to {
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+@keyframes move {
+    from {
+        transform: translate(-4rpx);
+    }
+
+    to {
+        transform: rotate(4rpx);
+    }
+}
+
+@-webkit-keyframes move {
+    from {
+        -webkit-transform: translate(-4rpx);
+    }
+
+    to {
+        -webkit-transform: rotate(4rpx);
+    }
+}
+
 
 .week-list {
     background: #fff;
@@ -164,7 +218,7 @@
     color: #666;
 }
 
-.bottom-info .update-btn,.back-btn {
+.bottom-info .update-btn, .back-btn {
     font-size: 24rpx;
     color: #5756c0;
 }

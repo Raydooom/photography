@@ -12,7 +12,8 @@ Page({
         longitude: '',
         altitude: '',
         loading: true,
-        lastTime:''
+        lastTime: '',
+        windPower: '1',
     },
 
     /**
@@ -39,7 +40,7 @@ Page({
         return {
             title: '天冷了，你要多穿点衣服，别冻着我的全世界。',
             success: function (res) {
-                
+
             },
             fail: function (res) {
                 // 转发失败
@@ -95,7 +96,8 @@ Page({
                     that.setData({
                         weatherData: res.data.result,
                         loading: false,
-                        lastTime: res.data.result.updatetime.substring(11,16)
+                        lastTime: res.data.result.updatetime.substring(11, 16),
+                        windPower: res.data.result.windpower.substring(0, 1)
                     })
                     wx.hideNavigationBarLoading();
                     wx.setNavigationBarTitle({
@@ -130,7 +132,7 @@ Page({
     /**
      * 返回首页
      */
-    backIndex:function(){
+    backIndex: function () {
         console.log(11)
         wx.switchTab({
             url: "../../pages/index/index",
