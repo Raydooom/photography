@@ -1,7 +1,7 @@
 {
     "pages": [
-        "centerTools/weather/weather",
         "pages/index/index",
+        "centerTools/weather/weather",
         "centerTools/editText/editText",
         "centerTools/viewCard/viewCard",
         "centerTools/postcardIndex/postcardIndex",
