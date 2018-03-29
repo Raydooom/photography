@@ -24,8 +24,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "./assets/scss/theme.scss";
+<style lang="scss">
 
 footer {
   background: #fff;
