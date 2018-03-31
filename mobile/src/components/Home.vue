@@ -1,16 +1,19 @@
 <template>
   <div class="hot">
-    <Header />
+    <Topbar topbarText="热门" />
+    <ArticleList listData="" />
   </div>
 </template>
 
 <script>
-import Header from "./../modules/header";
+import Topbar from "./../modules/Topbar";
+import ArticleList from "./../modules/ArticleList";
 
 export default {
-  name: ".hot",
+  name: "hot",
   components: {
-    Header
+    Topbar,
+    ArticleList
   }
 };
 </script>
