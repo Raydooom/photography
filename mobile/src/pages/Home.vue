@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Topbar from "./../modules/Topbar";
-import ArticleList from "./../modules/ArticleList";
+import Topbar from "../components/Topbar";
+import ArticleList from "../components/ArticleList";
 
 export default {
   name: "hot",
