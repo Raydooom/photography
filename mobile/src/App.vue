@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <router-view class="app-view"/>
+    <Topbar topbarText="热门"/>
+    <ArticleList class="list" listData=""/>
     <footer>
       <span class="home active">
         热门
@@ -19,18 +20,31 @@
 </template>
 
 <script>
+  import Topbar from "./components/Topbar";
+  import ArticleList from "./components/ArticleList";
+
   export default {
-    name: "App"
+    name: "App",
+    components: {
+      Topbar,
+      ArticleList
+    }
   };
 </script>
 
 <style lang="scss">
-  .app-view {
-    background: #fff;
-    min-height: 100%;
-    border-radius: 0.6rem 0.6rem 0 0;
-    overflow: hidden;
+  #app {
+    padding-top: 2.2rem;
+    position: relative;
   }
+
+ /* .list {
+    background: #f40;
+    height: 100%;
+    border-radius: 0.6rem 0.6rem 0 0;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }*/
 
   footer {
     background: #fff;
@@ -50,7 +64,7 @@
       padding-top: 0.6rem;
       text-align: center;
       font-size: 0.6rem;
-      color:  nth($fontColor, 2);
+      color: nth($fontColor, 2);
       &.active {
         color: $mainColor;
       }

@@ -1,9 +1,7 @@
 <template>
   <div id="topbar">
-    <header>
-      <a class="back-btn"></a>
-      <span>{{topbarText}}</span>
-    </header>
+    <a class="back-btn"></a>
+    <span>{{topbarText}}</span>
   </div>
 </template>
 
@@ -15,11 +13,7 @@
 </script>
 
 <style lang="scss">
-  body {
-    padding-top: 2.2rem;
-  }
-
-  header {
+  #topbar {
     line-height: 2.2rem;
     width: 100%;
     height: 2.2rem;

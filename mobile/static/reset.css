@@ -6,8 +6,9 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-body{
-  background: #5756c0;
+html,body{
+  /*height:100%;*/
+  /*overflow:hidden;*/
 }
 h1,
 h2,
