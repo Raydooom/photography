@@ -6,10 +6,16 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-html,body{
+
+html, body {
   /*height:100%;*/
   /*overflow:hidden;*/
 }
+
+body {
+  padding-top: 2.2rem;
+}
+
 h1,
 h2,
 h3,

@@ -1,50 +1,39 @@
 <template>
-  <div id="app">
-    <Topbar topbarText="热门"/>
-    <ArticleList class="list" listData=""/>
+  <div class="main">
+    <router-view class="main-page"/>
     <footer>
-      <span class="home active">
+      <router-link class="home" to="/home">
         热门
-      </span>
-      <span class="new">
+      </router-link>
+      <router-link class="new" to="/newest">
         最新
-      </span>
-      <span class="special">
+      </router-link>
+      <router-link class="special" to="/special">
         专题
-      </span>
-      <span class="center">
+      </router-link>
+      <router-link class="center" to="/center">
         我的
-      </span>
+      </router-link>
     </footer>
   </div>
 </template>
 
 <script>
-  import Topbar from "./components/Topbar";
-  import ArticleList from "./components/ArticleList";
-
   export default {
     name: "App",
-    components: {
-      Topbar,
-      ArticleList
+    mounted: function () {
+      // console.log(this.$router);
     }
   };
 </script>
 
 <style lang="scss">
-  #app {
-    padding-top: 2.2rem;
-    position: relative;
-  }
-
- /* .list {
-    background: #f40;
-    height: 100%;
+  .app-view {
+    background: #fff;
+    min-height: 100%;
     border-radius: 0.6rem 0.6rem 0 0;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-  }*/
+    overflow: hidden;
+  }
 
   footer {
     background: #fff;
@@ -57,7 +46,8 @@
     z-index: 999;
     width: 100%;
     box-shadow: 0 -2px 6px rgba($color: #000000, $alpha: 0.05);
-    span {
+
+    a {
       height: 2.2rem;
       width: 25%;
       float: left;
@@ -65,14 +55,14 @@
       text-align: center;
       font-size: 0.6rem;
       color: nth($fontColor, 2);
-      &.active {
-        color: $mainColor;
+      &.router-link-active {
+        color: nth($mainColor, 1);
       }
       &.home {
         background: url(#{$url}hot.png) no-repeat center top;
         background-size: 30% auto;
       }
-      &.home.active {
+      &.home.router-link-active {
         background: url(#{$url}hot-active.png) no-repeat center top;
         background-size: 30% auto;
       }
@@ -80,7 +70,7 @@
         background: url(#{$url}newest.png) no-repeat center top;
         background-size: 30% auto;
       }
-      &.new.active {
+      &.new.router-link-active {
         background: url(#{$url}newest-active.png) no-repeat center top;
         background-size: 30% auto;
       }
@@ -88,7 +78,7 @@
         background: url(#{$url}special.png) no-repeat center top;
         background-size: 30% auto;
       }
-      &.special.active {
+      &.special.router-link-active {
         background: url(#{$url}special-active.png) no-repeat center top;
         background-size: 30% auto;
       }
@@ -96,12 +86,11 @@
         background: url(#{$url}center.png) no-repeat center top;
         background-size: 30% auto;
       }
-      &.center.active {
+      &.center.router-link-active {
         background: url(#{$url}center-active.png) no-repeat center top;
         background-size: 30% auto;
       }
     }
   }
-
 </style>
 

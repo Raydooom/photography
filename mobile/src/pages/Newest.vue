@@ -1,30 +1,21 @@
 <template>
   <div class="hot">
-    <Topbar topbarText="热门" />
+    <Topbar topbarText="最新" />
     <ArticleList listData="" />
-    <Loading />
   </div>
 </template>
 
 <script>
-
 import Topbar from "../components/Topbar";
 import ArticleList from "../components/ArticleList";
-import Loading from "../components/Loading";
-import {hotList} from "../api"
 
 export default {
-  name: "Home",
+  name: "Newest",
   components: {
     Topbar,
-    ArticleList,
-    Loading
-  },
-  mounted(){
-    var a = new hotList();
-    console.log(hotList)
+    ArticleList
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

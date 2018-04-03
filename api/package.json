@@ -11,6 +11,7 @@
   "dependencies": {
     "co-mysql": "^1.0.0",
     "debug": "^2.6.3",
+    "gm": "^1.23.1",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",
     "koa-convert": "^1.2.0",
