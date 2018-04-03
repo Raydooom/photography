@@ -2,21 +2,18 @@
   <div class="hot">
     <Topbar topbarText="热门" />
     <ArticleList listData="" />
-    <Loading />
   </div>
 </template>
 
 <script>
 import Topbar from "../components/Topbar";
 import ArticleList from "../components/ArticleList";
-import Loading from "../components/Loading";
 
 export default {
-  name: "Home",
+  name: "Newest",
   components: {
     Topbar,
-    ArticleList,
-    Loading
+    ArticleList
   }
 };
 </script>

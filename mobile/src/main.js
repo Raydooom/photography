@@ -14,10 +14,16 @@ window.onresize = function () {
   document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 18.75 + 'px'
 }
 
+router.beforeEach((to, from, next) => {
+  
+  next()
+})
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: {App},
+  components: { App },
   template: '<App/>'
 })

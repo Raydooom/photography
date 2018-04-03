@@ -23,6 +23,9 @@ const wechatIndex = require('./routes/wechat/index')
 const wechatSpecial= require('./routes/wechat/special')
 const wechatTools= require('./routes/wechat/tools')
 
+//  mobile端接口
+// const mobileIndex = require('./routes/mobile/index')
+
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
@@ -38,9 +41,6 @@ app.use(async (ctx, next) => {
     ctx.set("Content-Type", "application/json;charset=utf-8");
     ctx.set("Access-Control-Allow-Credentials", true);
     ctx.set("Access-Control-Max-Age", 300);
-    ctx.set("Access-Control-Expose-Headers", "myData");
-    ctx.set("server", "aaa");
-    // ctx.body = ctx.request.body;
     await next();
 })
 // 测试页面
@@ -54,6 +54,9 @@ app.use(login.routes(), login.allowedMethods())
 app.use(wechatIndex.routes(), wechatIndex.allowedMethods())
 app.use(wechatSpecial.routes(), wechatSpecial.allowedMethods())
 app.use(wechatTools.routes(), wechatTools.allowedMethods())
+
+// mobile
+// app.use(mobileIndex.routes(), mobileIndex.allowedMethods())
 
 app.use(json())
 app.use(logger())
