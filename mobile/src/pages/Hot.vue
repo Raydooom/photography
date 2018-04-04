@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     getData() {
-      this.$ajax.post(HOST + "/wechat/newest").then(res => {
+      this.$ajax.post(HOST + "/wechat/hot").then(res => {
         this.listData = res.data.data;
       });
     }

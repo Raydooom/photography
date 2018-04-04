@@ -2,9 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import router from './router'
+import axios from 'axios'
 
 Vue.config.productionTip = false
-
+Vue.prototype.$ajax = axios
 // 屏幕适配
 document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 18.75 + 'px'
 window.onresize = function () {
