@@ -5,6 +5,7 @@ const Home = r => require.ensure([], () => r(require('@/pages/Home')), 'Home')
 const Hot = r => require.ensure([], () => r(require('@/pages/Hot')), 'Hot')
 const Newest = r => require.ensure([], () => r(require('@/pages/Newest')), 'Newest')
 const Special = r => require.ensure([], () => r(require('@/pages/Special')), 'Special')
+const SpecialDetail = r => require.ensure([], () => r(require('@/pages/SpecialDetail')), 'SpecialDetail')
 const Center = r => require.ensure([], () => r(require('@/pages/Center')), 'Center')
 
 Vue.use(Router)
@@ -15,40 +16,24 @@ export default new Router({
     {
       path: '/',
       component: App,
+      redirect: '/home',
       children: [
         {
-          path: '',
-          redirect: '/home/hot',
+          path: 'home',
+          component: Home,
         },
         {
-          path: '/home',
-          component: Home,
-          redirect: '/home/hot',
-          children: [
-            {
-              path: 'hot',
-              component: Hot,
-              meta: { index: 1 }
-            },
-            {
-              path: 'newest',
-              component: Newest,
-              meta: { index: 2 }
-            }
-          ]
+          path: 'special',
+          component: Special,
+          children: [{
+            path: 'specialDetail',
+            component: SpecialDetail
+          }]
         },
-        // {
-        //   path: '/newest',
-        //   component: Home
-        // },
-        // {
-        //   path: '/special',
-        //   component: Special
-        // },
-        // {
-        //   path: '/center',
-        //   component: Center
-        // }
+        {
+          path: 'center',
+          component: Center
+        }
       ]
     }
   ]

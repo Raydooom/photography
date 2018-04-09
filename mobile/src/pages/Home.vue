@@ -1,16 +1,19 @@
 <template>
-  <div class="hot">
+  <div class="home">
     <div class="tabBar">
-      <router-link :to="{path:'/home/hot'}">热门</router-link><router-link :to="{path:'/home/newest'}">最新</router-link>
+      <span :class="active === 'hot' ? 'active':''" @click="getHotData">热门</span>
+      <span :class="active === 'newest' ? 'active':''" @click="getNewestData">最新</span>
     </div>
-    <transition :name="slide">
-      <router-view class="home-view"></router-view>
-    </transition>
+    <div class="home-tab">
+      <article-list v-if="loaded" :listData="listData"></article-list>
+      <loading v-else></loading>
+      <!-- <article-list :listData="newestData"></article-list> -->
+    </div>
   </div>
 </template>
 
 <script>
-import Topbar from "../components/Topbar";
+import ArticleList from "../components/ArticleList";
 import Loading from "../components/Loading";
 import { HOST } from "../api";
 
@@ -18,54 +21,71 @@ export default {
   name: "Home",
   data() {
     return {
+      // hotData: "",
+      // newestData: ""
       listData: "",
-      slide: ""
+      active: "hot",
+      loaded: false
     };
   },
   components: {
-    Topbar,
+    ArticleList,
     Loading
   },
-  watch: {
-    $route(to, from) {
-      if (to.meta.index > from.meta.index) {
-        this.slide = "slide-right";
-      } else {
-        this.slide = "slide-left";
-      }
-    }
+  mounted() {
+    this.getHotData();
   },
-  mounted() {},
-  methods: {}
+  methods: {
+    getHotData() {
+      this.active = "hot";
+      this.$ajax.post(HOST + "/wechat/hot").then(res => {
+        this.listData = res.data.data;
+        this.loaded = true;
+        this.scrollToTop();
+      });
+    },
+    getNewestData() {
+      this.active = "newest";
+      this.$ajax.post(HOST + "/wechat/newest").then(res => {
+        this.listData = res.data.data;
+        this.scrollToTop();
+      });
+    },
+    scrollToTop() {
+      document.documentElement.scrollTop = document.body.scrollTop = 0;
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.home {
+  padding-top: 2.2rem;
+}
 .tabBar {
   position: fixed;
   width: 100%;
-  background: nth($mainColor, 1);
+  background: #fff;
   height: 2.2rem;
   line-height: 2.2rem;
   top: 0;
   left: 0;
   z-index: 4;
-  text-align: center;
-  a {
-    color: #fff;
+  border-bottom: 1px solid nth($bgColor, 1);
+  display: flex;
+  justify-content: center;
+  span {
+    color: #333;
     display: inline-block;
-    height: 1.4rem;
-    line-height: 1.4rem;
-    font-size: 0.7rem;
-    padding: 0 2rem;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    font-size: 0.8rem;
     text-align: center;
-    border: 1px solid #fff;
-    &:first-child {
-      border-radius: 0.7rem 0 0 0.7rem;
-    }
-    &:last-child {
-      margin-left:-1px;
-      border-radius: 0 0.7rem 0.7rem 0;
+    margin: 0 1rem;
+    padding: 0 1rem;
+    &.active {
+      color: nth($mainColor, 1);
+      border-bottom: 2px solid nth($mainColor, 1);
     }
   }
 }

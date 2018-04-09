@@ -7,10 +7,6 @@
     -webkit-box-sizing: border-box;
 }
 
-body {
-    padding-top: 2.2rem;
-}
-
 h1,
 h2,
 h3,
@@ -35,6 +31,7 @@ a {
     cursor: pointer;
     color: inherit;
     outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 ul,
