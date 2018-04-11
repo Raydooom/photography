@@ -43,7 +43,7 @@ footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 999;
+  z-index: 10;
   width: 100%;
   box-shadow: 0 -2px 6px rgba($color: #000000, $alpha: 0.05);
 

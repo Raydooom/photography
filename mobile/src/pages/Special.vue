@@ -3,7 +3,7 @@
     <topbar topbarText="专题"></topbar>
     <ul>
       <li v-for="item in specialList" :key="item.id">
-        <router-link :to="{path:'/special/specialDetail',params:{id:item.id}}">
+        <router-link :to="{name:'specialDetail',params:{id:item.id}}">
           <span class="cover">
             <img :src="item.cover">
           </span>
@@ -79,7 +79,7 @@ ul {
         display: flex;
         padding-top: 0.3rem;
         .view {
-          flex: 4;
+          flex: 6;
           font-size: 0.6rem;
           line-height: 1.5rem;
           color: nth($fontColor, 3);

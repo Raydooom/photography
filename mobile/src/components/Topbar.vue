@@ -28,6 +28,11 @@ export default {
     display: block;
     line-height: 2.2rem;
     color: nth($fontColor, 1);
+    max-width: 60%;
+    margin:0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>

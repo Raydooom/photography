@@ -27,7 +27,8 @@ export default new Router({
           component: Special,
           children: [{
             path: 'specialDetail',
-            component: SpecialDetail
+            component: SpecialDetail,
+            name: 'specialDetail'
           }]
         },
         {
