@@ -7,6 +7,7 @@ const Newest = r => require.ensure([], () => r(require('@/pages/Newest')), 'Newe
 const Special = r => require.ensure([], () => r(require('@/pages/Special')), 'Special')
 const SpecialDetail = r => require.ensure([], () => r(require('@/pages/SpecialDetail')), 'SpecialDetail')
 const Center = r => require.ensure([], () => r(require('@/pages/Center')), 'Center')
+const Login = r => require.ensure([], () => r(require('@/pages/Login')), 'Login')
 
 Vue.use(Router)
 
@@ -36,6 +37,10 @@ export default new Router({
           component: Center
         }
       ]
+    },
+    {
+      path: '/login',
+      component: Login
     }
   ]
 })
