@@ -21,11 +21,11 @@
       </div>
       <div class="input-wrap">
         <!-- <p>请输入账号</p> -->
-        <input type="text" placeholder="请设置账号" maxlength="16" />
+        <input type="text" placeholder="请设置账号" v-model="register.account" maxlength="16" />
         <!-- <p>请输入密码</p> -->
-        <input type="password" placeholder="请设置密码" maxlength="16" />
-        <input type="password" placeholder="确认密码" maxlength="16" />
-        <span class="login-btn">立即注册</span>
+        <input type="password" placeholder="请设置密码" v-model="register.password" maxlength="16" />
+        <input type="password" placeholder="确认密码" v-model="register.surePassword" maxlength="16" />
+        <span class="login-btn" @click="registerAccount">立即注册</span>
       </div>
       <div class="register login-btn" :class="{active:!isRegister}" @click="goRegister">立即登录</div>
     </div>
@@ -33,15 +33,84 @@
 </template>
 
 <script>
+import Utils from "../utils/index";
+import { HOST } from "../api";
+
 export default {
   data() {
     return {
-      isRegister: true
+      isRegister: false,
+      register: {
+        account: "1234512",
+        password: "123456",
+        surePassword: "123456",
+        md5Password: ""
+      }
     };
   },
   methods: {
+    // 登录和注册切换
     goRegister() {
       this.isRegister = !this.isRegister;
+    },
+    // 注册
+    registerAccount() {
+      if (this.checkAccount() && this.checkPassword()) {
+        this.$ajax
+          .get(HOST + "/mobile/register", {
+            params: {
+              account: this.register.account,
+              password: this.register.md5Password
+            }
+          })
+          .then(res => {
+            if(res.data.state == 1){
+              alert("注册成功")
+            }else{
+              alert("账号已存在")
+            }
+          });
+      }
+    },
+    checkAccount() {
+      let reg = /^[0-9a-z_A-Z]*$/g;
+      let [account, password, surePassword] = [
+        this.register.account,
+        this.register.password,
+        this.register.surePassword
+      ];
+      // 账号验证
+      if (account === "") {
+        alert("账号不能为空");
+        return false;
+      } else if (account.length < 6) {
+        alert("账号长度不能小于6位");
+        return false;
+      } else if (!reg.test(account)) {
+        alert("账号只能用大小写字母、数字、下划线组成");
+        return false;
+      } else {
+        return true;
+      }
+    },
+    checkPassword() {
+      let [password, surePassword] = [
+        this.register.password,
+        this.register.surePassword
+      ];
+      if (password != surePassword) {
+        alert("俩次输入的密码不一致！");
+        return false;
+      } else if (password.length < 6) {
+        alert("密码长度不能小于6位");
+        return false;
+      } else if (password === "") {
+        alert("密码不能为空！");
+        return false;
+      } else {
+        this.register.md5Password = Utils.md5Encrypt(password);
+        return true;
+      }
     }
   }
 };

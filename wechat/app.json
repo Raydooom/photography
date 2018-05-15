@@ -15,12 +15,8 @@
         "pages/specialDetail/specialDetail",
         "pages/newest/newest",
         "pages/detail/detail",
-        "pages/comments/comments",
-        "pages/kinds/kinds"
+        "pages/comments/comments"
     ],
-    "usingComponents": {
-        "aaa": "../../modules/loading/loading"
-    },
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#5756c0",

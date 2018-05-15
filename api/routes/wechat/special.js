@@ -45,6 +45,7 @@ router.post('/special', async(ctx, next) => {
  * @return {[json]}      [description]
  */
 router.post('/specialDetail', async(ctx, next) => {
+    console.log(ctx)
     let id = parseInt(ctx.request.body.id);
     await sql.query("SELECT * FROM special_article WHERE id = " + id)
         .then(res => {
