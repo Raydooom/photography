@@ -14,7 +14,6 @@ window.onresize = function () {
 
 router.beforeEach((to, from, next) => {
   // 登录拦截
-  console.log(router)
   let loginPages = ['/center'];
   let pagePath = to.path;
   if (loginPages.includes(pagePath)) {

@@ -7,10 +7,10 @@
       </div>
       <div class="input-wrap">
         <!-- <p>请输入账号</p> -->
-        <input type="text" placeholder="请输入账号" maxlength="16" />
+        <input type="text" placeholder="请输入账号" v-model="login.account" maxlength="16" />
         <!-- <p>请输入密码</p> -->
-        <input type="password" placeholder="请输入密码" maxlength="16" />
-        <span class="login-btn">立即登录</span>
+        <input type="password" placeholder="请输入密码" v-model="login.password" maxlength="16" />
+        <span class="login-btn" @click="userLogin">立即登录</span>
       </div>
       <div class="register register-btn" :class="{active:isRegister}" @click="goRegister">注册账号</div>
     </div>
@@ -39,21 +39,27 @@ import { HOST } from "../api";
 export default {
   data() {
     return {
-      isRegister: false,
+      isRegister: true,
       register: {
-        account: "1234512",
-        password: "123456",
-        surePassword: "123456",
+        account: "",
+        password: "",
+        surePassword: "",
+        md5Password: ""
+      },
+      login: {
+        account: "",
+        password: "",
         md5Password: ""
       }
     };
   },
+  mounted() {},
   methods: {
     // 登录和注册切换
     goRegister() {
       this.isRegister = !this.isRegister;
     },
-    // 注册
+    // 注册方法
     registerAccount() {
       if (this.checkAccount() && this.checkPassword()) {
         this.$ajax
@@ -64,14 +70,19 @@ export default {
             }
           })
           .then(res => {
-            if(res.data.state == 1){
-              alert("注册成功")
-            }else{
-              alert("账号已存在")
+            if (res.data.state == 1) {
+              alert("注册成功！");
+              setTimeout(() => {
+                localStorage.setItem("isLogin", res.data.userId);
+                this.$router.push("/center");
+              }, 2000);
+            } else {
+              alert("账号已存在");
             }
           });
       }
     },
+    // 账号校验
     checkAccount() {
       let reg = /^[0-9a-z_A-Z]*$/g;
       let [account, password, surePassword] = [
@@ -93,6 +104,7 @@ export default {
         return true;
       }
     },
+    // 密码校验
     checkPassword() {
       let [password, surePassword] = [
         this.register.password,
@@ -111,6 +123,31 @@ export default {
         this.register.md5Password = Utils.md5Encrypt(password);
         return true;
       }
+    },
+    // 登录方法
+    userLogin() {
+      let [account, password] = [this.login.password, this.login.password];
+      this.login.md5Password = Utils.md5Encrypt(password);
+      this.$ajax
+        .get(HOST + "/mobile/login", {
+          params: {
+            account: account,
+            password: this.login.md5Password
+          }
+        })
+        .then(res => {
+          let data = res.data;
+          if (data.state == 1) {
+            console.log(data);
+            localStorage.setItem("isLogin", data.userInfo.userId);
+            this.$router.push("/center");
+          } else {
+            alert("账号或密码不正确");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
