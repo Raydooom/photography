@@ -32,7 +32,6 @@ export default {
 <style lang="scss">
 .main {
   padding-bottom: 2.2rem;
-  background: $bgColor;
 }
 
 footer {
