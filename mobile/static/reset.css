@@ -40,10 +40,14 @@ li {
     list-style: none;
 }
 
-input {
+textarea,input {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     outline: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html,body {
+    background: #f3f3f3;
 }

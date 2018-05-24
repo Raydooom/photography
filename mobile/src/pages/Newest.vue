@@ -1,192 +1,177 @@
 <template>
-  <section id="articleList">
-    <ul>
-      <li v-for="item in listData" :key="item.index">
-        <div class="author">
-          <span class="avatar"><img :src="item.authorInfo.avatarUrl" alt=""></span>
-          <span class="name-wrap">
-            <b>
-              <span>{{item.authorInfo.nickname}}</span>
-              <i>{{item.authorInfo.level}}</i>
-            </b>
-            <i class="time">{{item.content.date}}</i>
-          </span>
-        </div>
-        <div class="main-wrap">
-          <p>{{item.content.description}}</p>
-          <div class="photo-wrap" v-if="item.content.img.split(',').length > 1">
-            <div class="photos">
-              <span v-for="img in item.content.img.split(',')" :key="img"><img :src="img"></span>
-            </div>
-          </div>
-          <div class="simple-photo" v-if="item.content.img.split(',').length === 1">
-            <span><img :src="item.content.img"></span>
-          </div>
-        </div>
-        <div class="loc-show" v-if="item.content.location">{{item.content.location}}</div>
-        <div class="handle-wrap">
-          <b>浏览{{item.content.views}}次</b>
-          <span class="handle-btn praise">{{item.content.praises}}</span>
-          <span class="handle-btn comment">{{item.content.shares}}</span>
-          <span class="handle-btn share">{{item.comments.length}}</span>
-        </div>
-      </li>
-    </ul>
-  </section>
+  <div class="home">
+    <div class="home-tab">
+      <article-list v-if="loaded" :listData="listData"></article-list>
+      <loading v-else></loading>
+      <div class="load-more" v-if="!noMore"><img src="../assets/svg/oval.svg">
+        <span>正在加载</span>
+      </div>
+      <div class="load-more" v-else>
+        <span>我可是有底线的</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import ArticleList from "../components/ArticleList";
+import Loading from "../components/Loading";
 import { HOST } from "../api";
+
 export default {
-  name: "ArticleList",
+  name: "Home",
   data() {
     return {
-      listData: ""
+      listData: [],
+      loaded: false,
+      page: 0,
+      pageSize: 5,
+      noMore: false
     };
   },
+  components: {
+    ArticleList,
+    Loading
+  },
   mounted() {
-    this.getData();
+    this.getHotData();
+    var that = this;
+    window.onscroll = function() {
+      if (
+        that.getScrollTop() + that.getWindowHeight() ==
+        that.getScrollHeight()
+      ) {
+        that.page++;
+        that.getHotData(that.page);
+      }
+    };
   },
   methods: {
-    getData() {
-      this.$ajax.post(HOST + "/wechat/newest").then(res => {
-        this.listData = res.data.data;
+    getHotData(page) {
+      this.$ajax(HOST + "/mobile/list", {
+        params: {
+          type: 2,
+          page: page || 0,
+          pageSize: this.pageSize,
+          userId: localStorage.getItem("isLogin")
+        }
+      }).then(res => {
+        let pageData = res.data.data;
+        if (pageData.length == 0) {
+          this.noMore = true;
+          this.loaded = true;
+        } else {
+          this.listData = this.listData.concat(res.data.data);
+          this.loaded = true;
+        }
       });
+    },
+    getScrollTop: function() {
+      var scrollTop = 0,
+        bodyScrollTop = 0,
+        documentScrollTop = 0;
+      if (document.body) {
+        bodyScrollTop = document.body.scrollTop;
+      }
+      if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop;
+      }
+      scrollTop =
+        bodyScrollTop - documentScrollTop > 0
+          ? bodyScrollTop
+          : documentScrollTop;
+      return scrollTop;
+    },
+    //文档的总高度
+    getScrollHeight: function() {
+      var scrollHeight = 0,
+        bodyScrollHeight = 0,
+        documentScrollHeight = 0;
+      if (document.body) {
+        bodyScrollHeight = document.body.scrollHeight;
+      }
+      if (document.documentElement) {
+        documentScrollHeight = document.documentElement.scrollHeight;
+      }
+      scrollHeight =
+        bodyScrollHeight - documentScrollHeight > 0
+          ? bodyScrollHeight
+          : documentScrollHeight;
+      return scrollHeight;
+    },
+    getWindowHeight: function() {
+      var windowHeight = 0;
+      if (document.compatMode == "CSS1Compat") {
+        windowHeight = document.documentElement.clientHeight;
+      } else {
+        windowHeight = document.body.clientHeight;
+      }
+      return windowHeight;
     }
   }
 };
 </script>
 
-<style lang="scss">
-ul {
-  background: nth($bgColor, 1);
-  li {
-    background: #fff;
-    margin-bottom: 0.6rem;
-    .author {
-      display: flex;
-      padding: 0.6rem 0.65rem;
-      .avatar {
-        width: 2.2rem;
-        height: 2.2rem;
-        overflow: hidden;
-        border-radius: 50%;
-        img {
-          display: block;
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .name-wrap {
-        padding-left: 0.5rem;
-        b {
-          span {
-            color: nth($fontColor, 1);
-            font-size: 0.9rem;
-            display: inline-block;
-            max-width: 9rem;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            vertical-align: text-bottom;
-          }
-          i {
-            display: inline-block;
-            padding-left: 0.8rem;
-            margin-left: 0.3rem;
-            font-size: 0.7rem;
-            color: nth($fontColor, 2);
-            background: url(#{$comUrl}level.png) no-repeat center left;
-            background-size: 0.8rem auto;
-            vertical-align: text-bottom;
-          }
-        }
-        .time {
-          display: block;
-          font-size: 0.6rem;
-          color: nth($fontColor, 3);
-        }
-      }
+<style lang="scss" scoped>
+.tabBar {
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  border-bottom: 1px solid nth($bgColor, 1);
+  display: flex;
+  justify-content: center;
+  span {
+    color: #333;
+    display: inline-block;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 0 1rem;
+    padding: 0 1rem;
+    &.active {
+      color: nth($mainColor, 1);
+      border-bottom: 2px solid nth($mainColor, 1);
     }
+  }
+}
 
-    .main-wrap {
-      p {
-        padding: 0.4rem 0.65rem;
-        color: nth($fontColor, 1);
-        font-size: 0.8rem;
-      }
-      .photo-wrap,
-      .simple-photo {
-        margin: 0.65rem;
-        overflow: hidden;
-        span {
-          display: block;
-          border-radius: 0.4rem;
-          overflow: hidden;
-          img {
-            display: block;
-          }
-        }
-      }
-      .photo-wrap {
-        border-radius: 0.4rem;
-        overflow: hidden;
-        .photos {
-          margin: -0.05rem;
-          display: flex;
-          flex-wrap: wrap;
-        }
-        span {
-          flex: 0 0 5.75rem;
-          height: 5.75rem;
-          border-radius: 0;
-          margin: 0.05rem;
-          img {
-            display: block;
-            min-height: 100%;
-          }
-        }
-      }
-    }
-    .loc-show {
-      padding: 0 1.4rem;
-      margin-bottom: 0.65rem;
-      font-size: 0.7rem;
-      color: nth($fontColor, 3);
-      background: url(#{$comUrl}location.png) no-repeat 0.65rem center;
-      background-size: 0.7rem auto;
-    }
-    .handle-wrap {
-      display: flex;
-      border-top: 1px solid nth($bgColor, 1);
-      padding-left: 0.65rem;
-      b {
-        flex: 3;
-        font-size: 0.6rem;
-        line-height: 2.2rem;
-        color: nth($fontColor, 3);
-      }
-      .handle-btn {
-        flex: 1;
-        text-align: left;
-        font-size: 0.7rem;
-        line-height: 2.2rem;
-        padding-left: 1.6rem;
-        color: nth($fontColor, 2);
-        &.praise {
-          background: url(#{$comUrl}like.png) no-repeat 0.3rem center;
-          background-size: 1rem auto;
-        }
-        &.comment {
-          background: url(#{$comUrl}comment.png) no-repeat 0.3rem center;
-          background-size: 1rem auto;
-        }
-        &.share {
-          background: url(#{$comUrl}share.png) no-repeat 0.3rem center;
-          background-size: 1rem auto;
-        }
-      }
-    }
+.home-view {
+  transition: 0.8s all;
+  position: absolute;
+  left: 0;
+  &.slide-left-enter,
+  &.slide-left-leave {
+    transform: translateX(-100%);
+  }
+  &.slide-right-enter,
+  &.slide-right-leave {
+    transform: translateX(100%);
+  }
+}
+
+.load-more {
+  margin: 0 0 0.8rem;
+  text-align: center;
+  line-height: 0.7rem;
+  img {
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-right: 0.2rem;
+    vertical-align: middle;
+  }
+  span {
+    display: inline-block;
+    font-size: 0.6rem;
+    color: nth($fontColor, 3);
+    line-height: 0.7rem;
+    height: 0.7rem;
   }
 }
 </style>

@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import router from './router'
 import axios from 'axios'
+import store from './store'
 
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
@@ -26,5 +27,6 @@ router.beforeEach((to, from, next) => {
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
 })

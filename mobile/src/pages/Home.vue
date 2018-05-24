@@ -1,13 +1,14 @@
 <template>
   <div class="home">
-    <div class="tabBar">
-      <span :class="active === 'hot' ? 'active':''" @click="getHotData">热门</span>
-      <span :class="active === 'newest' ? 'active':''" @click="getNewestData">最新</span>
-    </div>
     <div class="home-tab">
-      <article-list v-if="loaded" :listData="listData"></article-list>
+      <article-list v-if="loaded" :listData="listData" @refreshList="onRefresList"></article-list>
       <loading v-else></loading>
-      <!-- <article-list :listData="newestData"></article-list> -->
+      <div class="load-more" v-if="!noMore"><img src="../assets/svg/oval.svg">
+        <span>正在加载</span>
+      </div>
+      <div class="load-more" v-else>
+        <span>我可是有底线的</span>
+      </div>
     </div>
   </div>
 </template>
@@ -21,11 +22,11 @@ export default {
   name: "Home",
   data() {
     return {
-      // hotData: "",
-      // newestData: ""
-      listData: "",
-      active: "hot",
-      loaded: false
+      listData: [],
+      loaded: false,
+      page: 0,
+      pageSize: 5,
+      noMore: false
     };
   },
   components: {
@@ -34,34 +35,88 @@ export default {
   },
   mounted() {
     this.getHotData();
+    var that = this;
+    window.onscroll = function() {
+      if (
+        that.getScrollTop() + that.getWindowHeight() ==
+        that.getScrollHeight()
+      ) {
+        that.page = that.page + 1;
+        that.getHotData();
+      }
+    };
   },
   methods: {
     getHotData() {
-      this.active = "hot";
-      this.$ajax.post(HOST + "/wechat/hot").then(res => {
-        this.listData = res.data.data;
-        this.loaded = true;
-        this.scrollToTop();
+      console.log(this.page)
+      this.$ajax(HOST + "/mobile/list", {
+        params: {
+          type: 1,
+          page: this.page,
+          pageSize: this.pageSize,
+          userId: localStorage.getItem("isLogin")
+        }
+      }).then(res => {
+        let pageData = res.data.data;
+        if (pageData.length == 0) {
+          this.noMore = true;
+          this.loaded = true;
+        } else {
+          this.listData = this.listData.concat(res.data.data);
+          this.loaded = true;
+        }
       });
     },
-    getNewestData() {
-      this.active = "newest";
-      this.$ajax.post(HOST + "/wechat/newest").then(res => {
-        this.listData = res.data.data;
-        this.scrollToTop();
-      });
+    onRefresList() {
+      this.getHotData();
     },
-    scrollToTop() {
-      document.documentElement.scrollTop = document.body.scrollTop = 0;
+    getScrollTop: function() {
+      var scrollTop = 0,
+        bodyScrollTop = 0,
+        documentScrollTop = 0;
+      if (document.body) {
+        bodyScrollTop = document.body.scrollTop;
+      }
+      if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop;
+      }
+      scrollTop =
+        bodyScrollTop - documentScrollTop > 0
+          ? bodyScrollTop
+          : documentScrollTop;
+      return scrollTop;
+    },
+    //文档的总高度
+    getScrollHeight: function() {
+      var scrollHeight = 0,
+        bodyScrollHeight = 0,
+        documentScrollHeight = 0;
+      if (document.body) {
+        bodyScrollHeight = document.body.scrollHeight;
+      }
+      if (document.documentElement) {
+        documentScrollHeight = document.documentElement.scrollHeight;
+      }
+      scrollHeight =
+        bodyScrollHeight - documentScrollHeight > 0
+          ? bodyScrollHeight
+          : documentScrollHeight;
+      return scrollHeight;
+    },
+    getWindowHeight: function() {
+      var windowHeight = 0;
+      if (document.compatMode == "CSS1Compat") {
+        windowHeight = document.documentElement.clientHeight;
+      } else {
+        windowHeight = document.body.clientHeight;
+      }
+      return windowHeight;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.home {
-  padding-top: 2.2rem;
-}
 .tabBar {
   position: fixed;
   width: 100%;
@@ -101,6 +156,26 @@ export default {
   &.slide-right-enter,
   &.slide-right-leave {
     transform: translateX(100%);
+  }
+}
+
+.load-more {
+  margin: 0 0 0.8rem;
+  text-align: center;
+  line-height: 0.7rem;
+  img {
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-right: 0.2rem;
+    vertical-align: middle;
+  }
+  span {
+    display: inline-block;
+    font-size: 0.6rem;
+    color: nth($fontColor, 3);
+    line-height: 0.7rem;
+    height: 0.7rem;
   }
 }
 </style>

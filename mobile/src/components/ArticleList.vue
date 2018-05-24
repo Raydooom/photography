@@ -1,38 +1,38 @@
 <template>
-    <section id="articleList">
-        <ul>
-            <li v-for="item in listData" :key="item.index">
-                <div class="author">
-                    <span class="avatar"><img :src="item.authorInfo.avatarUrl" alt=""></span>
-                    <span class="name-wrap">
-                        <b>
-                            <span>{{item.authorInfo.nickname}}</span>
-                            <i>{{item.authorInfo.level}}</i>
-                        </b>
-                        <i class="time">{{item.content.date}}</i>
-                    </span>
-                </div>
-                <div class="main-wrap">
-                    <p>{{item.content.description}}</p>
-                    <div class="photo-wrap" v-if="item.content.img.split(',').length > 1">
-                        <div class="photos">
-                            <span v-for="img in item.content.img.split(',')" :key="img"><img :src="img"></span>
-                        </div>
-                    </div>
-                    <div class="simple-photo" v-if="item.content.img.split(',').length === 1">
-                        <span><img :src="item.content.img"></span>
-                    </div>
-                </div>
-                <div class="loc-show" v-if="item.content.location">{{item.content.location}}</div>
-                <div class="handle-wrap">
-                    <b>浏览{{item.content.views}}次</b>
-                    <span class="handle-btn praise">{{item.content.praises}}</span>
-                    <span class="handle-btn comment">{{item.content.shares}}</span>
-                    <span class="handle-btn share">{{item.comments.length}}</span>
-                </div>
-            </li>
-        </ul>
-    </section>
+  <section id="articleList">
+    <ul>
+      <li v-for="(item) in list" :key="item.index">
+        <div class="author">
+          <span class="avatar"><img :src="item.authorInfo.avatarUrl" alt=""></span>
+          <span class="name-wrap">
+            <b>
+              <span>{{item.authorInfo.nickname}}</span>
+              <i>{{item.authorInfo.level}}</i>
+            </b>
+            <i class="time">{{item.content.date}}</i>
+          </span>
+        </div>
+        <div class="main-wrap">
+          <p>{{item.content.description}}</p>
+          <div class="photo-wrap" v-if="item.content.img.split(',').length > 1">
+            <div class="photos">
+              <span v-for="img in item.content.img.split(',')" :key="img"><img :src="img"></span>
+            </div>
+          </div>
+          <div class="simple-photo" v-if="item.content.img.split(',').length === 1">
+            <span><img :src="item.content.img"></span>
+          </div>
+        </div>
+        <div class="loc-show" v-if="item.content.location">{{item.content.location}}</div>
+        <div class="handle-wrap">
+          <b>浏览{{item.content.views}}次</b>
+          <span @click="tapPraise(item.isPraise,item.content.praises,item.content.id)" data-num="123" class="handle-btn praise" :class="item.isPraise ? 'active' : ''">{{item.content.praises}}</span>
+          <span class="handle-btn comment">{{item.content.shares}}</span>
+          <span class="handle-btn share">{{item.comments.length}}</span>
+        </div>
+      </li>
+    </ul>
+  </section>
 </template>
 
 <script>
@@ -41,10 +41,34 @@ export default {
   name: "ArticleList",
   props: ["listData"],
   data() {
-    return {};
+    return {
+      list: this.listData
+    };
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    console.log(this.listData);
+  },
+  watch: {
+    listData: function() {
+      this.list = this.listData;
+      
+      console.log(this.listData)
+    }
+  },
+  methods: {
+    tapPraise(isPraise, praises, id) {
+      let praise = isPraise ? praises - 1 : praises + 1;
+      this.$ajax(HOST + "/wechat/praises", {
+        params: {
+          id: id,
+          praises: praise,
+          userId: localStorage.getItem("isLogin")
+        }
+      }).then(res => {
+        this.$emit("refreshList");
+      });
+    }
+  }
 };
 </script>
 
@@ -167,6 +191,11 @@ ul {
         &.praise {
           background: url(#{$comUrl}like.png) no-repeat 0.3rem center;
           background-size: 1rem auto;
+        }
+        &.praise.active {
+          background: url(#{$comUrl}like-on.png) no-repeat 0.3rem center;
+          background-size: 1rem auto;
+          color: #f40;
         }
         &.comment {
           background: url(#{$comUrl}comment.png) no-repeat 0.3rem center;
