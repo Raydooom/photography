@@ -5,31 +5,36 @@
     </div>
     <upload></upload>
     <div class="publish-btn" @click="publishMsg">立即发布</div>
-    {{pos}}
+    <model></model>
+    <!-- 上传进度条 -->
+    <upload-progress v-if="!uploadDone && total" :step="{total:total,currentStep:currentStep}"></upload-progress>
   </div>
 </template>
 
 <script>
 import upload from "../components/Upload.vue";
+import { uploadProgress, model } from "../modules";
 
 export default {
   name: "publish",
   data() {
     return {
-      pos: "123"
+      uploadDone: true
     };
   },
   mounted() {
     // console.log(this.$store);
+    console.log(model);
   },
   methods: {
     publishMsg() {
+      this.uploadDone = false;
       // 发布首先触发子组件图片上传方法
-      this.$children[0].upload();
-      if (this.upComplate) {
-        console.log(this.imgNames);
-        console.log(12314123);
-      }
+      let upLoad = new Promise(this.$children[0].upload);
+      upLoad.then(res => {
+        console.log(res);
+        this.uploadDone = true;
+      });
     }
   },
   computed: {
@@ -47,7 +52,9 @@ export default {
     }
   },
   components: {
-    upload
+    upload,
+    uploadProgress,
+    model
   }
 };
 </script>

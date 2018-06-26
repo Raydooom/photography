@@ -15,7 +15,7 @@
 
 <script>
 import ArticleList from "../components/ArticleList";
-import Loading from "../components/Loading";
+import { loading } from "../modules";
 import { HOST } from "../api";
 
 export default {
@@ -31,7 +31,7 @@ export default {
   },
   components: {
     ArticleList,
-    Loading
+    loading
   },
   mounted() {
     this.getHotData();
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getHotData() {
-      console.log(this.page)
+      console.log(this.page);
       this.$ajax(HOST + "/mobile/list", {
         params: {
           type: 1,

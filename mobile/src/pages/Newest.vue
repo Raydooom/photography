@@ -15,7 +15,7 @@
 
 <script>
 import ArticleList from "../components/ArticleList";
-import Loading from "../components/Loading";
+import { loading } from "../modules";
 import { HOST } from "../api";
 
 export default {
@@ -31,7 +31,7 @@ export default {
   },
   components: {
     ArticleList,
-    Loading
+    loading
   },
   mounted() {
     this.getHotData();

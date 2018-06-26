@@ -3,6 +3,12 @@ const sql = require('../config/db.config.js')
 
 router.prefix('/mobile')
 
+router.get("/test", async(ctx, next) => {
+    ctx.body = false;
+})
+
+
+
 router.get("/list", async(ctx, next) => {
     /**
      * [热门和最新数据列表]
@@ -88,7 +94,9 @@ router.get("/list", async(ctx, next) => {
 /**
  * 发布接口
  */
+router.post("/publish", async(ctx, next) => {
 
+})
 
 
 

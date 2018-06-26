@@ -23,6 +23,7 @@ export default {
     };
   },
   mounted() {},
+  watch: {},
   methods: {
     selectImg() {
       let inputDom = this.$refs.input;
@@ -59,7 +60,7 @@ export default {
         that.previewList.push(reader.result);
       };
     },
-    upload() {
+    upload(resolve, reject) {
       console.log(this.filesList);
       let upLoadFiles = this.filesList;
       for (let i = 0; i < upLoadFiles.length; i++) {
@@ -78,9 +79,10 @@ export default {
           if (this.step == this.filesLength) {
             // console.log(this.imgNames);
             this.$store.commit("getUploadImgUrl", this.imgNames);
+            resolve("上传成功");
             // 上传完成重置data
-            // this.previewList = this.filesList = this.imgNames = [];
-            // this.filesLength = this.step = 0;
+            this.previewList = this.filesList = this.imgNames = [];
+            this.filesLength = this.step = 0;
           }
         });
       }
